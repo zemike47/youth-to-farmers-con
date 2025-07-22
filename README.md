@@ -4,7 +4,7 @@ A web platform that connects the youth in Addis Ababa with farmers in the countr
 
 ## 🚀 Live Website
 
-Visit the deployed app here: [https://zemike47.github.io/youth-to-farmers-conn/](https://youth-to-farmers-con-qdhh.vercel.app/)
+Visit the deployed app here: [youth-to-farmers-con](https://youth-to-farmers-con-qdhh.vercel.app/)
 
 > If this isn't the correct URL, update it with the actual GitHub Pages or deployment URL.
 
