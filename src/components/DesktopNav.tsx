@@ -2,40 +2,34 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { NavMenu } from "../types"; // Adjust the import path as needed
 
-export default function DesktopNav({ NavMenus }) {
+interface Props {
+  NavMenus: NavMenu;
+}
+
+export default function DesktopNav({ NavMenus }: Props) {
   const [isHover, setIsHover] = useState(false);
-  const toggleHoverMenu = () => {
-    setIsHover(!isHover);
-  };
+  const toggleHoverMenu = () => setIsHover(!isHover);
 
-  const nav = useNavigate(); // useNavigate hook for navigation
+  const nav = useNavigate();
 
-  // Updated handleClick to properly navigate
-  const handleClick = (catagory) => {
-    return () => {
-      nav(`/Catagory/${catagory}`); // Navigates to the category
-    };
+  const handleClick = (category: string) => () => {
+    nav(`/Catagory/${category}`);
   };
 
   const subMenuAnimate = {
     enter: {
       opacity: 1,
       rotateX: 0,
-      transition: {
-        duration: 0.5,
-      },
+      transition: { duration: 0.5 },
       display: "block",
     },
     exit: {
       opacity: 0,
       rotatex: -15,
-      transition: {
-        duration: 0.5,
-      },
-      transitionEnd: {
-        display: "none",
-      },
+      transition: { duration: 0.5 },
+      transitionEnd: { display: "none" },
     },
   };
 
@@ -44,9 +38,7 @@ export default function DesktopNav({ NavMenus }) {
   return (
     <motion.li
       className="group/link"
-      onHoverStart={() => {
-        toggleHoverMenu();
-      }}
+      onHoverStart={toggleHoverMenu}
       onHoverEnd={toggleHoverMenu}
       key={NavMenus.name}
     >
@@ -75,40 +67,38 @@ export default function DesktopNav({ NavMenus }) {
                 : "grid-cols-1"
             } `}
           >
-            {hasSubMenu &&
-              NavMenus.submenu.map((submenu, i) => (
-                <div key={i} className="relative cursor-pointer">
-                  {NavMenus.gridcols > 1 && NavMenus?.subMenuHeading?.[i] && (
-                    <p className="text-sm mb-4 text-slate-900">
-                      {NavMenus?.subMenuHeading?.[i]}
-                    </p>
-                  )}
-                  {/* Only add the click handler to the element you want to trigger the navigation */}
-                  <div className="flex items-center gap-x-4 group/menubox">
-                    <div
-                      className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-blue-300 group-hover/menubox:text-gray-900 duration-300"
-                      onClick={handleClick(submenu.name)} // On click, navigate to category
-                    >
-                      {submenu.icon && <submenu.icon />}
-                    </div>
+            {NavMenus.submenu?.map((submenu, i) => (
+              <div key={i} className="relative cursor-pointer">
+                {NavMenus.gridcols! > 1 && NavMenus?.subMenuHeading?.[i] && (
+                  <p className="text-sm mb-4 text-slate-900">
+                    {NavMenus.subMenuHeading[i]}
+                  </p>
+                )}
+                <div className="flex items-center gap-x-4 group/menubox">
+                  <div
+                    className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-blue-300 group-hover/menubox:text-gray-900 duration-300"
+                    onClick={handleClick(submenu.name)}
+                  >
+                    {submenu.icon && <submenu.icon />}
+                  </div>
 
-                    <div>
-                      <h6
-                        className="font-garamond text-lg"
-                        onClick={handleClick(submenu.name)} // On click, navigate to category
-                      >
-                        {submenu.name}
-                      </h6>
-                      <p
-                        className="text-sm font-inter text-gray-700"
-                        onClick={handleClick(submenu.name)} // On click, navigate to category
-                      >
-                        {submenu.desc}
-                      </p>
-                    </div>
+                  <div>
+                    <h6
+                      className="font-garamond text-lg"
+                      onClick={handleClick(submenu.name)}
+                    >
+                      {submenu.name}
+                    </h6>
+                    <p
+                      className="text-sm font-inter text-gray-700"
+                      onClick={handleClick(submenu.name)}
+                    >
+                      {submenu.desc}
+                    </p>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </motion.div>
       )}

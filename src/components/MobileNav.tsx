@@ -2,15 +2,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { NavMenu } from "../types"; // Adjust path
 
-export default function MobileNav({ NavMenus }) {
+interface Props {
+  NavMenus: NavMenu[];
+}
+
+export default function MobileNav({ NavMenus }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [clicked, setClicked] = useState(null);
-  const nav = useNavigate(); // To handle navigation
+  const [clicked, setClicked] = useState<number | null>(null);
+  const nav = useNavigate();
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
-    setClicked(null); // Reset clicked submenu state when drawer is closed
+    setClicked(null);
   };
 
   const subMenuDrawer = {
@@ -24,15 +29,13 @@ export default function MobileNav({ NavMenus }) {
     },
   };
 
-  // Handle click on submenu item and navigate
-  const handleSubMenuClick = (submenuName) => {
-    nav(`/Catagory/${submenuName}`); // Navigating to the submenu category
-    setIsOpen(false); // Optionally close the drawer after navigating
+  const handleSubMenuClick = (submenuName: string) => {
+    nav(`/Catagory/${submenuName}`);
+    setIsOpen(false);
   };
 
-  // Handle click on a main menu item with a submenu
-  const handleMainMenuClick = (index) => {
-    setClicked(clicked === index ? null : index); // Toggle submenu visibility
+  const handleMainMenuClick = (index: number) => {
+    setClicked(clicked === index ? null : index);
   };
 
   return (
@@ -74,9 +77,9 @@ export default function MobileNav({ NavMenus }) {
                       <li
                         key={name}
                         className="p-2 flex items-center hover:bg-white/5 rounded-md gap-x-2 cursor-pointer"
-                        onClick={() => handleSubMenuClick(name)} // Call the navigation function on click
+                        onClick={() => handleSubMenuClick(name)}
                       >
-                        <Icon size={17} />
+                        {Icon && <Icon size={17} />}
                         {name}
                       </li>
                     ))}
