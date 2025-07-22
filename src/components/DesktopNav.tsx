@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { NavMenu } from "../types"; // Adjust the import path as needed
+// Adjust the import path as needed
+import type { NavMenu } from "../types/types";
 
 interface Props {
   NavMenus: NavMenu;

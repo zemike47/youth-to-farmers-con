@@ -1,5 +1,5 @@
 // types.ts or at the top of your component
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export interface SubMenuItem {
   name: string;

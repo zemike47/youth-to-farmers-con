@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { NavMenu } from "../types"; // Adjust path
+import type { NavMenu } from "../types/types";
 
 interface Props {
   NavMenus: NavMenu[];
