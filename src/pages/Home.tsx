@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import { MoveRight } from "lucide-react";
 import bgImage from "../assets/background-image3.avif";
 import bgImage2 from "../assets/background-image4.avif";
-import bgImage3 from "../assets/background-image5.avif";
+
 import bgImage4 from "../assets/background-image6.avif";
 
 // Register GSAP plugin

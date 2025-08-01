@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
-import { FaUsers, FaBookOpen, FaArrowUp } from "react-icons/fa";
+
 import bgImage from "../assets/background-image3.avif";
 import { BookOpen, MoveRight } from "lucide-react";
-import youthGroup from "../assets/youth-group.jpg";
+
 import video from "../assets/video.png";
 import man from "../assets/man.png";
 import land from "../assets/land.png";
@@ -14,13 +14,10 @@ import bgImage7 from "../assets/background-image7.avif";
 
 import { Users } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
-import { MapPin } from "lucide-react";
-import { MessageSquareHeart } from "lucide-react";
 
 import card1 from "../assets/card1.png";
 import card2 from "../assets/card2.png";
 import card3 from "../assets/card3.png";
-import card4 from "../assets/card4.png";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {

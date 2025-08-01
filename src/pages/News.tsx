@@ -1,27 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
-import { MoveRight } from "lucide-react";
+
 import bgImage from "../assets/background-image3.avif";
-import bgImage7 from "../assets/background-image7.avif";
-import bgImage8 from "../assets/background-image8.avif";
-import bgImage2 from "../assets/background-image2.avif";
-import bgImage12 from "../assets/background-image12.avif";
 
-import logo from "../assets/logoofcompany.png";
-
-import { Users } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
-import { MapPin } from "lucide-react";
-import { MessageSquareHeart } from "lucide-react";
-
-import man from "../assets/man.png";
-import land from "../assets/land.png";
 import dawit from "../assets/success-story-dawit.jpg";
 import dark from "../assets/rural-community.jpg";
 import farm from "../assets/ethiopian-farmer.jpg";
-
+import bgImage2 from "../assets/background-image2.avif";
 import agriculture from "../assets/agricultural-training.jpg";
 import farmTech from "../assets/farming-technology.jpg";
 import youthGroup from "../assets/youth-group.jpg";

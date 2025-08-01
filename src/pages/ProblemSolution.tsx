@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import { TriangleAlert, CircleCheckBig } from "lucide-react";
-import bgImage from "../assets/background-image3.avif";
+
 import bgImage10 from "../assets/background-image10.webp";
 import bgImage12 from "../assets/background-image12.avif";
 

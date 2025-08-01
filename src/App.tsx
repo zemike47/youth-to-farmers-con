@@ -1,11 +1,8 @@
 // App.tsx
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 
 import DesktopNav from "./components/DesktopNav";
 import MobileNav from "./components/MobileNav";
-import DarkModeToggle from "./components/DarkModeToggle";
-import Footer from "./components/Footer";
+
 import { NavMenus } from "./navUtils";
 
 import AppRoutes from "./routes/AppRoutes";

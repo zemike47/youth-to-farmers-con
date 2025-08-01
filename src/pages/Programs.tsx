@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import bgImage from "../assets/background-image3.avif";
-import bgImage15 from "../assets/background-image15.avif";
-import { MoveRight } from "lucide-react";
 
 import bgImage4 from "../assets/background-image6.avif"; // adjust the
-import bgImage3 from "../assets/background-image5.avif";
-import video from "../assets/video.png";
+
 import card1 from "../assets/card1.png";
 import card2 from "../assets/card2.png";
 import card3 from "../assets/card3.png";

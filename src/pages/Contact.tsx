@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
@@ -6,7 +6,7 @@ import bgImage from "../assets/background-image7.avif";
 
 import { Facebook, LinkedinIcon } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import { Linkedin } from "lucide-react";
+
 import { Phone } from "lucide-react";
 import { Mail } from "lucide-react";
 import { MapPin } from "lucide-react";
