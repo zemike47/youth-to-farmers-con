@@ -1,6 +1,6 @@
-// src/App.tsx
+// App.tsx
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { motion } from "framer-motion";
 
 import DesktopNav from "./components/DesktopNav";
 import MobileNav from "./components/MobileNav";
@@ -10,22 +10,22 @@ import { NavMenus } from "./navUtils";
 
 import AppRoutes from "./routes/AppRoutes";
 import { Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+
+  const handleJoinClick = () => {
+    navigate("/join");
+  };
+
   return (
-    <Router>
-      {/* Header / Navbar */}
-      <header className="h-16 text-[15px] flex fixed inset-0 z-50 rounded-s dark:bg-gray-950">
-        <nav className="flex items-center justify-between bg-yellow-50 text-black gap-2 w-full max-w-7xl mx-auto p-3 mb-1 dark:text-white dark:bg-gray-900">
-          <motion.div
-            className="lg:flex items-center gap-x-3 relative cursor-pointer"
-            whileHover={{ scale: 1.2 }}
-          >
-            <div className="bg-teal-500 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center">
-              YM
-            </div>
+    <div>
+      <header className="h-16 text-[15px] flex fixed inset-0 z-50  dark:bg-gray-950">
+        <nav className="flex items-center justify-between  text-white  gap-2 w-full max-w-7xl mx-auto p-3 mb-1 dark:text-white dark:bg-gray-900">
+          <div className="lg:flex items-center gap-x-3 relative cursor-pointer">
             <h3 className="text-lg font-semibold">YeLijoch Mahiber</h3>
-          </motion.div>
+          </div>
 
           <ul className="gap-x-1 lg:flex items-center hidden">
             {NavMenus.map((menu) => (
@@ -34,25 +34,17 @@ function App() {
           </ul>
 
           <div className="flex items-center space-x-2">
-            <motion.div
-              className="relative px-1 py-1  shadow rounded-xl flex items-center dark:bg-gray-800"
-              whileHover={{ boxShadow: "0px 0px 8px rgb(55,25,23)" }}
-            >
-              <DarkModeToggle />
-            </motion.div>
-            <motion.div
-              className="relative px-1 py-1 shadow rounded-xl flex items-center dark:bg-gray-800"
-              whileHover={{ boxShadow: "0px 0px 8px rgb(55,25,23)" }}
-            >
-              <Globe className="relative px-1 py-1 shadow rounded-xl flex items-center dark:bg-gray-800" />
+            <div className="relative px-1 py-1 shadow rounded-xl flex items-center dark:bg-gray-800">
+              <Globe className="mr-1" />
               Eng
-            </motion.div>
-            <motion.div
-              className="relative px-3 py-3 shadow rounded-xl flex items-center dark:bg-gray-800"
-              whileHover={{ boxShadow: "0px 0px 8px rgb(55,25,23)" }}
+            </div>
+
+            <button
+              onClick={handleJoinClick}
+              className="relative px-3 py-3 shadow rounded-xl flex items-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
               Join
-            </motion.div>
+            </button>
           </div>
 
           <div className="lg:hidden">
@@ -61,15 +53,11 @@ function App() {
         </nav>
       </header>
 
-      {/* Routes */}
+      {/* Main Routes */}
       <main className="pt-20">
         <AppRoutes />
       </main>
-
-      <div>
-        <Footer />
-      </div>
-    </Router>
+    </div>
   );
 }
 

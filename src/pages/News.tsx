@@ -1,96 +1,540 @@
-export default function News() {
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { Observer } from "gsap/Observer";
+import SplitType from "split-type"; // Alternative to SplitText
+import { MoveRight } from "lucide-react";
+import bgImage from "../assets/background-image3.avif";
+import bgImage7 from "../assets/background-image7.avif";
+import bgImage8 from "../assets/background-image8.avif";
+import bgImage2 from "../assets/background-image2.avif";
+import bgImage12 from "../assets/background-image12.avif";
+
+import logo from "../assets/logoofcompany.png";
+
+import { Users } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { MessageSquareHeart } from "lucide-react";
+
+import man from "../assets/man.png";
+import land from "../assets/land.png";
+import dawit from "../assets/success-story-dawit.jpg";
+import dark from "../assets/rural-community.jpg";
+import farm from "../assets/ethiopian-farmer.jpg";
+
+import agriculture from "../assets/agricultural-training.jpg";
+import farmTech from "../assets/farming-technology.jpg";
+import youthGroup from "../assets/youth-group.jpg";
+
+import { useState } from "react";
+
+// Register GSAP plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Observer);
+}
+
+const News = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const images = document.querySelectorAll(".bg-img");
+    const outerWrappers = document.querySelectorAll(".outer");
+    const innerWrappers = document.querySelectorAll(".inner");
+    const headings = document.querySelectorAll(".section-heading");
+
+    const splitHeadings = Array.from(headings).map(
+      (heading) => new SplitType(heading, { types: "lines, words, chars" })
+    );
+
+    let currentIndex = -1;
+    let animating = false;
+    const wrap = gsap.utils.wrap(0, sections.length);
+
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
+
+    function gotoSection(index, direction) {
+      index = wrap(index);
+      animating = true;
+      const fromTop = direction === -1;
+      const dFactor = fromTop ? -1 : 1;
+
+      const tl = gsap.timeline({
+        defaults: { duration: 1.25, ease: "power1.inOut" },
+        onComplete: () => (animating = false),
+      });
+
+      if (currentIndex >= 0) {
+        gsap.set(sections[currentIndex], { zIndex: 0 });
+        tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
+          sections[currentIndex],
+          { autoAlpha: 0 }
+        );
+      }
+
+      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      tl.fromTo(
+        [outerWrappers[index], innerWrappers[index]],
+        {
+          yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
+        },
+        { yPercent: 0 },
+        0
+      )
+        .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0)
+        .fromTo(
+          splitHeadings[index].chars,
+          { autoAlpha: 0, yPercent: 150 * dFactor },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: "power2",
+            stagger: {
+              each: 0.02,
+              from: "random",
+            },
+          },
+          0.2
+        );
+
+      currentIndex = index;
+    }
+
+    Observer.create({
+      type: "wheel,touch,pointer",
+      wheelSpeed: -1,
+      onDown: () => !animating && gotoSection(currentIndex + 1, 1),
+      onUp: () => !animating && gotoSection(currentIndex - 1, -1),
+
+      tolerance: 10,
+      preventDefault: true,
+    });
+
+    gotoSection(0, 1);
+  }, []);
+
+  const [selected, setSelected] = useState("All");
+
   return (
-    <div className="bg-white px-4 md:px-10 py-10 max-w-screen-xl mx-auto">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-semibold text-[#6d4c41]">
-          News & Stories
-        </h1>
-        <p className="text-sm text-gray-600 mt-1">
-          Stay updated with the latest news, success stories, and impact reports
-          from <strong>VEGItech</strong>
-        </p>
-      </div>
+    <div className="relative h-screen text-white font-['Cormorant Garamond'] uppercase">
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage2})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className=" py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      News & Stories
+                    </h2>
+                    <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                      Stay updated with the latest news, success stories, and
+                      impact reports from YeLijoch Mahiber
+                    </h2>
+                  </div>
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {/* Search Bar */}
+                    <div className="flex items-center border rounded-md px-3 py-1.5 w-64 bg-white text-black">
+                      <span className="text-gray-400 mr-2">🔍</span>
+                      <input
+                        type="text"
+                        placeholder="Search articles..."
+                        className="w-full bg-transparent outline-none text-sm"
+                      />
+                    </div>
 
-      {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 mb-6 text-sm font-medium text-gray-700">
-        {[
-          "All",
-          "Newsroom",
-          "Impact Stories",
-          "Programs Updates",
-          "Partner Highlights",
-        ].map((tab) => (
-          <button
-            key={tab}
-            className="border rounded-full px-4 py-1 hover:bg-green-100 transition"
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+                    {/* Buttons - Hardcoded */}
+                    <button
+                      onClick={() => setSelected("All")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "All"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      All (7)
+                    </button>
 
-      {/* Top Featured Article */}
-      <div className="flex flex-col md:flex-row bg-gray-50 rounded-xl overflow-hidden shadow-md mb-10">
-        <img
-          src="https://via.placeholder.com/400x250"
-          alt="Featured"
-          className="w-full md:w-1/2 h-60 object-cover"
-        />
-        <div className="p-6 flex flex-col justify-between">
-          <div>
-            <span className="text-xs text-green-700 font-semibold">
-              Impact Story
-            </span>
-            <h2 className="text-xl font-bold mt-2">
-              800 Youth Successfully Placed in Rural Communities Across Ethiopia
-            </h2>
-            <p className="text-sm text-gray-600 mt-2">
-              Our youth empowerment program has helped place over 800
-              individuals into productive roles...
-            </p>
-          </div>
-          <button className="text-green-600 text-sm mt-4">Read More →</button>
-        </div>
-      </div>
+                    <button
+                      onClick={() => setSelected("Success Story")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Success Story"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Success Story (2)
+                    </button>
 
-      {/* Grid of Articles */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="border rounded-lg overflow-hidden shadow-sm bg-white hover:shadow-lg transition"
-          >
-            <img
-              src="https://via.placeholder.com/300x180"
-              alt="Card"
-              className="w-full h-44 object-cover"
-            />
-            <div className="p-4">
-              <span className="text-xs text-purple-600 font-semibold">
-                Newsroom
-              </span>
-              <h3 className="text-md font-semibold mt-1 mb-1">
-                Sample Headline #{i + 1}
-              </h3>
-              <p className="text-sm text-gray-500">
-                Short preview of the article or story goes here. Summary of
-                about 2–3 lines.
-              </p>
-              <button className="text-green-500 text-sm mt-2">
-                Read More →
-              </button>
+                    <button
+                      onClick={() => setSelected("Program Update")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Program Update"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Program Update (1)
+                    </button>
+
+                    <button
+                      onClick={() => setSelected("Impact Report")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Impact Report"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Impact Report (1)
+                    </button>
+
+                    <button
+                      onClick={() => setSelected("Partnership")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Partnership"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Partnership (1)
+                    </button>
+
+                    <button
+                      onClick={() => setSelected("Innovation")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Innovation"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Innovation (1)
+                    </button>
+
+                    <button
+                      onClick={() => setSelected("Milestone")}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                        selected === "Milestone"
+                          ? "bg-green-700 text-white"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }`}
+                    >
+                      Milestone (1)
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={youthGroup}
+                        alt="Dawit"
+                        className="w-full h-60 "
+                      />
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg text-amber-300 mb-2.5">
+                      500 Youth Successfully Placed in Rural Communities Across
+                      Ethiopia
+                    </h3>
+                    <p className="italic text-sm">
+                      A milestone achievement as YeLijoch Mahiber reaches its
+                      target of placing 500 urban youth with rural farmers,
+                      creating lasting impact in agricultural communities.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        YeLijoch Mahiber Team
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 1/15/2024 • ⏱ 5 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read Full Story →
+                      </a>
+                    </div>
+                  </div>
+
+                  {/************************************ */}
+                </div>
+              </div>
+              {/* --------------------------- */}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
 
-      {/* Load More Button */}
-      <div className="text-center mt-10">
-        <button className="px-6 py-2 border rounded-full text-sm hover:bg-green-100">
-          Load More Articles
-        </button>
-      </div>
+      {/*************************************00  */}
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      News & Stories
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={dawit} alt="Dawit" className="w-full h-80 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 mb-2.5">
+                      From City to Farm: Dawit's Transformation Story
+                    </h3>
+                    <p className="italic text-sm">
+                      Meet Dawit Mekonnen, a 24-year-old from Addis Ababa who
+                      found his calling in rural agriculture through our field
+                      placement
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        By Sarah Johnson
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 1/10/2024 • ⏱ 4 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </div>
+                  {/************************************ */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={dark} alt="Dawit" className="w-full h-80 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 mb-2.5">
+                      New Partnership with Ethiopian Agricultural Ministry
+                    </h3>
+                    <p className="italic text-sm">
+                      YeLijoch Mahiber signs strategic partnership agreement to
+                      expand programs nationwide with government support.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        YeLijoch Mahiber Team
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 1/8/2024• ⏱ 3 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </div>
+                  {/************************************ */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={farm} alt="Dawit" className="w-full h-80 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 mb-2.5">
+                      Harvest Season Success: 30% Increase in Farmer Income
+                    </h3>
+                    <p className="italic text-sm">
+                      Latest impact assessment shows significant income
+                      improvements for farmers participating in our support
+                      programs.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        Research Team
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 1/5/2024 • ⏱ 6 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </div>
+                  {/************************************ */}
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*************************************00  */}
+      {/* Section 4 */}
+
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      News & Stories
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={farm} alt="Dawit" className="w-full h-80 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 mb-2.5">
+                      Almaz's Farm: A Model of Modern Agriculture
+                    </h3>
+                    <p className="italic text-sm">
+                      How one farmer in Oromia region transformed her
+                      traditional farm using techniques learned from youth
+                      volunteers.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        Field Reporter
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 1/3/2024 • ⏱ 5 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </div>
+                  {/************************************ */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={agriculture}
+                        alt="Dawit"
+                        className="w-full h-80 "
+                      />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 ">
+                      Training Program Expansion: New Certification Courses
+                    </h3>
+                    <p className="italic text-sm">
+                      Announcing new agricultural certification courses for
+                      youth participants, developed in partnership with local
+                      universities.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">
+                        Training Department
+                      </span>
+                      <span className="text-sm text-amber-100">
+                        📅 12/28/2023 • ⏱ 3 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                      <a
+                        href="#"
+                        className="text-green-500 border text-center font-medium hover:bg-white mt-1.5 flex justify-center"
+                      >
+                        load more videos
+                      </a>
+                    </div>
+                  </div>
+                  {/************************************ */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={farmTech}
+                        alt="Dawit"
+                        className="w-full h-80 "
+                      />
+                      <div></div>
+                    </div>
+                    <h3 className="text-sm text-amber-100 mb-2.5">
+                      Technology in Agriculture: Digital Tools for Rural Farmers
+                    </h3>
+                    <p className="italic text-sm">
+                      Exploring how mobile apps and digital platforms are
+                      helping farmers access market information and weather
+                      updates.
+                    </p>
+                    <div>
+                      {" "}
+                      <span className="text-sm text-amber-100">Tech Team</span>
+                      <span className="text-sm text-amber-100">
+                        📅 12/25/2023 • ⏱ 7 min read
+                      </span>
+                      <a
+                        href="#"
+                        className="text-green-600 font-medium hover:underline flex items-center"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
-}
+};
+
+export default News;

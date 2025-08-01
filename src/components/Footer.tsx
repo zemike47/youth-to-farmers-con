@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#8B3E0D] text-white py-10 px-6 md:px-20">
+    <footer className="bg-black text-white py-10 px-6 md:px-20">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
         {/* Left Section - Logo & Description */}
         <div>

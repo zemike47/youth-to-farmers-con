@@ -44,7 +44,7 @@ export default function DesktopNav({ NavMenus }: Props) {
       key={NavMenus.name}
     >
       <Link to={NavMenus.name}>
-        <span className="flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer px-3 py-1  rounded-xl ">
+        <span className="flex items-center gap-1 hover:bg-slate-100 hover:text-black dark:hover:bg-slate-700 cursor-pointer px-3 py-1  hover:underline rounded-xl ">
           {NavMenus.name}
           {hasSubMenu && (
             <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />

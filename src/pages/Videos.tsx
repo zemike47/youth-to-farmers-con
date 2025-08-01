@@ -1,168 +1,436 @@
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { Observer } from "gsap/Observer";
+import SplitType from "split-type"; // Alternative to SplitText
 import { FaUsers, FaBookOpen, FaArrowUp } from "react-icons/fa";
+import bgImage from "../assets/background-image3.avif";
+import { BookOpen, MoveRight } from "lucide-react";
+import youthGroup from "../assets/youth-group.jpg";
+import video from "../assets/video.png";
+import man from "../assets/man.png";
+import land from "../assets/land.png";
+import bgImage4 from "../assets/background-image4.avif";
+import bgImage7 from "../assets/background-image7.avif";
 
-export default function Videos() {
+import { Users } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { MessageSquareHeart } from "lucide-react";
+
+import card1 from "../assets/card1.png";
+import card2 from "../assets/card2.png";
+import card3 from "../assets/card3.png";
+import card4 from "../assets/card4.png";
+
+// Register GSAP plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Observer);
+}
+
+const Videos = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const images = document.querySelectorAll(".bg-img");
+    const outerWrappers = document.querySelectorAll(".outer");
+    const innerWrappers = document.querySelectorAll(".inner");
+    const headings = document.querySelectorAll(".section-heading");
+
+    const splitHeadings = Array.from(headings).map(
+      (heading) => new SplitType(heading, { types: "lines, words, chars" })
+    );
+
+    let currentIndex = -1;
+    let animating = false;
+    const wrap = gsap.utils.wrap(0, sections.length);
+
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
+
+    function gotoSection(index, direction) {
+      index = wrap(index);
+      animating = true;
+      const fromTop = direction === -1;
+      const dFactor = fromTop ? -1 : 1;
+
+      const tl = gsap.timeline({
+        defaults: { duration: 1.25, ease: "power1.inOut" },
+        onComplete: () => (animating = false),
+      });
+
+      if (currentIndex >= 0) {
+        gsap.set(sections[currentIndex], { zIndex: 0 });
+        tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
+          sections[currentIndex],
+          { autoAlpha: 0 }
+        );
+      }
+
+      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      tl.fromTo(
+        [outerWrappers[index], innerWrappers[index]],
+        {
+          yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
+        },
+        { yPercent: 0 },
+        0
+      )
+        .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0)
+        .fromTo(
+          splitHeadings[index].chars,
+          { autoAlpha: 0, yPercent: 150 * dFactor },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: "power2",
+            stagger: {
+              each: 0.02,
+              from: "random",
+            },
+          },
+          0.2
+        );
+
+      currentIndex = index;
+    }
+
+    Observer.create({
+      type: "wheel,touch,pointer",
+      wheelSpeed: -1,
+      onDown: () => !animating && gotoSection(currentIndex - 1, -1),
+      onUp: () => !animating && gotoSection(currentIndex + 1, 1),
+      tolerance: 10,
+      preventDefault: true,
+    });
+
+    gotoSection(0, 1);
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-      {/* Page Title */}
-      <h2 className="text-3xl font-semibold text-orange-800">Video Gallery</h2>
-      <p className="text-gray-600 mt-1">
-        Watch real stories of transformation and see our programs in action
-        through video testimonials and demonstrations.
-      </p>
+    <div className="relative h-screen text-white font-['Cormorant Garamond'] uppercase">
+      <header className="fixed z-30 w-full flex justify-between items-center px-[5%] h-28 font-['Bebas Neue'] text-[clamp(0.66rem,2vw,1rem)] tracking-[0.5em]"></header>
 
-      {/* Featured Video */}
-      <section className="mt-12 text-left">
-        <h3 className="text-lg font-medium text-orange-700 mb-4">
-          ▶ Featured Video
-        </h3>
-        <div className="border rounded-lg overflow-hidden bg-gray-100">
-          <div className="h-64 flex items-center justify-center text-4xl text-gray-400">
-            ▶
-          </div>
-          <div className="p-4 text-sm text-gray-700">
-            <p className="font-semibold text-orange-700">
-              PolyCom Solution: Empowering Youth, Uplifting Farmers
-            </p>
-            <p className="text-gray-600">
-              This mini-documentary shows how our impact-driven model supports
-              local economies – 5:32
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className=" py-16 px-4">
+                <div>
+                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    Video Gallery
+                  </h2>
+                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    Watch real stories of transformation and see our programs in
+                    action through video testimonials and demonstrations
+                  </h2>
+                </div>
 
-      {/* Success Stories */}
-      <section className="mt-12 text-left">
-        <h3 className="text-lg font-medium text-orange-700 mb-4">
-          ✨ Success Stories
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Video 1 */}
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1502764613149-7f1d229e2300"
-              alt="David testimonial"
-              className="w-full h-auto rounded-md"
-            />
-            <p className="mt-2 text-sm text-gray-700">
-              <span className="font-semibold text-orange-700">
-                David’s Journey From City to Farm
-              </span>
-              <br />
-              Urban youth to agripreneur – community garden pilot leader – 2:16
-            </p>
-          </div>
-          {/* Video 2 */}
-          <div className="bg-gray-100 border rounded-md h-60 flex items-center justify-center relative">
-            <div className="text-4xl text-gray-400">▶</div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t text-sm text-gray-700">
-              <span className="font-semibold text-orange-700">
-                Elena’s Success Story
-              </span>
-              <br />
-              From a teacher to training leader through education transformation
-              – 3:28
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                  <div className="shadow rounded p-6">
+                    <h3 className="text-base md:text-lg font-medium text-orange-700 mb-3">
+                      ▶ Featured Video
+                    </h3>
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={video} alt="Dawit" className="w-full h-60 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg text-amber-300 mb-2.5">
+                      YeLijoch Mahiber: Empowering Youth, Uplifting Farmers
+                    </h3>
+                    <p className="italic text-sm">
+                      Our complete story - from vision to impact across
+                      Ethiopia's rural communities. • 6:30
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
             </div>
           </div>
         </div>
       </section>
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      Success Stories
+                    </h2>
+                  </div>
+                </div>
 
-      {/* Program Demonstrations */}
-      <section className="mt-12 text-left">
-        <h3 className="text-lg font-medium text-orange-700 mb-4">
-          📺 Program Demonstrations
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Demo 1 */}
-          <div className="border rounded-lg overflow-hidden bg-white">
-            <img
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-              alt="Field demo"
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-4 text-sm text-gray-700">
-              <p className="font-semibold text-orange-700">
-                Field Project: Irrigation Program Overview
-              </p>
-              <p>See our drip irrigation pilot in action – 1:55</p>
-            </div>
-          </div>
-          {/* Demo 2 */}
-          <div className="border rounded-lg overflow-hidden bg-white">
-            <div className="bg-gray-100 h-40 flex items-center justify-center text-3xl text-gray-400">
-              ▶
-            </div>
-            <div className="p-4 text-sm text-gray-700">
-              <p className="font-semibold text-orange-700">
-                Training & Certification
-              </p>
-              <p>Skills-based training workshop recap – 3:04</p>
-            </div>
-          </div>
-          {/* Demo 3 */}
-          <div className="border rounded-lg overflow-hidden bg-white">
-            <img
-              src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce"
-              alt="Market Linkage"
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-4 text-sm text-gray-700">
-              <p className="font-semibold text-orange-700">
-                Market Linkage in Action
-              </p>
-              <p>Connecting farmers directly to buyers – 2:22</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={man} alt="Dawit" className="w-full h-40 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg text-amber-100 mb-2.5">
+                      Dawit's Journey: From City to Farm
+                    </h3>
+                    <p className="italic text-sm">
+                      Watch Dawit Mekonnen share his transformation story from
+                      unemployed graduate to successful agricultural
+                      entrepreneur. • 3:45
+                    </p>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img src={land} alt="Almaz" className="w-full h-40 " />
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg text-amber-100 mb-2.5">
+                      Almaz's Success Story
+                    </h3>
+                    <p className="italic text-sm">
+                      Farmer Almaz Tadesse explains how youth volunteers helped
+                      increase her harvest by 30%. • 2:30
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
             </div>
           </div>
         </div>
       </section>
-      <div className="bg-yellow-50 py-10 px-4 rounded-md">
-        <h2 className="text-2xl font-semibold text-center text-[#823e0f] mb-10">
-          Video Categories
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {/* Card 1: Success Stories */}
-          <div className="bg-white p-6 rounded-md shadow-sm text-center hover:shadow-md transition">
-            <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <FaUsers className="text-green-700 text-2xl" />
-            </div>
-            <h3 className="text-lg font-semibold text-[#823e0f]">
-              Success Stories
-            </h3>
-            <p className="text-sm text-gray-600 mt-2">
-              Personal testimonials from youth participants and farmers sharing
-              their transformation journeys.
-            </p>
-          </div>
+      {/** ********* */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage4})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className=" py-16 px-4">
+                <div>
+                  <h2 className="section-heading text-3xl pt-20 font-bold text-center text-[#367e66] mb-3">
+                    Our Programs
+                  </h2>
+                  <h2 className="text-lg font-bold text-center text-white mb-3">
+                    Comprehensive programs designed to empower youth, support
+                    farmers, and create sustainable rural-urban partnerships.
+                  </h2>
+                </div>
+                <h3 className="text-2xl font-semibold text-orange-400 mb-3">
+                  Program Demonstrations
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                  {/* Card 1  ---------- */}
+                  {/* Card 1 */}
+                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                    {/* Image with Play Button Overlay */}
+                    <div className="relative">
+                      <img
+                        src={card1}
+                        alt="Hanna"
+                        className="w-full h-48 object-cover"
+                      />
+                      <button
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
+                        aria-label="Play Video"
+                      >
+                        <div className=" text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                          ▶
+                        </div>
+                      </button>
+                    </div>
 
-          {/* Card 2: Program Demos */}
-          <div className="bg-white p-6 rounded-md shadow-sm text-center hover:shadow-md transition">
-            <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <FaBookOpen className="text-green-700 text-2xl" />
-            </div>
-            <h3 className="text-lg font-semibold text-[#823e0f]">
-              Program Demos
-            </h3>
-            <p className="text-sm text-gray-600 mt-2">
-              Detailed demonstrations of our programs showing how they work and
-              their impact on communities.
-            </p>
-          </div>
+                    {/* Text Content */}
+                    <div className="p-4">
+                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                        Field Placement Program
+                      </h4>
+                      <p className="text-sm text-amber-50">
+                        See how our flagship program works from start to finish
+                        • 5:20
+                      </p>
+                    </div>
+                  </div>
 
-          {/* Card 3: Impact Reports */}
-          <div className="bg-white p-6 rounded-md shadow-sm text-center hover:shadow-md transition">
-            <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <FaArrowUp className="text-green-700 text-2xl" />
+                  {/* Repeat for Card 2 and Card 3 */}
+                  {/* Card 2 */}
+                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                    {/* Image with Play Button Overlay */}
+                    <div className="relative">
+                      <img
+                        src={card2}
+                        alt="Hanna"
+                        className="w-full h-48 object-cover"
+                      />
+                      <button
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
+                        aria-label="Play Video"
+                      >
+                        <div className=" text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                          ▶
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className="p-4">
+                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                        Training & Certification
+                      </h4>
+                      <p className="text-sm text-amber-50">
+                        Comprehensive training that prepares youth for success •
+                        4:15
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                    {/* Image with Play Button Overlay */}
+                    <div className="relative">
+                      <img
+                        src={card3}
+                        alt="Hanna"
+                        className="w-full h-48 object-cover"
+                      />
+                      <button
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
+                        aria-label="Play Video"
+                      >
+                        <div className=" text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                          ▶
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className="p-4">
+                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                        Market Linkage Program
+                      </h4>
+                      <p className="text-sm text-amber-50">
+                        Connecting farmers directly to urban markets • 3:50
+                      </p>
+                    </div>
+                  </div>
+
+                  <div></div>
+
+                  <button className="px-6 py-3 m-5 bg-emerald-900 text-white text-lg font-semibold rounded-2xl shadow-md hover:bg-white  hover:text-black transition">
+                    View more Videos
+                  </button>
+                </div>
+              </div>
+              {/* --------------------------- */}
             </div>
-            <h3 className="text-lg font-semibold text-[#823e0f]">
-              Impact Reports
-            </h3>
-            <p className="text-sm text-gray-600 mt-2">
-              Visual reports showcasing our achievements, statistics, and the
-              broader impact of our work.
-            </p>
           </div>
         </div>
-      </div>
+      </section>
+      {/*---------------------------------------------------*/}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage7})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className=" py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      Video Categories
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                  <div className=" shadow-md rounded-lg p-6 text-center border">
+                    <div className="mb-4">
+                      <div className="w-12 h-12 mx-auto rounded-full  flex items-center justify-center">
+                        <i className="fas fa-users text-amber-50">
+                          <Users />
+                        </i>
+                      </div>
+                    </div>
+
+                    <p className="font-semibold text-orange-800">
+                      Success Stories
+                    </p>
+                    <p className="text-sm text-amber-50 mt-1">
+                      Personal testimonials from youth participants and farmers
+                      sharing their transformation journeys.
+                    </p>
+                  </div>
+
+                  {/* Income Increase */}
+                  <div className=" shadow-md rounded-lg p-6 text-center border">
+                    <div className="mb-4">
+                      <div className="w-12 h-12 mx-auto rounded-full  flex items-center justify-center">
+                        <i className="fas fa-chart-line text-amber-50">
+                          <BookOpen />
+                        </i>
+                      </div>
+                    </div>
+
+                    <p className="font-semibold text-orange-800">
+                      Program Demos
+                    </p>
+                    <p className="text-sm text-amber-50 mt-1">
+                      Detailed demonstrations of our programs showing how they
+                      work and their impact on communities.
+                    </p>
+                  </div>
+
+                  {/* Communities */}
+                  <div className=" shadow-md rounded-lg p-6 text-center border">
+                    <div className="mb-4">
+                      <div className="w-12 h-12 mx-auto rounded-full flex items-center justify-center">
+                        <i className="fas fa-map-marker-alt text-amber-50">
+                          <ArrowUpRight />
+                        </i>
+                      </div>
+                    </div>
+
+                    <p className="font-semibold text-orange-800">
+                      Impact Reports
+                    </p>
+                    <p className="text-sm text-amber-50 mt-1">
+                      Visual reports showcasing our achievements, statistics,
+                      and the broader impact of our work.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/**********************************/}
     </div>
   );
-}
+};
+
+export default Videos;

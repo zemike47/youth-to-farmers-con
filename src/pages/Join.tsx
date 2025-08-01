@@ -1,125 +1,601 @@
-export default function Join() {
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { Observer } from "gsap/Observer";
+import SplitType from "split-type"; // Alternative to SplitText
+import bgImage from "../assets/background-image7.avif";
+
+import { Facebook, LinkedinIcon } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { Phone } from "lucide-react";
+import { Mail } from "lucide-react";
+import { MapPin } from "lucide-react";
+
+// Register GSAP plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Observer);
+}
+
+const Contact = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const images = document.querySelectorAll(".bg-img");
+    const outerWrappers = document.querySelectorAll(".outer");
+    const innerWrappers = document.querySelectorAll(".inner");
+    const headings = document.querySelectorAll(".section-heading");
+
+    const splitHeadings = Array.from(headings).map(
+      (heading) => new SplitType(heading, { types: "lines, words, chars" })
+    );
+
+    let currentIndex = -1;
+    let animating = false;
+    const wrap = gsap.utils.wrap(0, sections.length);
+
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
+
+    function gotoSection(index, direction) {
+      index = wrap(index);
+      animating = true;
+      const fromTop = direction === -1;
+      const dFactor = fromTop ? -1 : 1;
+
+      const tl = gsap.timeline({
+        defaults: { duration: 1.25, ease: "power1.inOut" },
+        onComplete: () => (animating = false),
+      });
+
+      if (currentIndex >= 0) {
+        gsap.set(sections[currentIndex], { zIndex: 0 });
+        tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
+          sections[currentIndex],
+          { autoAlpha: 0 }
+        );
+      }
+
+      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      tl.fromTo(
+        [outerWrappers[index], innerWrappers[index]],
+        {
+          yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
+        },
+        { yPercent: 0 },
+        0
+      )
+        .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0)
+        .fromTo(
+          splitHeadings[index].chars,
+          { autoAlpha: 0, yPercent: 150 * dFactor },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: "power2",
+            stagger: {
+              each: 0.02,
+              from: "random",
+            },
+          },
+          0.2
+        );
+
+      currentIndex = index;
+    }
+
+    Observer.create({
+      type: "wheel,touch,pointer",
+      wheelSpeed: -1,
+      onDown: () => !animating && gotoSection(currentIndex - 1, -1),
+      onUp: () => !animating && gotoSection(currentIndex + 1, 1),
+      tolerance: 10,
+      preventDefault: true,
+    });
+
+    gotoSection(0, 1);
+  }, []);
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12 text-sm">
-      {/* Header */}
-      <div className="text-center mb-6">
-        <h1 className="text-2xl font-semibold text-[#6d4c41]">
-          Join YeLijoch Mahiber
-        </h1>
-        <p className="text-gray-600 mt-1">
-          Be part of the movement that's transforming lives across Ethiopia
-        </p>
-      </div>
+    <div className="relative h-screen text-white font-['Cormorant Garamond'] uppercase">
+      <header className="fixed z-30 w-full flex justify-between items-center px-[5%] h-28 font-['Bebas Neue'] text-[clamp(0.66rem,2vw,1rem)] tracking-[0.5em]"></header>
 
-      {/* Tabs */}
-      <div className="flex justify-center mb-8 space-x-4 text-xs">
-        <button className="px-4 py-1 border rounded bg-gray-100 font-medium">
-          For Youth
-        </button>
-        <button className="px-4 py-1 border rounded hover:bg-gray-100">
-          For Partners
-        </button>
-        <button className="px-4 py-1 border rounded hover:bg-gray-100">
-          For Funders
-        </button>
-      </div>
-
-      {/* Form & Benefits */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Application Form */}
-        <div className="flex-1 border rounded-md p-5 shadow-sm">
-          <h2 className="font-semibold mb-4">Youth Application Form</h2>
-          <form className="space-y-4">
-            <div className="flex gap-4">
-              <input
-                type="text"
-                placeholder="First Name"
-                className="w-1/2 border px-3 py-2 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="w-1/2 border px-3 py-2 rounded"
-              />
-            </div>
-            <input
-              type="email"
-              placeholder="you@email.com"
-              className="w-full border px-3 py-2 rounded"
-            />
-            <input
-              type="tel"
-              placeholder="+251 XXX XXX XXX"
-              className="w-full border px-3 py-2 rounded"
-            />
-            <input
-              type="number"
-              placeholder="Age"
-              className="w-full border px-3 py-2 rounded"
-            />
-            <select className="w-full border px-3 py-2 rounded text-gray-500">
-              <option>Select education level</option>
-              <option>High School</option>
-              <option>College Graduate</option>
-              <option>Vocational Training</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Describe any agricultural work experience you have..."
-              className="w-full border px-3 py-2 rounded"
-            />
-            <textarea
-              placeholder="Why do you want to join?"
-              className="w-full border px-3 py-2 rounded h-24"
-            />
-
-            {/* File Upload */}
-            <div className="border-dashed border-2 border-gray-300 rounded p-4 text-center text-xs text-gray-500 bg-gray-50">
-              <p className="font-medium">Click to upload or drag and drop</p>
-              <p>PDF, DOCX (Max. 5MB)</p>
-              <input type="file" className="hidden" />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded text-sm"
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
             >
-              Submit Application
-            </button>
-          </form>
-        </div>
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      Join YeLijoch Mahiber - Youth Program
+                    </h2>
+                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                      Youth Program
+                    </h3>
+                    <p>
+                      {" "}
+                      Be part of the movement that's transforming lives across
+                      Ethiopia
+                    </p>
+                  </div>
+                </div>
 
-        {/* Program Benefits */}
-        <div className="w-full md:w-1/3 border rounded-md p-5 shadow-sm bg-white">
-          <h2 className="font-semibold mb-4">Program Benefits</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm mb-4">
-            <li>Monthly stipend during placement</li>
-            <li>Free accommodation when hosted by farmer</li>
-            <li>Practical agricultural skill development</li>
-            <li>Employment and entrepreneurial opportunities</li>
-            <li>Certificate of Completion</li>
-            <li>National network of youth-driven connections</li>
-          </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
 
-          <div className="bg-amber-100 text-gray-700 p-3 rounded text-xs">
-            <strong>Frequently Asked Questions</strong>
-            <ul className="list-disc list-inside mt-2 space-y-1">
-              <li>Q: How long is the program?</li>
-              <li>A: Most run between 2 to 12 weeks.</li>
-              <li>Q: Do I need farming experience?</li>
-              <li>
-                A: No. We train youth from all levels and provide training
-                sessions beforehand.
-              </li>
-              <li>Q: Where will I be placed?</li>
-              <li>
-                A: Placements will be in cities, suburbs, and nearby regions
-                based on needs and preferences.
-              </li>
-            </ul>
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Program Benefits
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      <li>Monthly stipend during placement</li>
+                      <li> Free accommodation with host families</li>
+                      <li>Practical agricultural training</li>
+                      <li> Leadership development opportunities</li>
+                      <li>Certificate of completion</li>
+                      <li>Network of rural and urban connections</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg text-amber-200">
+                      Frequently Asked Questions
+                    </h3>
+                    <p className="font-bold text-sm text-amber-500">
+                      Q: How long is the placement?
+                    </p>
+                    <p className=" text-sm text-amber-100">
+                      A: Typically 3-6 months, depending on the program and your
+                      availability.
+                    </p>
+                    <p className="font-bold text-sm text-amber-500">
+                      Q: Do I need farming experience?
+                    </p>
+                    <p className=" text-sm text-amber-100">
+                      A: No prior experience required. We provide training
+                      before placement.
+                    </p>
+                    <p className="font-bold text-sm text-amber-500">
+                      Q: Where will I be placed?
+                    </p>
+                    <p className=" text-sm text-amber-100">
+                      A: Placements are in Oromia, Amhara, and SNNPR regions
+                      based on needs and preferences.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4 mt-16">
+                <div>
+                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    Join - Youth Program
+                  </h2>
+                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    Get in touch with us to learn more about our programs,
+                    partnerships, or how you can get involved.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                  <div className="shadow rounded p-6">
+                    <div className="border rounded-md p-6 shadow-md mb-8">
+                      <h2 className="font-semibold mb-4">Youth Program Form</h2>
+                      <form className="space-y-4">
+                        <div className="flex gap-4 flex-col sm:flex-row">
+                          <input
+                            type="text"
+                            placeholder="First Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Last Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                        </div>
+                        <input
+                          type="email"
+                          placeholder="Email Address"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="tel"
+                          placeholder="+251 9XX XXX XXX"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Subject"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <textarea
+                          placeholder="Tell us more about your inquiry..."
+                          className="w-full border px-3 py-2 rounded text-sm h-24"
+                        ></textarea>
+                        <button
+                          type="submit"
+                          className="bg-green-700 text-white w-full py-2 rounded hover:bg-green-800"
+                        >
+                          Send Message
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      Join YeLijoch Mahiber - Farmers Program
+                    </h2>
+                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                      Farmers Program
+                    </h3>
+                    <p>
+                      {" "}
+                      Be part of the movement that's transforming lives across
+                      Ethiopia
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Benefits for Farmers
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      <li>Free agricultural labor and support</li>
+                      <li>Access to modern farming techniques</li>
+                      <li>Direct market access through youth coordinators</li>
+                      <li> Technology transfer and training</li>
+                      <li>Group sales coordination for better prices</li>
+                      <li>Long-term mentorship and support</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      What We Provide
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      <li>Trained and motivated youth volunteers</li>
+                      <li> Regular supervision and support</li>
+                      <li>Access to agricultural inputs and tools</li>
+                      <li> Market linkage services</li>
+                      <li>Training on modern farming practices</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4 mt-16">
+                <div>
+                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    Join Farmers Program
+                  </h2>
+                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    Get in touch with us to learn more about our programs,
+                    partnerships, or how you can get involved.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                  <div className="shadow rounded p-6">
+                    <div className="border rounded-md p-6 shadow-md mb-8">
+                      <h2 className="font-semibold mb-4">
+                        Farmers Program Form
+                      </h2>
+                      <form className="space-y-4">
+                        <div className="flex gap-4 flex-col sm:flex-row">
+                          <input
+                            type="text"
+                            placeholder="First Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Last Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                        </div>
+                        <input
+                          type="email"
+                          placeholder="Email Address"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="tel"
+                          placeholder="+251 9XX XXX XXX"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Subject"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <textarea
+                          placeholder="Tell us more about your inquiry..."
+                          className="w-full border px-3 py-2 rounded text-sm h-24"
+                        ></textarea>
+                        <button
+                          type="submit"
+                          className="bg-green-700 text-white w-full py-2 rounded hover:bg-green-800"
+                        >
+                          Send Message
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/****** */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4">
+                <div>
+                  <div>
+                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                      Join YeLijoch Mahiber - Partner Organization
+                    </h2>
+                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                      Partner Organization
+                    </h3>
+                    <p>
+                      {" "}
+                      Be part of the movement that's transforming lives across
+                      Ethiopia
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8 max-w-6xl mx-auto">
+                  {/* --------------------------- */}
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Funding Partners
+                    </h3>
+                    <h4>Support program expansion and sustainability</h4>
+                    <ul className="list-disc pl-5">
+                      <li>Program funding and grants</li>
+                      <li>Youth stipend support</li>
+                      <li>Infrastructure development</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Implementation Partners
+                    </h3>
+                    <h4>Collaborate on program delivery</h4>
+                    <ul className="list-disc pl-5">
+                      <li>Joint program implementation</li>
+                      <li>Resource sharing</li>
+                      <li>Geographic expansion</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Technical Partners
+                    </h3>
+                    <h4>Provide expertise and knowledge</h4>
+                    <ul className="list-disc pl-5">
+                      <li>Agricultural technology transfer</li>
+                      <li>Training and capacity building</li>
+                      <li>Research and development</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Government Partners
+                    </h3>
+                    <h4>Policy support and scaling</h4>
+                    <ul className="list-disc pl-5">
+                      <li>Policy alignment and support</li>
+                      <li>National program integration</li>
+                      <li>Regulatory facilitation</li>
+                    </ul>
+                  </div>
+
+                  <div className="shadow rounded p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div></div>
+                    </div>
+                    <h3 className="text-lg font-bold  text-amber-200">
+                      Partnership Benefits
+                    </h3>
+                    <ul className="list-disc pl-5">
+                      <li>Direct impact on rural development</li>
+                      <li> Youth empowerment and job creation </li>
+                      <li> Sustainable development goals alignment</li>
+                      <li> Measurable social impact</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4 */}
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+        <div className="outer w-full h-full overflow-hidden">
+          <div className="inner w-full h-full overflow-hidden">
+            <div
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+              }}
+            >
+              {/* --------------------------- */}
+              <div className="py-16 px-4 mt-16">
+                <div>
+                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    Join Farmers Program
+                  </h2>
+                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    Get in touch with us to learn more about our programs,
+                    partnerships, or how you can get involved.
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                  <div className="shadow rounded p-6">
+                    <div className="border rounded-md p-6 shadow-md mb-8">
+                      <h2 className="font-semibold mb-4">
+                        Partner Organization Form
+                      </h2>
+                      <form className="space-y-4">
+                        <div className="flex gap-4 flex-col sm:flex-row">
+                          <input
+                            type="text"
+                            placeholder="First Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Last Name"
+                            className="w-full sm:w-1/2 border px-3 py-2 rounded text-sm"
+                          />
+                        </div>
+                        <input
+                          type="email"
+                          placeholder="Email Address"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="tel"
+                          placeholder="+251 9XX XXX XXX"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Subject"
+                          className="w-full border px-3 py-2 rounded text-sm"
+                        />
+                        <textarea
+                          placeholder="Tell us more about your inquiry..."
+                          className="w-full border px-3 py-2 rounded text-sm h-24"
+                        ></textarea>
+                        <button
+                          type="submit"
+                          className="bg-green-700 text-white w-full py-2 rounded hover:bg-green-800"
+                        >
+                          Send Message
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* --------------------------- */}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
-}
+};
+
+export default Contact;
