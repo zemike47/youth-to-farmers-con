@@ -21,7 +21,10 @@ const ProblemSolution = () => {
     const headings = document.querySelectorAll(".section-heading");
 
     const splitHeadings = Array.from(headings).map(
-      (heading) => new SplitType(heading, { types: "lines, words, chars" })
+      (heading) =>
+        new SplitType(heading as HTMLElement, {
+          types: ["lines", "words", "chars"],
+        })
     );
 
     let currentIndex = -1;
@@ -31,7 +34,7 @@ const ProblemSolution = () => {
     gsap.set(outerWrappers, { yPercent: 100 });
     gsap.set(innerWrappers, { yPercent: -100 });
 
-    function gotoSection(index, direction) {
+    function gotoSection(index: number, direction: number): void {
       index = wrap(index);
       animating = true;
       const fromTop = direction === -1;
@@ -39,7 +42,9 @@ const ProblemSolution = () => {
 
       const tl = gsap.timeline({
         defaults: { duration: 1.25, ease: "power1.inOut" },
-        onComplete: () => (animating = false),
+        onComplete: () => {
+          animating = false;
+        },
       });
 
       if (currentIndex >= 0) {
@@ -82,8 +87,9 @@ const ProblemSolution = () => {
     Observer.create({
       type: "wheel,touch,pointer",
       wheelSpeed: -1,
-      onDown: () => !animating && gotoSection(currentIndex - 1, -1),
-      onUp: () => !animating && gotoSection(currentIndex + 1, 1),
+      onDown: () => !animating && gotoSection(currentIndex + 1, 1),
+      onUp: () => !animating && gotoSection(currentIndex - 1, -1),
+
       tolerance: 10,
       preventDefault: true,
     });
