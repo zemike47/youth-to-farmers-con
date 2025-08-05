@@ -28,6 +28,9 @@ if (typeof window !== "undefined") {
 
 const Videos = () => {
   useEffect(() => {
+    const isMobile = window.innerWidth < 640;
+    if (isMobile) return;
+
     const sections = document.querySelectorAll("section");
     const images = document.querySelectorAll(".bg-img");
     const outerWrappers = document.querySelectorAll(".outer");
@@ -309,7 +312,7 @@ const Videos = () => {
                   </div>
 
                   {/* Card 3 */}
-                  <div className="rounded-lg  border shadow-md overflow-hidden border  text-white max-w-sm">
+                  <div className="rounded-lg  border shadow-md overflow-hidden   text-white max-w-sm">
                     {/* Image with Play Button Overlay */}
                     <div className="relative">
                       <img

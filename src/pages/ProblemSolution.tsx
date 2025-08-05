@@ -14,6 +14,9 @@ if (typeof window !== "undefined") {
 
 const ProblemSolution = () => {
   useEffect(() => {
+    const isMobile = window.innerWidth < 640;
+    if (isMobile) return;
+
     const sections = document.querySelectorAll("section");
     const images = document.querySelectorAll(".bg-img");
     const outerWrappers = document.querySelectorAll(".outer");
