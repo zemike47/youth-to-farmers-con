@@ -3,10 +3,12 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import { MoveRight } from "lucide-react";
-import bgImage from "../assets/background-image3.avif";
-import bgImage2 from "../assets/background-image4.avif";
 
-import bgImage4 from "../assets/background-image6.avif";
+import bg1 from "../assets/bg-1.jpg";
+import bg2 from "../assets/bg-2.jpg";
+import bg3 from "../assets/bg-3.jpg";
+import bg4 from "../assets/bg-4.jpg";
+import bg5 from "../assets/bg-5.jpg";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -97,6 +99,7 @@ const Home = () => {
 
     gotoSection(0, 1);
   }, []);
+
   return (
     <div className="relative h-screen text-white font-['Cormorant Garamond'] uppercase">
       {/* Section 1 */}
@@ -108,7 +111,7 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg1})`,
               }}
             >
               <div className="flex flex-col items-center justify-center text-center max-w-[90vw]">
@@ -122,7 +125,7 @@ const Home = () => {
                   Bridging Urban Youth with Rural Farmers — A Sustainable
                   Support and Learning Ecosystem
                 </h2>
-                <button className="px-6 py-3 bg-yellow-600 text-white text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition">
+                <button className="px-3 py-1.5 bg-yellow-600 text-white text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition">
                   Get Involved
                 </button>
               </div>
@@ -138,12 +141,12 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage2})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg2})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
-                <h2 className="text-3xl font-bold text-center text-[#f5810e] mb-12">
+              <div className="py-16 px-4 mt-[380px]">
+                <h2 className="font-bold text-center text-[#f5810e] mb-12">
                   Our Three Core Goals
                 </h2>
 
@@ -155,10 +158,10 @@ const Home = () => {
                         <span className="text-green-600 text-2xl">🌱</span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#f5810e] mb-2">
+                    <h3 className="text-base font-semibold text-[#f5810e] mb-2">
                       Support Rural Farmers
                     </h3>
-                    <p className="text-sm text-[#f5810e]">
+                    <p className="text-xs text-[#f5810e]">
                       Provide direct agricultural support, modern techniques,
                       and market access to rural farming communities across
                       Ethiopia.
@@ -172,10 +175,10 @@ const Home = () => {
                         <span className="text-green-600 text-2xl">👥</span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#f5810e] mb-2">
+                    <h3 className="text-base font-semibold text-[#f5810e] mb-2">
                       Empower Youth
                     </h3>
-                    <p className="text-sm text-[#f5810e]">
+                    <p className="text-xs text-[#f5810e]">
                       Give urban youth purpose, practical skills, and meaningful
                       work experience while contributing to rural development.
                     </p>
@@ -188,10 +191,10 @@ const Home = () => {
                         <span className="text-green-600 text-2xl">$</span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#f5810e] mb-2">
+                    <h3 className="text-base font-semibold text-[#f5810e] mb-2">
                       Generate Income
                     </h3>
-                    <p className="text-sm text-[#f5810e]">
+                    <p className="text-xs text-[#f5810e]">
                       Create sustainable revenue through coordination services,
                       value-added activities, and market facilitation.
                     </p>
@@ -212,11 +215,11 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg3})`,
               }}
             >
-              <div className="flex flex-col items-center justify-center text-center max-w-[90vw]">
-                <h2 className="section-heading text-[clamp(0.8rem,3vw,2.5rem)] font-normal tracking-[0.3em] text-gray-300 max-w-[900px] mb-4">
+              <div className="flex flex-col items-center justify-center text-center max-w-[90vw] ">
+                <h2 className="section-heading font-extrabold text-[clamp(0.8rem,3vw,2.5rem)] tracking-[0.3em] text-gray-300 max-w-[900px] mb-4">
                   Ready to Get Started?
                 </h2>
                 <h2 className="section-heading text-[clamp(0.8rem,2.5vw,2rem)] font-normal tracking-[0.3em] text-gray-300 max-w-[900px] mb-4">
@@ -224,10 +227,10 @@ const Home = () => {
                   the YeLijoch Mahiber community.
                 </h2>
                 <div className="gap-x-7">
-                  <button className="px-6 py-3 bg-yellow-600 text-white text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition mr-2.5">
+                  <button className="px-3 py-1.5 bg-yellow-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-yellow-900 transition mr-2.5">
                     Apply now
                   </button>
-                  <button className="px-6 py-3 bg-amber-50 text-black text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition">
+                  <button className="px-3 py-1.5 bg-yellow-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-yellow-900 transition mr-2.5">
                     Contact US
                   </button>
                 </div>
@@ -244,40 +247,40 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage4})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg4})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className=" py-16 px-4 mt-[530px]">
                 <div>
-                  <h2 className="section-heading text-3xl pt-20 font-bold text-center text-[#804000] mb-12">
+                  <h2 className="section-heading text-base pt-20 font-bold text-center text-[#f7f4f1] mb-4">
                     Latest News & Stories
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#804000] mb-12">
+                  <h2 className="text-sm  text-center text-[#e9e3dd] mb-5">
                     Stay updated with our impact and success stories
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {/* Card 1 */}
-                  <div className=" rounded-lg p-8 shadow-sm border  border-gray-200">
+                  <div className=" rounded-lg p-6 shadow-sm border  border-gray-200">
                     <div className="flex justify-center mb-4">
                       <div className=" rounded-full w-12 h-12 flex items-center justify-center">
-                        <span className="text-green-600 text-2xl">
-                          Milestone
+                        <span className="text-white font-bold text-base">
+                          SUCCESS STORY
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#804000] mb-2 text-left">
-                      500 Youth Successfully Placed
+                    <h3 className="text-sm font-semibold text-[#804000] mb-2 text-left">
+                      FROM CITY TO FARM: DAWIT'S STORY
                     </h3>
-                    <p className="text-sm text-[#804000] text-left mb-4">
-                      YeLijoch Mahiber reaches major milestone with 500 urban
-                      youth placed in rural communities.
+                    <p className="text-xs font-extrabold text-[#faf9f9f3] text-left mb-4">
+                      HOW A COMPUTER SCIENCE GRADUATE FOUND HIS CALLING IN RURAL
+                      AGRICULTURE.
                     </p>
                     <a
                       href="#"
-                      className="text-green-600 inline-flex items-center hover:underline text-left"
+                      className="text-green-600  font-extrabold inline-flex items-center hover:underline text-left"
                     >
                       Read more
                       <MoveRight className="ml-1 w-4 h-4" />
@@ -285,24 +288,24 @@ const Home = () => {
                   </div>
 
                   {/* Card 2 */}
-                  <div className="rounded-lg p-8 shadow-sm text-center border border-gray-200">
+                  <div className=" rounded-lg p-6 shadow-sm border  border-gray-200">
                     <div className="flex justify-center mb-4">
                       <div className=" rounded-full w-12 h-12 flex items-center justify-center">
-                        <span className="text-green-600 text-2xl">
-                          Success Story
+                        <span className="text-white font-bold text-base">
+                          IMPACT REPORT
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#804000] mb-2">
-                      From City to Farm: Dawit's Story
+                    <h3 className="text-sm font-semibold text-[#804000] mb-2 text-left">
+                      30% INCREASE IN FARMER INCOME
                     </h3>
-                    <p className="text-sm text-[#804000]">
-                      How a computer science graduate found his calling in rural
-                      agriculture.
+                    <p className="text-xs font-extrabold text-[#faf9f9f3] text-left mb-4">
+                      LATEST ASSESSMENT SHOWS SIGNIFICANT INCOME IMPROVEMENTS
+                      FOR PARTICIPATING FARMERS.
                     </p>
                     <a
                       href="#"
-                      className="text-green-600 inline-flex items-center hover:underline text-left"
+                      className="text-green-600  font-extrabold inline-flex items-center hover:underline text-left"
                     >
                       Read more
                       <MoveRight className="ml-1 w-4 h-4" />
@@ -310,24 +313,24 @@ const Home = () => {
                   </div>
 
                   {/* Card 3 */}
-                  <div className="rounded-lg p-8 shadow-sm text-center border border-gray-200">
+                  <div className=" rounded-lg p-6 shadow-sm border  border-gray-200">
                     <div className="flex justify-center mb-4">
-                      <div className="rounded-full w-12 h-12 flex items-center justify-center">
-                        <span className="text-green-600 text-2xl">
-                          Impact Report
+                      <div className=" rounded-full w-12 h-12 flex items-center justify-center">
+                        <span className="text-white font-bold text-base">
+                          Milestone
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#804000] mb-2">
-                      30% Increase in Farmer Income
+                    <h3 className="text-sm font-semibold text-[#804000] mb-2 text-left">
+                      500 Youth Successfully Placed
                     </h3>
-                    <p className="text-sm text-[#804000]">
-                      Latest assessment shows significant income improvements
-                      for participating farmers.
+                    <p className="text-xs font-extrabold text-[#faf9f9f3] text-left mb-4">
+                      YeLijoch Mahiber reaches major milestone with 500 urban
+                      youth placed in rural communities.
                     </p>
                     <a
                       href="#"
-                      className="text-green-600 inline-flex items-center hover:underline text-left"
+                      className="text-green-600  font-extrabold inline-flex items-center hover:underline text-left"
                     >
                       Read more
                       <MoveRight className="ml-1 w-4 h-4" />
@@ -353,16 +356,16 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg5})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4 mt-16">
+              <div className="py-16 px-4 mt-12">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-1">
                     Contact Us
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-sm  text-center text-[#ebe4dd] mb-1">
                     Get in touch with us to learn more about our programs,
                     partnerships, or how you can get involved.
                   </h2>
@@ -372,12 +375,12 @@ const Home = () => {
                   <div className="shadow rounded p-6">
                     <div className="border rounded-md p-6 shadow-md mb-8">
                       {/* Title */}
-                      <h2 className="text-2xl font-bold text-amber-800 mb-2">
+                      <h2 className="text-base font-bold text-amber-800 mb-3">
                         Stay Updated
                       </h2>
 
                       {/* Description */}
-                      <p className="text-white mb-6">
+                      <p className="text-white  text-sm mb-6">
                         Subscribe to our newsletter for the latest updates,
                         success stories, and opportunities to get involved.
                       </p>
@@ -385,11 +388,11 @@ const Home = () => {
                         <input
                           type="email"
                           placeholder="Enter your email address"
-                          className="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-amber-300 w-full sm:w-auto"
+                          className="px-4 py-2 border text-xs rounded-md focus:outline-none focus:ring focus:ring-amber-300 w-full sm:w-auto"
                         />
                         <button
                           type="submit"
-                          className="bg-green-700 text-white px-5 py-2 rounded-md hover:bg-green-800 transition"
+                          className="bg-green-700 text-white px-3 py-1.5 rounded-md hover:bg-green-800 transition"
                         >
                           Subscribe
                         </button>
@@ -415,11 +418,11 @@ const Home = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg1})`,
               }}
             >
               <h2 className="section-heading text-[clamp(1rem,5vw,5rem)] font-normal text-center tracking-[0.5em] text-gray-300 w-[90vw] max-w-[1200px]">
-                Keep scrolling
+                YeLijoch Mahiber
               </h2>
             </div>
           </div>

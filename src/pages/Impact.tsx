@@ -3,11 +3,11 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 
-import bgImage from "../assets/background-image3.avif";
-import bgImage7 from "../assets/background-image7.avif";
-import bgImage8 from "../assets/background-image8.avif";
-import bgImage2 from "../assets/background-image2.avif";
-import bgImage12 from "../assets/background-image12.avif";
+import bg13 from "../assets/bg-13.jpg";
+import bg14 from "../assets/bg-14.jpg";
+import bg15 from "../assets/bg-15.jpg";
+import bg16 from "../assets/bg-16.jpg";
+import bg17 from "../assets/bg-17.jpg";
 
 import { Users } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
@@ -116,22 +116,22 @@ const Impact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage7})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg13})`,
               }}
             >
               {/* --------------------------- */}
               <div className=" py-16 px-4">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4 mt-[650px]">
                       Our Impact
                     </h2>
-                    <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    <h2 className="text-sm font-bold text-center text-[#ebe4dd] mb-4">
                       Measuring success through the lives we've touched and the
                       communities we've strengthened.
                     </h2>
                   </div>
-                  <h3 className="text-2xl font-semibold text-orange-800 mb-3">
+                  <h3 className="text-base font-semibold text-orange-800 mb-3">
                     Key Performance Indicators
                   </h3>
                 </div>
@@ -219,30 +219,30 @@ const Impact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage7})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg14})`,
               }}
             >
               {/* --------------------------- */}
               <div className="py-16 px-4">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4 mt-[390px]">
                       Written Testimonials
                     </h2>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  <div className=" shadow rounded p-6 ">
+                  <div className="border shadow rounded p-6 ">
                     <div className="flex items-center space-x-4 mb-4">
                       <img
-                        src={bgImage8}
+                        src={bg13}
                         alt="Almaz"
                         className="w-10 h-10 rounded-full"
                       />
                       <div>
-                        <p className="font-semibold">Almaz Tadesse</p>
-                        <p className="text-sm text-amber-100">
+                        <p className="font-semibold text-base">Almaz Tadesse</p>
+                        <p className="text-xs text-amber-100">
                           Farmer, Oromia Region
                         </p>
                       </div>
@@ -255,16 +255,16 @@ const Impact = () => {
                     </p>
                   </div>
 
-                  <div className="shadow rounded p-6">
+                  <div className=" border shadow rounded p-6">
                     <div className="flex items-center space-x-4 mb-4">
                       <img
-                        src={bgImage8}
+                        src={bg14}
                         alt="Dawit"
                         className="w-10 h-10 rounded-full"
                       />
                       <div>
                         <p className="font-semibold">Dawit Mekonnen</p>
-                        <p className="text-sm text-amber-100">
+                        <p className="text-xs text-amber-100">
                           Youth Participant, Addis Ababa
                         </p>
                       </div>
@@ -277,16 +277,16 @@ const Impact = () => {
                     </p>
                   </div>
 
-                  <div className="shadow rounded p-6">
+                  <div className=" border shadow rounded p-6">
                     <div className="flex items-center space-x-4 mb-4">
                       <img
-                        src={bgImage}
+                        src={bg15}
                         alt="Hanna"
                         className="w-10 h-10 rounded-full"
                       />
                       <div>
                         <p className="font-semibold">Hanna Wolde</p>
-                        <p className="text-sm text-amber-100">
+                        <p className="text-xs text-amber-100">
                           Farmer, Amhara Region
                         </p>
                       </div>
@@ -312,31 +312,31 @@ const Impact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg15})`,
               }}
             >
               {/* --------------------------- */}
               <div className="py-16 px-4">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-lg  font-bold text-center text-[#dfdad6] mb-4 mt-[170px]">
                       Video Testimonials
                     </h2>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
                   <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center space-x-4 mb-1">
                       <img src={man} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
                     <h3 className="text-sm text-amber-100">
                       Dawit's Transformation Story
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       From unemployed graduate to successful agricultural
                       entrepreneur • 3:45
                     </p>
@@ -350,7 +350,7 @@ const Impact = () => {
                     <h3 className="text-sm text-amber-100">
                       Almaz's Success Story
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       How youth volunteers helped increase harvest by 30% • 2:30
                     </p>
                   </div>
@@ -374,33 +374,33 @@ const Impact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage2})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg16})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-52">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] ">
                       Program Impact Over Time
                     </h2>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-1 max-w-6xl mx-auto">
                   <div className=" shadow rounded p-6 ">
-                    <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center space-x-4">
                       <div>
                         <p className="font-semibold text-green-600 text-2xl">
                           Year 1
                         </p>
-                        <p className="text-sm text-amber-100 mb-2.5">
+                        <p className="text-sm text-amber-100 mb-1">
                           150 youth placed
                         </p>
-                        <p className="text-sm text-amber-100 mb-2.5">
+                        <p className="text-sm text-amber-100 mb-1">
                           25 farming communities
                         </p>
-                        <p className="text-sm text-amber-100 mb-2.5">
+                        <p className="text-sm text-amber-100 mb-1">
                           15% average income increase
                         </p>
                       </div>
@@ -459,14 +459,14 @@ const Impact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage12})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg17})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-26">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                       Our Long-term Vision
                     </h2>
                   </div>
@@ -474,9 +474,9 @@ const Impact = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   <div className=" shadow rounded p-6 ">
-                    <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center space-x-4 ">
                       <div>
-                        <p className="font-semibold text-green-600 text-2xl">
+                        <p className="font-semibold text-green-600 text-base">
                           5,000 Youth
                         </p>
                         <p className="text-sm text-amber-100 mb-2.5">
@@ -487,12 +487,12 @@ const Impact = () => {
                   </div>
 
                   <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center space-x-4 ">
                       <div>
-                        <p className="font-semibold text-green-600 text-2xl">
+                        <p className="font-semibold text-green-600 text-base">
                           500 Communities
                         </p>
-                        <p className="text-sm text-amber-100 mb-2.5">
+                        <p className="text-sm text-amber-100 ">
                           Rural communities transformed
                         </p>
                       </div>
@@ -502,7 +502,7 @@ const Impact = () => {
                   <div className="shadow rounded p-6">
                     <div className="flex items-center space-x-4 mb-4">
                       <div>
-                        <p className="font-semibold text-green-600 text-2xl">
+                        <p className="font-semibold text-green-600 text-base">
                           50% Income Boost
                         </p>
                         <p className="text-sm text-amber-100 mb-2.5">

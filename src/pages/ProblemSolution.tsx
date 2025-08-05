@@ -4,8 +4,8 @@ import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import { TriangleAlert, CircleCheckBig } from "lucide-react";
 
-import bgImage10 from "../assets/background-image10.webp";
-import bgImage12 from "../assets/background-image12.avif";
+import bg28 from "../assets/bg-28.jpg";
+import bg27 from "../assets/bg-27.jpg";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -111,12 +111,12 @@ const ProblemSolution = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage10})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg28})`,
               }}
             >
-              <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+              <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8 mt-60">
                 {/* Heading */}
-                <h2 className="section-heading text-2xl sm:text-3xl font-semibold text-[#8B0000] mb-4 text-center">
+                <h2 className="section-heading text-lg sm:text-3xl font-semibold text-[#8B0000] mb-4 text-center">
                   Problem & Solution
                 </h2>
 
@@ -124,9 +124,11 @@ const ProblemSolution = () => {
                 <div className="max-w-3xl mx-auto mb-8 text-center">
                   <div className="flex items-center justify-center gap-2 mb-2 text-[#D14343]">
                     <TriangleAlert className="h-5 w-5" />
-                    <span className="font-semibold">The Challenge We Face</span>
+                    <span className="font-semibold text-sm">
+                      The Challenge We Face
+                    </span>
                   </div>
-                  <p className="text-sm text-amber-100">
+                  <p className="text-xs text-amber-100">
                     Ethiopia faces interconnected challenges that limit the
                     potential of both urban youth and rural farmers.
                   </p>
@@ -156,10 +158,10 @@ const ProblemSolution = () => {
                       key={idx}
                       className="border border-red-300 p-4 text-left rounded-md shadow-sm"
                     >
-                      <h3 className="font-semibold text-sm text-amber-200 mb-1">
+                      <h3 className="font-semibold text-base text-amber-200 mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-amber-50">{item.text}</p>
+                      <p className="text-xs text-amber-50">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -176,19 +178,19 @@ const ProblemSolution = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage12})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg27})`,
               }}
             >
-              <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+              <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8 mt-[500px]">
                 {/* Solution Section */}
                 <div className="max-w-3xl mx-auto mb-6 text-center">
                   <div className="flex items-center justify-center gap-2 text-green-700 mb-2">
                     <CircleCheckBig className="h-5 w-5" />
-                    <h2 className="section-heading font-semibold text-amber-100">
+                    <h2 className="section-heading font-semibold text-base text-amber-100">
                       Our Comprehensive Solution
                     </h2>
                   </div>
-                  <p className="text-sm text-amber-50">
+                  <p className="text-xs text-amber-50">
                     YeLijoch Mahiber creates a sustainable ecosystem that
                     addresses these challenges through innovative collaboration.
                   </p>
@@ -226,10 +228,10 @@ const ProblemSolution = () => {
                       key={idx}
                       className="border border-green-200 p-4 text-left rounded-md shadow-sm"
                     >
-                      <h3 className="font-semibold text-sm mb-1">
+                      <h3 className="font-semibold text-base mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-blue-100">{item.text}</p>
+                      <p className="text-xs text-blue-100">{item.text}</p>
                     </div>
                   ))}
                 </div>

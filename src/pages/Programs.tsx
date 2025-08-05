@@ -4,7 +4,11 @@ import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 import bgImage from "../assets/background-image3.avif";
 
-import bgImage4 from "../assets/background-image6.avif"; // adjust the
+import bg29 from "../assets/bg-29.jpg";
+import bg30 from "../assets/bg-30.jpg";
+import bg31 from "../assets/bg-31.jpg";
+import bg32 from "../assets/bg-32.jpg";
+import bg33 from "../assets/bg-33.jpg";
 
 import card1 from "../assets/card1.png";
 import card2 from "../assets/card2.png";
@@ -110,21 +114,21 @@ const Programs = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage4})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg29})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className=" py-16 px-4 mt-[480px]">
                 <div>
-                  <h2 className="section-heading text-3xl pt-20 font-bold text-center text-[#367e66] mb-3">
+                  <h2 className="section-heading text-base pt-20 font-bold text-center text-[#367e66] mb-3">
                     Our Programs
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-white mb-3">
+                  <h2 className="text-xs font-bold text-center text-white mb-3 p-2">
                     Comprehensive programs designed to empower youth, support
                     farmers, and create sustainable rural-urban partnerships.
                   </h2>
                 </div>
-                <h3 className="text-2xl font-semibold text-orange-400 mb-3">
+                <h3 className="text-base font-semibold text-orange-400 mb-3 p-2">
                   Program Demonstrations
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -136,7 +140,7 @@ const Programs = () => {
                       <img
                         src={card1}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 object-cover p-2"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -149,11 +153,11 @@ const Programs = () => {
                     </div>
 
                     {/* Text Content */}
-                    <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                    <div className="p-2">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Field Placement Program
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         See how our flagship program works from start to finish
                         • 5:20
                       </p>
@@ -168,7 +172,7 @@ const Programs = () => {
                       <img
                         src={card2}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 object-cover p-2"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -181,11 +185,11 @@ const Programs = () => {
                     </div>
 
                     {/* Text Content */}
-                    <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                    <div className="p-2">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Training & Certification
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         Comprehensive training that prepares youth for success •
                         4:15
                       </p>
@@ -199,7 +203,7 @@ const Programs = () => {
                       <img
                         src={card3}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 object-cover p-2"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -212,11 +216,11 @@ const Programs = () => {
                     </div>
 
                     {/* Text Content */}
-                    <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                    <div className="p-2">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Market Linkage Program
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         Connecting farmers directly to urban markets • 3:50
                       </p>
                     </div>
@@ -224,7 +228,7 @@ const Programs = () => {
 
                   <div></div>
 
-                  <button className="px-6 py-3 m-5 bg-emerald-900 text-white text-lg font-semibold rounded-2xl shadow-md hover:bg-white  hover:text-black transition">
+                  <button className="px-3 py-1.5 m-5 bg-emerald-900 text-white text-base font-semibold rounded-2xl shadow-md hover:bg-white  hover:text-black transition">
                     View more Videos
                   </button>
                 </div>
@@ -242,16 +246,16 @@ const Programs = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg30})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="mt-10 py-16 px-4">
+              <div className="mt-60 py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] ">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] ">
                     Active Programs
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-xs font-bold text-center text-[#ebe4dd] mb-4">
                     GET IN TOUCH WITH US TO LEARN MORE ABOUT OUR PROGRAMS,
                     PARTNERSHIPS, OR HOW YOU CAN GET INVOLVED.
                   </h2>
@@ -273,22 +277,22 @@ const Programs = () => {
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <h2 className="text-xl text-amber-300 font-semibold mb-3">
+                      <h2 className="text-base text-amber-300 font-semibold mb-3">
                         Field Placement Program
                       </h2>
-                      <span className="text-sm text-green-300">3-6 months</span>
+                      <span className="text-xs text-green-300">3-6 months</span>
                     </div>
 
-                    <p className="italic text-sm text-gray-300 mb-4">
+                    <p className="italic text-xs text-gray-300 mb-4">
                       Our flagship program places urban youth with rural farmers
                       for extended periods, providing hands-on agricultural
                       experience while supporting farming communities.
                     </p>
 
-                    <h3 className="text-lg text-green-400 font-medium mb-1">
+                    <h3 className="text-base text-green-400 font-medium mb-1">
                       Program Benefits:
                     </h3>
-                    <ul className="list-disc list-inside text-sm space-y-1 mb-3 text-gray-200">
+                    <ul className="list-disc list-inside text-xs space-y-1 mb-3 text-gray-200">
                       <li>Live and work alongside experienced farmers</li>
                       <li>Learn traditional and modern farming techniques</li>
                       <li>Receive monthly stipend and accommodation</li>
@@ -296,7 +300,7 @@ const Programs = () => {
                       <li>Gain practical work experience</li>
                     </ul>
                     <div className="flex items-center space-x-4 mb-4">
-                      <button className="px-6 py-1 bg-green-600 text-white text-base font-semibold shadow-md hover:bg-green-200  hover:text-black transition">
+                      <button className="px-3 py-1 bg-green-600 text-white text-sm font-semibold shadow-md hover:bg-green-200  hover:text-black transition">
                         Join This Program
                       </button>
                     </div>
@@ -315,13 +319,13 @@ const Programs = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg31})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="mt-10 py-16 px-4">
+              <div className="mt-20 py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] ">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] ">
                     program - 2
                   </h2>
                 </div>
@@ -341,13 +345,13 @@ const Programs = () => {
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <h2 className="text-xl text-amber-300 font-semibold mb-3">
+                      <h2 className="text-base text-amber-300 font-semibold mb-3">
                         Farmer Support Services
                       </h2>
-                      <span className="text-sm text-green-300">Ongoing</span>
+                      <span className="text-xs text-green-300">Ongoing</span>
                     </div>
 
-                    <p className="italic text-sm text-gray-300 mb-4">
+                    <p className="italic text-xs text-gray-300 mb-4">
                       Comprehensive support services for rural farmers including
                       irrigation assistance, modern planting techniques, and
                       technology transfer..
@@ -356,7 +360,7 @@ const Programs = () => {
                     <h3 className="text-lg text-green-400 font-medium mb-1">
                       Program Benefits:
                     </h3>
-                    <ul className="list-disc list-inside text-sm space-y-1 mb-3 text-gray-200">
+                    <ul className="list-disc list-inside text-xs space-y-1 mb-3 text-gray-200">
                       <li>Access to modern farming equipment</li>
                       <li>Irrigation system setup and maintenance</li>
                       <li>Crop planning and rotation guidance</li>
@@ -364,7 +368,7 @@ const Programs = () => {
                       <li>Soil testing and improvement</li>
                     </ul>
                     <div className="flex items-center space-x-4 mb-4">
-                      <button className="px-6 py-1 bg-green-600 text-white text-base font-semibold shadow-md hover:bg-green-200 hover:text-black transition">
+                      <button className="px-3 py-1 bg-green-600 text-white text-sm font-semibold shadow-md hover:bg-green-200 hover:text-black transition">
                         Join This Program
                       </button>
                     </div>
@@ -383,13 +387,13 @@ const Programs = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg32})`,
               }}
             >
               {/* --------------------------- */}
               <div className="mt-10 py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] ">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] ">
                     Program-3
                   </h2>
                 </div>
@@ -409,22 +413,22 @@ const Programs = () => {
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <h2 className="text-xl text-amber-300 font-semibold mb-3">
+                      <h2 className="text-base text-amber-300 font-semibold mb-3">
                         Market Linkage Program
                       </h2>
-                      <span className="text-sm text-green-300">Year-round</span>
+                      <span className="text-xs text-green-300">Year-round</span>
                     </div>
 
-                    <p className="italic text-sm text-gray-300 mb-4">
+                    <p className="italic text-xs text-gray-300 mb-4">
                       Connect farmers directly to urban markets, facilitating
                       group sales and ensuring fair pricing for agricultural
                       products.
                     </p>
 
-                    <h3 className="text-lg text-green-400 font-medium mb-1">
+                    <h3 className="text-base text-green-400 font-medium mb-1">
                       Program Benefits:
                     </h3>
-                    <ul className="list-disc list-inside text-sm space-y-1 mb-3 text-gray-200">
+                    <ul className="list-disc list-inside text-xs space-y-1 mb-3 text-gray-200">
                       <li>Direct access to urban buyers</li>
                       <li>Group sales coordination</li>
                       <li>Price negotiation support</li>
@@ -432,7 +436,7 @@ const Programs = () => {
                       <li>Quality control assistance</li>
                     </ul>
                     <div className="flex items-center space-x-4 mb-4">
-                      <button className="px-6 py-1 bg-green-600 text-white text-base font-semibold shadow-md hover:bg-green-200 hover:text-black transition">
+                      <button className="px-3 py-1 bg-green-600 text-white text-xs font-semibold shadow-md hover:bg-green-200 hover:text-black transition">
                         Join This Program
                       </button>
                     </div>
@@ -455,9 +459,9 @@ const Programs = () => {
               }}
             >
               {/* --------------------------- */}
-              <div className="mt-10 py-16 px-4">
+              <div className="mt-20 py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] ">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] ">
                     Program-4
                   </h2>
                 </div>
@@ -477,22 +481,22 @@ const Programs = () => {
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <h2 className="text-xl text-amber-300 font-semibold mb-3">
+                      <h2 className="text-base text-amber-300 font-semibold mb-3">
                         Training & Certification
                       </h2>
-                      <span className="text-sm text-green-300">2-4 weeks</span>
+                      <span className="text-xs text-green-300">2-4 weeks</span>
                     </div>
 
-                    <p className="italic text-sm text-gray-300 mb-4">
+                    <p className="italic text-xs text-gray-300 mb-4">
                       Structured training programs for both youth and farmers,
                       covering modern agricultural practices, business skills,
                       and community development.
                     </p>
 
-                    <h3 className="text-lg text-green-400 font-medium mb-1">
+                    <h3 className="text-base text-green-400 font-medium mb-1">
                       Program Benefits:
                     </h3>
-                    <ul className="list-disc list-inside text-sm space-y-1 mb-3 text-gray-200">
+                    <ul className="list-disc list-inside text-xs space-y-1 mb-3 text-gray-200">
                       <li>Certified agricultural training</li>
                       <li>Business and entrepreneurship skills</li>
                       <li>Leadership development</li>
@@ -500,7 +504,7 @@ const Programs = () => {
                       <li>Digital literacy programs</li>
                     </ul>
                     <div className="flex items-center space-x-4 mb-4">
-                      <button className="px-6 py-1 bg-green-600 text-white text-base font-semibold shadow-md hover:bg-green-200  hover:text-blacktransition">
+                      <button className="px-3 py-1 bg-green-600 text-white text-sm font-semibold shadow-md hover:bg-green-200  hover:text-blacktransition">
                         Join This Program
                       </button>
                     </div>
@@ -520,7 +524,7 @@ const Programs = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg33})`,
               }}
             >
               <div className="flex flex-col items-center justify-center text-center max-w-[90vw]">
@@ -532,10 +536,10 @@ const Programs = () => {
                   the YeLijoch Mahiber community.
                 </h2>
                 <div className="gap-x-7">
-                  <button className="px-6 py-3 bg-yellow-600 text-white text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition mr-2.5">
+                  <button className="px-3 py-1.5 bg-yellow-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-yellow-900 transition mr-2.5">
                     Apply now
                   </button>
-                  <button className="px-6 py-3 bg-amber-50 text-black text-base font-semibold rounded-full shadow-md hover:bg-yellow-700 transition">
+                  <button className="px-3 py-1.5 bg-yellow-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-yellow-900 transition mr-2.5">
                     Contact US
                   </button>
                 </div>

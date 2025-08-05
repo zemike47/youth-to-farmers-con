@@ -3,7 +3,7 @@ import { SunMoon, Moon } from "lucide-react";
 
 const DarkModeToggle = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [mounted, setMounted] = useState(false); // ✅ fix hydration
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -28,7 +28,7 @@ const DarkModeToggle = () => {
     }
   }, [darkMode, mounted]);
 
-  if (!mounted) return null; // ✅ avoid mismatch on SSR/initial render
+  if (!mounted) return null;
 
   return (
     <button

@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
-import bgImage from "../assets/background-image7.avif";
+
+import bg18 from "../assets/bg-18.jpg";
+import bg19 from "../assets/bg-19.jpg";
+import bg20 from "../assets/bg-20.jpg";
+import bg21 from "../assets/bg-21.jpg";
+import bg22 from "../assets/bg-22.jpg";
+import bg23 from "../assets/bg-23.jpg";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -104,20 +110,20 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg18})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-[300px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                       Join YeLijoch Mahiber - Youth Program
                     </h2>
-                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                    <h3 className="text-sm font-bold mb-1.5 text-amber-200">
                       Youth Program
                     </h3>
-                    <p>
+                    <p className="text-xs">
                       {" "}
                       Be part of the movement that's transforming lives across
                       Ethiopia
@@ -132,10 +138,10 @@ const Contact = () => {
                     <div className="flex items-center space-x-4 mb-4">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-sm font-bold  text-amber-200">
                       Program Benefits
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc pl-5 text-xs">
                       <li>Monthly stipend during placement</li>
                       <li> Free accommodation with host families</li>
                       <li>Practical agricultural training</li>
@@ -149,27 +155,27 @@ const Contact = () => {
                     <div className="flex items-center space-x-4 mb-4">
                       <div></div>
                     </div>
-                    <h3 className="text-lg text-amber-200">
+                    <h3 className="text-base text-amber-200">
                       Frequently Asked Questions
                     </h3>
                     <p className="font-bold text-sm text-amber-500">
                       Q: How long is the placement?
                     </p>
-                    <p className=" text-sm text-amber-100">
+                    <p className=" text-xs text-amber-100">
                       A: Typically 3-6 months, depending on the program and your
                       availability.
                     </p>
                     <p className="font-bold text-sm text-amber-500">
                       Q: Do I need farming experience?
                     </p>
-                    <p className=" text-sm text-amber-100">
+                    <p className=" text-xs text-amber-100">
                       A: No prior experience required. We provide training
                       before placement.
                     </p>
                     <p className="font-bold text-sm text-amber-500">
                       Q: Where will I be placed?
                     </p>
-                    <p className=" text-sm text-amber-100">
+                    <p className=" text-xs text-amber-100">
                       A: Placements are in Oromia, Amhara, and SNNPR regions
                       based on needs and preferences.
                     </p>
@@ -189,23 +195,23 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg19})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4 mt-16">
+              <div className="py-16 px-4 mt-36">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">
                     Join - Youth Program
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-xs font-bold text-center text-[#ebe4dd] mb-4">
                     Get in touch with us to learn more about our programs,
                     partnerships, or how you can get involved.
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded ">
                     <div className="border rounded-md p-6 shadow-md mb-8">
                       <h2 className="font-semibold mb-4">Youth Program Form</h2>
                       <form className="space-y-4">
@@ -263,20 +269,20 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg20})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-[100px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold  text-[#dfdad6] mb-2">
                       Join YeLijoch Mahiber - Farmers Program
                     </h2>
-                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                    <h3 className="text-base font-bold mb-1.5 text-amber-200">
                       Farmers Program
                     </h3>
-                    <p>
+                    <p className="text-xs">
                       {" "}
                       Be part of the movement that's transforming lives across
                       Ethiopia
@@ -287,14 +293,14 @@ const Contact = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2">
                     <div className="flex items-center space-x-4 mb-4">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-base font-bold  text-amber-200">
                       Benefits for Farmers
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc text-xs pl-5">
                       <li>Free agricultural labor and support</li>
                       <li>Access to modern farming techniques</li>
                       <li>Direct market access through youth coordinators</li>
@@ -304,14 +310,14 @@ const Contact = () => {
                     </ul>
                   </div>
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2">
                     <div className="flex items-center space-x-4 mb-4">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-base font-bold  text-amber-200">
                       What We Provide
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc text-xs pl-5">
                       <li>Trained and motivated youth volunteers</li>
                       <li> Regular supervision and support</li>
                       <li>Access to agricultural inputs and tools</li>
@@ -334,25 +340,25 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg21})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4 mt-16">
+              <div className="py-16 px-4 mt-36">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                     Join Farmers Program
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-sm font-bold text-center text-[#ebe4dd] mb-4">
                     Get in touch with us to learn more about our programs,
                     partnerships, or how you can get involved.
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded ">
                     <div className="border rounded-md p-6 shadow-md mb-8">
-                      <h2 className="font-semibold mb-4">
+                      <h2 className="font-semibold text-base mb-4">
                         Farmers Program Form
                       </h2>
                       <form className="space-y-4">
@@ -411,20 +417,20 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg22})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-[350px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">
                       Join YeLijoch Mahiber - Partner Organization
                     </h2>
-                    <h3 className="text-lg font-bold mb-1.5 text-amber-200">
+                    <h3 className="text-base font-bold mb-1.5 text-amber-200">
                       Partner Organization
                     </h3>
-                    <p>
+                    <p className="text-xs">
                       {" "}
                       Be part of the movement that's transforming lives across
                       Ethiopia
@@ -435,74 +441,76 @@ const Contact = () => {
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-8 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
-                  <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                  <div className="shadow rounded p-1">
+                    <div className="flex items-center space-x-4 mb-2">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-sm font-bold  text-amber-200">
                       Funding Partners
                     </h3>
-                    <h4>Support program expansion and sustainability</h4>
-                    <ul className="list-disc pl-5">
+                    <h4 className="text-xs">
+                      Support program expansion and sustainability
+                    </h4>
+                    <ul className="list-disc text-xs pl-5">
                       <li>Program funding and grants</li>
                       <li>Youth stipend support</li>
                       <li>Infrastructure development</li>
                     </ul>
                   </div>
 
-                  <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                  <div className="shadow rounded p-1">
+                    <div className="flex items-center space-x-4 mb-2">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-sm font-bold  text-amber-200">
                       Implementation Partners
                     </h3>
-                    <h4>Collaborate on program delivery</h4>
-                    <ul className="list-disc pl-5">
+                    <h4 className="text-xs">Collaborate on program delivery</h4>
+                    <ul className="list-disc text-xs pl-5">
                       <li>Joint program implementation</li>
                       <li>Resource sharing</li>
                       <li>Geographic expansion</li>
                     </ul>
                   </div>
 
-                  <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                  <div className="shadow rounded p-1">
+                    <div className="flex items-center space-x-4 mb-2">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-sm font-bold  text-amber-200">
                       Technical Partners
                     </h3>
-                    <h4>Provide expertise and knowledge</h4>
-                    <ul className="list-disc pl-5">
+                    <h4 className="text-xs">Provide expertise and knowledge</h4>
+                    <ul className="list-disc text-xs pl-5">
                       <li>Agricultural technology transfer</li>
                       <li>Training and capacity building</li>
                       <li>Research and development</li>
                     </ul>
                   </div>
 
-                  <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                  <div className="shadow rounded p-1">
+                    <div className="flex items-center space-x-4 mb-2">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-base font-bold  text-amber-200">
                       Government Partners
                     </h3>
                     <h4>Policy support and scaling</h4>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc  text-xs pl-5">
                       <li>Policy alignment and support</li>
                       <li>National program integration</li>
                       <li>Regulatory facilitation</li>
                     </ul>
                   </div>
 
-                  <div className="shadow rounded p-6">
-                    <div className="flex items-center space-x-4 mb-4">
+                  <div className="shadow rounded p-1">
+                    <div className="flex items-center space-x-4 mb-2">
                       <div></div>
                     </div>
-                    <h3 className="text-lg font-bold  text-amber-200">
+                    <h3 className="text-base font-bold  text-amber-200">
                       Partnership Benefits
                     </h3>
-                    <ul className="list-disc pl-5">
+                    <ul className="list-disc text-xs pl-5">
                       <li>Direct impact on rural development</li>
                       <li> Youth empowerment and job creation </li>
                       <li> Sustainable development goals alignment</li>
@@ -524,23 +532,23 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg23})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4 mt-16">
+              <div className="py-16 px-4 mt-36">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                     Join Farmers Program
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-xs font-bold text-center text-[#ebe4dd] mb-4">
                     Get in touch with us to learn more about our programs,
                     partnerships, or how you can get involved.
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded ">
                     <div className="border rounded-md p-6 shadow-md mb-8">
                       <h2 className="font-semibold mb-4">
                         Partner Organization Form

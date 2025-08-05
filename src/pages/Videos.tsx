@@ -3,14 +3,16 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 
-import bgImage from "../assets/background-image3.avif";
 import { BookOpen } from "lucide-react";
 
 import video from "../assets/video.png";
 import man from "../assets/man.png";
 import land from "../assets/land.png";
-import bgImage4 from "../assets/background-image4.avif";
-import bgImage7 from "../assets/background-image7.avif";
+
+import bg40 from "../assets/bg-40.jpg";
+import bg41 from "../assets/bg-41.jpg";
+import bg42 from "../assets/bg-42.jpg";
+import bg43 from "../assets/bg-43.jpg";
 
 import { Users } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
@@ -120,16 +122,16 @@ const Videos = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg40})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className="mt-7 py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">
                     Video Gallery
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="p-1 text-xs font-bold text-center text-[#ebe4dd] mb-4">
                     Watch real stories of transformation and see our programs in
                     action through video testimonials and demonstrations
                   </h2>
@@ -141,13 +143,13 @@ const Videos = () => {
                       ▶ Featured Video
                     </h3>
                     <div className="flex items-center space-x-4 mb-4">
-                      <img src={video} alt="Dawit" className="w-full h-60 " />
+                      <img src={video} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
-                    <h3 className="text-lg text-amber-300 mb-2.5">
+                    <h3 className="text-base text-amber-300 mb-2.5">
                       YeLijoch Mahiber: Empowering Youth, Uplifting Farmers
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       Our complete story - from vision to impact across
                       Ethiopia's rural communities. • 6:30
                     </p>
@@ -166,14 +168,14 @@ const Videos = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg43})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="mt-36 py-16 px-4">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                       Success Stories
                     </h2>
                   </div>
@@ -182,30 +184,30 @@ const Videos = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded border p-2">
                     <div className="flex items-center space-x-4 mb-4">
                       <img src={man} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
-                    <h3 className="text-lg text-amber-100 mb-2.5">
+                    <h3 className="text-base text-amber-100 mb-2.5">
                       Dawit's Journey: From City to Farm
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       Watch Dawit Mekonnen share his transformation story from
                       unemployed graduate to successful agricultural
                       entrepreneur. • 3:45
                     </p>
                   </div>
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
                       <img src={land} alt="Almaz" className="w-full h-40 " />
                       <div></div>
                     </div>
-                    <h3 className="text-lg text-amber-100 mb-2.5">
+                    <h3 className="text-base text-amber-100 mb-2.5">
                       Almaz's Success Story
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       Farmer Almaz Tadesse explains how youth volunteers helped
                       increase her harvest by 30%. • 2:30
                     </p>
@@ -224,33 +226,33 @@ const Videos = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage4})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg41})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className="mt-[450px] py-16 px-4">
                 <div>
-                  <h2 className="section-heading text-3xl pt-20 font-bold text-center text-[#367e66] mb-3">
+                  <h2 className="section-heading text-base pt-20 font-bold text-center text-[#367e66] mb-3">
                     Our Programs
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-white mb-3">
+                  <h2 className="text-xs font-bold text-center text-white mb-3">
                     Comprehensive programs designed to empower youth, support
                     farmers, and create sustainable rural-urban partnerships.
                   </h2>
                 </div>
-                <h3 className="text-2xl font-semibold text-orange-400 mb-3">
+                <h3 className="text-sm font-semibold text-orange-400 mb-3">
                   Program Demonstrations
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {/* Card 1  ---------- */}
                   {/* Card 1 */}
-                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                  <div className="rounded-lg border shadow-md overflow-hidden  text-white max-w-sm">
                     {/* Image with Play Button Overlay */}
                     <div className="relative">
                       <img
                         src={card1}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 object-cover p-1"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -264,10 +266,10 @@ const Videos = () => {
 
                     {/* Text Content */}
                     <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Field Placement Program
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         See how our flagship program works from start to finish
                         • 5:20
                       </p>
@@ -276,13 +278,13 @@ const Videos = () => {
 
                   {/* Repeat for Card 2 and Card 3 */}
                   {/* Card 2 */}
-                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                  <div className="rounded-lg  border shadow-md overflow-hidden  text-white max-w-sm">
                     {/* Image with Play Button Overlay */}
                     <div className="relative">
                       <img
                         src={card2}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 p-1 object-cover"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -296,10 +298,10 @@ const Videos = () => {
 
                     {/* Text Content */}
                     <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Training & Certification
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         Comprehensive training that prepares youth for success •
                         4:15
                       </p>
@@ -307,13 +309,13 @@ const Videos = () => {
                   </div>
 
                   {/* Card 3 */}
-                  <div className="rounded-lg shadow-md overflow-hidden  text-white max-w-sm">
+                  <div className="rounded-lg  border shadow-md overflow-hidden border  text-white max-w-sm">
                     {/* Image with Play Button Overlay */}
                     <div className="relative">
                       <img
                         src={card3}
                         alt="Hanna"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-40 object-cover p-1"
                       />
                       <button
                         className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
@@ -327,10 +329,10 @@ const Videos = () => {
 
                     {/* Text Content */}
                     <div className="p-4">
-                      <h4 className="font-bold text-amber-100 text-lg mb-1">
+                      <h4 className="font-bold text-amber-100 text-base mb-1">
                         Market Linkage Program
                       </h4>
-                      <p className="text-sm text-amber-50">
+                      <p className="text-xs text-amber-50">
                         Connecting farmers directly to urban markets • 3:50
                       </p>
                     </div>
@@ -338,7 +340,7 @@ const Videos = () => {
 
                   <div></div>
 
-                  <button className="px-6 py-3 m-5 bg-emerald-900 text-white text-lg font-semibold rounded-2xl shadow-md hover:bg-white  hover:text-black transition">
+                  <button className="px-3 py-1.5 m-5 bg-emerald-900 text-white text-base font-semibold rounded-2xl shadow-md hover:bg-white  hover:text-black transition">
                     View more Videos
                   </button>
                 </div>
@@ -348,6 +350,7 @@ const Videos = () => {
           </div>
         </div>
       </section>
+
       {/*---------------------------------------------------*/}
       <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
         <div className="outer w-full h-full overflow-hidden">
@@ -355,14 +358,14 @@ const Videos = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage7})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg42})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className=" mt-60 py-16 px-4">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
                       Video Categories
                     </h2>
                   </div>
@@ -378,10 +381,10 @@ const Videos = () => {
                       </div>
                     </div>
 
-                    <p className="font-semibold text-orange-800">
+                    <p className="font-semibold text-base text-orange-800">
                       Success Stories
                     </p>
-                    <p className="text-sm text-amber-50 mt-1">
+                    <p className="text-xs text-amber-50 mt-1">
                       Personal testimonials from youth participants and farmers
                       sharing their transformation journeys.
                     </p>
@@ -397,10 +400,10 @@ const Videos = () => {
                       </div>
                     </div>
 
-                    <p className="font-semibold text-orange-800">
+                    <p className="font-semibold text-base text-orange-800">
                       Program Demos
                     </p>
-                    <p className="text-sm text-amber-50 mt-1">
+                    <p className="text-xs text-amber-50 mt-1">
                       Detailed demonstrations of our programs showing how they
                       work and their impact on communities.
                     </p>
@@ -416,10 +419,10 @@ const Videos = () => {
                       </div>
                     </div>
 
-                    <p className="font-semibold text-orange-800">
+                    <p className="font-semibold text-base text-orange-800">
                       Impact Reports
                     </p>
-                    <p className="text-sm text-amber-50 mt-1">
+                    <p className="text-xs text-amber-50 mt-1">
                       Visual reports showcasing our achievements, statistics,
                       and the broader impact of our work.
                     </p>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
-import bgImage from "../assets/background-image7.avif";
 
 import { Facebook, LinkedinIcon } from "lucide-react";
 import { MessageCircle } from "lucide-react";
@@ -10,6 +9,9 @@ import { MessageCircle } from "lucide-react";
 import { Phone } from "lucide-react";
 import { Mail } from "lucide-react";
 import { MapPin } from "lucide-react";
+
+import bg11 from "../assets/bg-11.jpg";
+import bg12 from "../assets/bg-12.jpg";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -112,26 +114,26 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg11})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className=" py-16 px-4 mt-[850px]">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] ">
+                  <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] ">
                     Contact Info
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-1.5">
                   <div className="shadow rounded p-6">
                     <div className="w-full flex flex-col md:flex-row gap-6 ">
                       {/* Get in Touch */}
                       <div className="flex-1 border rounded-md p-4">
-                        <h2 className="font-semibold mb-2 text-yellow-900">
+                        <h2 className="font-semibold mb-2 text-yellow-900 ">
                           Get in Touch
                         </h2>
-                        <div className="text-amber-50">
+                        <div className="text-amber-50 ">
                           <p>
                             <MapPin />
                             <strong>Head Office</strong>
@@ -142,10 +144,11 @@ const Contact = () => {
                             <strong>Phone</strong>
                             <br /> +251 118 123 065
                           </p>
-                          <p className="mt-2">
+                          <p className="mt-2 ">
                             <Mail />
                             <strong>Email</strong>
-                            <br /> info@yekolotemarihub.org
+                            <br />{" "}
+                            <p className="text-xs"> info@yekolotemarihub.org</p>
                           </p>
                         </div>
                       </div>
@@ -223,25 +226,25 @@ const Contact = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg12})`,
               }}
             >
               {/* --------------------------- */}
               <div className="py-16 px-4 mt-16">
                 <div>
-                  <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                  <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-1.5 mt-20">
                     Contact Us
                   </h2>
-                  <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                  <h2 className="text-sm font-bold text-center text-[#ebe4dd] mb-4">
                     Get in touch with us to learn more about our programs,
                     partnerships, or how you can get involved.
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-3">
-                  <div className="shadow rounded p-6">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto mt-1.5">
+                  <div className="shadow rounded p-2">
                     <div className="border rounded-md p-6 shadow-md mb-8">
-                      <h2 className="font-semibold mb-4">Send us a Message</h2>
+                      <h2 className="font-semibold mb-4 ">Send us a Message</h2>
                       <form className="space-y-4">
                         <div className="flex gap-4 flex-col sm:flex-row">
                           <input

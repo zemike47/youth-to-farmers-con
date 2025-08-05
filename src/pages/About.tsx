@@ -2,16 +2,22 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
-import bgImage from "../assets/background-image3.avif";
-import bgImage7 from "../assets/background-image7.avif";
-import bgImage8 from "../assets/background-image8.avif";
 
-// Register GSAP plugin
+import bg22 from "../assets/bg-24.jpg";
+import bg7 from "../assets/bg-7.jpg";
+
+import bg9 from "../assets/bg-9.jpg";
+import bg10 from "../assets/bg-10.jpg";
+
+import { useTranslation } from "react-i18next";
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(Observer);
 }
 
 const About = () => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const images = document.querySelectorAll(".bg-img");
@@ -110,12 +116,12 @@ const About = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage7})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg22})`,
               }}
             >
               <div className="max-w-2xl text-center p-10">
                 <h1 className="section-heading text-5xl font-bold mb-4">
-                  About YeLijoch Mahiber
+                  {t("About Yeljoch Mahber")}
                 </h1>
               </div>
 
@@ -135,14 +141,14 @@ const About = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage8})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg7})`,
               }}
             >
               <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className="section-heading text-5xl text-orange-400 font-semibold mb-2">
+                <h2 className="section-heading text-lg text-orange-400 font-semibold mb-2">
                   Our Vision
                 </h2>
-                <p className="text-2xl text-white">
+                <p className="text-base text-white p-2.5">
                   To create a thriving ecosystem where urban youth and farmers
                   collaborate toward sustainable communities, reduce poverty,
                   and drive agricultural innovation across Ethiopia. We envision
@@ -162,14 +168,14 @@ const About = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg10})`,
               }}
             >
               <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className="section-heading text-5xl text-red-400 font-semibold mb-2">
+                <h2 className="section-heading text-lg text-red-400 font-semibold mb-2">
                   Our Mission
                 </h2>
-                <p className="text-2xl ">
+                <p className="text-base text-white p-2.5">
                   YeLijoch Mahiber connects urban youth with rural farmers
                   through structured field placements, providing practical
                   agricultural experience and economic empowerment. We build
@@ -190,14 +196,14 @@ const About = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg9})`,
               }}
             >
               <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className=" section-heading text-5xl text-cyan-400 font-semibold mb-2">
+                <h2 className=" section-heading text-base text-cyan-400 font-semibold mb-2 mt-[280px]">
                   Executive Summary
                 </h2>
-                <p className="text-2xl">
+                <p className="text-sm text-white p-2.5">
                   YeLijoch Mahiber addresses two critical challenges in
                   Ethiopia: youth unemployment in urban areas and the lack of
                   agricultural support in rural communities. Our innovative
@@ -238,11 +244,11 @@ const About = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg10})`,
               }}
             >
               <h2 className="section-heading text-[clamp(1rem,5vw,5rem)] font-normal text-center tracking-[0.5em] text-gray-300 w-[90vw] max-w-[1200px]">
-                KEEP SCROLLING
+                YeLijoch Mahiber
               </h2>
             </div>
           </div>

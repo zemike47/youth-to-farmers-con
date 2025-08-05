@@ -9,6 +9,7 @@ export interface SubMenuItem {
 
 export interface NavMenu {
   name: string;
+  icon?: LucideIcon;
   gridcols?: number;
   submenu?: SubMenuItem[];
   subMenuHeading?: string[];

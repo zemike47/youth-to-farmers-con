@@ -3,12 +3,14 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 
-import bgImage from "../assets/background-image3.avif";
+import bg24 from "../assets/bg-24.jpg";
+import bg25 from "../assets/bg-25.jpg";
+import bg26 from "../assets/bg-26.jpg";
 
 import dawit from "../assets/success-story-dawit.jpg";
 import dark from "../assets/rural-community.jpg";
 import farm from "../assets/ethiopian-farmer.jpg";
-import bgImage2 from "../assets/background-image2.avif";
+
 import agriculture from "../assets/agricultural-training.jpg";
 import farmTech from "../assets/farming-technology.jpg";
 import youthGroup from "../assets/youth-group.jpg";
@@ -116,17 +118,17 @@ const News = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage2})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg25})`,
               }}
             >
               {/* --------------------------- */}
-              <div className=" py-16 px-4">
+              <div className=" py-16 px-4 mt-[400px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">
                       News & Stories
                     </h2>
-                    <h2 className="text-lg font-bold text-center text-[#ebe4dd] mb-4">
+                    <h2 className="text-xs font-bold text-center text-[#ebe4dd] mb-4">
                       Stay updated with the latest news, success stories, and
                       impact reports from YeLijoch Mahiber
                     </h2>
@@ -138,14 +140,14 @@ const News = () => {
                       <input
                         type="text"
                         placeholder="Search articles..."
-                        className="w-full bg-transparent outline-none text-sm"
+                        className="w-full bg-transparent outline-none text-xs"
                       />
                     </div>
 
                     {/* Buttons - Hardcoded */}
                     <button
                       onClick={() => setSelected("All")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "All"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -156,7 +158,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Success Story")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Success Story"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -167,7 +169,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Program Update")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Program Update"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -178,7 +180,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Impact Report")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Impact Report"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -189,7 +191,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Partnership")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Partnership"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -200,7 +202,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Innovation")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Innovation"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -211,7 +213,7 @@ const News = () => {
 
                     <button
                       onClick={() => setSelected("Milestone")}
-                      className={`px-3 py-1.5 rounded-md text-sm border transition-all ${
+                      className={`px-2 py-1 rounded-md text-sm border transition-all ${
                         selected === "Milestone"
                           ? "bg-green-700 text-white"
                           : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -232,11 +234,11 @@ const News = () => {
                       />
                       <div></div>
                     </div>
-                    <h3 className="text-lg text-amber-300 mb-2.5">
+                    <h3 className="text-base text-amber-300 mb-2.5">
                       500 Youth Successfully Placed in Rural Communities Across
                       Ethiopia
                     </h3>
-                    <p className="italic text-sm">
+                    <p className="italic text-xs">
                       A milestone achievement as YeLijoch Mahiber reaches its
                       target of placing 500 urban youth with rural farmers,
                       creating lasting impact in agricultural communities.
@@ -275,14 +277,14 @@ const News = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg24})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-[590px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
+                    <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">
                       News & Stories
                     </h2>
                   </div>
@@ -291,9 +293,9 @@ const News = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border ">
                     <div className="flex items-center space-x-4 mb-4">
-                      <img src={dawit} alt="Dawit" className="w-full h-80 " />
+                      <img src={dawit} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
                     <h3 className="text-sm text-amber-100 mb-2.5">
@@ -322,9 +324,9 @@ const News = () => {
                   </div>
                   {/************************************ */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
-                      <img src={dark} alt="Dawit" className="w-full h-80 " />
+                      <img src={dark} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
                     <h3 className="text-sm text-amber-100 mb-2.5">
@@ -352,9 +354,9 @@ const News = () => {
                   </div>
                   {/************************************ */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
-                      <img src={farm} alt="Dawit" className="w-full h-80 " />
+                      <img src={farm} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
                     <h3 className="text-sm text-amber-100 mb-2.5">
@@ -399,15 +401,15 @@ const News = () => {
             <div
               className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
               style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg26})`,
               }}
             >
               {/* --------------------------- */}
-              <div className="py-16 px-4">
+              <div className="py-16 px-4 mt-[800px]">
                 <div>
                   <div>
-                    <h2 className="section-heading text-3xl  font-bold text-center text-[#dfdad6] mb-4">
-                      News & Stories
+                    <h2 className="section-heading text-base  font-bold text-center text-[#dfdad6] mb-4">
+                      .
                     </h2>
                   </div>
                 </div>
@@ -415,9 +417,9 @@ const News = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {/* --------------------------- */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
-                      <img src={farm} alt="Dawit" className="w-full h-80 " />
+                      <img src={farm} alt="Dawit" className="w-full h-40 " />
                       <div></div>
                     </div>
                     <h3 className="text-sm text-amber-100 mb-2.5">
@@ -446,12 +448,12 @@ const News = () => {
                   </div>
                   {/************************************ */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
                       <img
                         src={agriculture}
                         alt="Dawit"
-                        className="w-full h-80 "
+                        className="w-full h-40 "
                       />
                       <div></div>
                     </div>
@@ -487,12 +489,12 @@ const News = () => {
                   </div>
                   {/************************************ */}
 
-                  <div className="shadow rounded p-6">
+                  <div className="shadow rounded p-2 border">
                     <div className="flex items-center space-x-4 mb-4">
                       <img
                         src={farmTech}
                         alt="Dawit"
-                        className="w-full h-80 "
+                        className="w-full h-40 "
                       />
                       <div></div>
                     </div>
