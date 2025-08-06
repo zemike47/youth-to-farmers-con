@@ -1,5 +1,4 @@
 // App.tsx
-import i18n from "./i18n";
 
 import DesktopNav from "./components/DesktopNav";
 import MobileNav from "./components/MobileNav";
