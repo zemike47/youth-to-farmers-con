@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
 
 const ProblemSolution = () => {
   useEffect(() => {
-    const isMobile = window.innerWidth < 640;
+    const isMobile = window.innerWidth < 768;
     if (isMobile) return;
 
     const sections = document.querySelectorAll("section");
