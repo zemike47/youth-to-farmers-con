@@ -7,7 +7,7 @@ import { TriangleAlert, CircleCheckBig } from "lucide-react";
 import bg28 from "../assets/bg-24.jpg";
 import bg27 from "../assets/bg-22.jpg";
 
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -15,7 +15,7 @@ if (typeof window !== "undefined") {
 }
 
 const ProblemSolution = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -34,7 +34,7 @@ const ProblemSolution = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 

@@ -6,22 +6,19 @@ import MobileNav from "./components/MobileNav";
 import { NavMenus } from "./navUtils";
 
 import AppRoutes from "./routes/AppRoutes";
-import { Globe } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function App() {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleJoinClick = () => {
     navigate("/join");
   };
-  const handleAdminClick = () => {
-    navigate("/admin");
-  };
 
-  const toggleLanguage = () => {
+  /*const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "am" : "en";
 
     i18n
@@ -32,7 +29,7 @@ function App() {
       .catch((err) => {
         console.error("Error changing language:", err);
       });
-  };
+  };*/
 
   return (
     <div>

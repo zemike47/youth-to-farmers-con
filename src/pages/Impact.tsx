@@ -9,15 +9,10 @@ import bg15 from "../assets/bg-15.jpg";
 import bg16 from "../assets/bg-16.jpg";
 import bg17 from "../assets/bg-17.jpg";
 
-import { Users } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
-import { MapPin } from "lucide-react";
-import { MessageSquareHeart } from "lucide-react";
-
 import man from "../assets/man.png";
 import land from "../assets/land.png";
 
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -26,7 +21,7 @@ if (typeof window !== "undefined") {
 import { useNavigate } from "react-router-dom";
 
 const Impact = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const nav = useNavigate();
 
@@ -47,7 +42,7 @@ const Impact = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 

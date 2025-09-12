@@ -21,7 +21,7 @@ import card1 from "../assets/card1.png";
 import card2 from "../assets/card2.png";
 import card3 from "../assets/card3.png";
 
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -30,7 +30,7 @@ if (typeof window !== "undefined") {
 
 import { useNavigate } from "react-router-dom";
 const Videos = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const nav = useNavigate();
 
@@ -51,7 +51,7 @@ const Videos = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 

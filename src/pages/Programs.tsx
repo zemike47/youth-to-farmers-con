@@ -15,7 +15,7 @@ import card2 from "../assets/card2.png";
 import card3 from "../assets/card3.png";
 import card4 from "../assets/card4.png";
 
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -25,7 +25,7 @@ if (typeof window !== "undefined") {
 import { useNavigate } from "react-router-dom";
 
 const Programs = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -44,7 +44,7 @@ const Programs = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 
@@ -283,7 +283,7 @@ const Programs = () => {
     <div className="relative h-screen text-white font-['Cormorant Garamond'] uppercase">
       {/*---------------------------------------------------*/}
       {/* Section 4 */}
-      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth scrollable-section">
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
         <div className="outer w-full h-full overflow-hidden">
           <div className="inner w-full h-full overflow-hidden">
             <div className="w-full h-full flex items-center justify-center">

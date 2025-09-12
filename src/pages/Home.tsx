@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
+
 import SplitType from "split-type"; // Alternative to SplitText
 import { MoveRight } from "lucide-react";
 
@@ -19,6 +20,11 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(Observer);
 }
 import { useNavigate } from "react-router-dom";
+
+type Message = {
+  type: "success" | "error";
+  text: string;
+} | null;
 
 const Home = () => {
   const { t } = useTranslation();
@@ -42,7 +48,7 @@ const Home = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 
@@ -264,9 +270,9 @@ const Home = () => {
   }, []);
 
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState<Message>(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const result = await subscribeEmail(email);

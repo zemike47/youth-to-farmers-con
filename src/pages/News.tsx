@@ -15,9 +15,7 @@ import agriculture from "../assets/agricultural-training.jpg";
 import farmTech from "../assets/farming-technology.jpg";
 import youthGroup from "../assets/youth-group.jpg";
 
-import { useState } from "react";
-
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
@@ -26,7 +24,7 @@ if (typeof window !== "undefined") {
 
 import { useNavigate } from "react-router-dom";
 const News = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const nav = useNavigate();
   useEffect(() => {
@@ -46,7 +44,7 @@ const News = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 
@@ -285,7 +283,7 @@ const News = () => {
                 }}
               >
                 {/* --------------------------- */}
-                <div className=" py-16 px-4 mt-[400px] md:mt-96 md:mb-[380px]">
+                <div className=" py-16 px-4 mt-[250px] md:mt-96 md:mb-[380px]">
                   <div>
                     <div>
                       <h2 className="section-heading text-base font-bold text-center text-[#dfdad6] mb-4">

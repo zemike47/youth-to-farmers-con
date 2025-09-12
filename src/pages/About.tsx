@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
-import SplitType from "split-type"; // Alternative to SplitText
+import SplitType from "split-type";
 
 import bg22 from "../assets/bg-24.jpg";
 import bg7 from "../assets/bg-7.jpg";
 
 import bg10 from "../assets/bg-10.jpg";
 
-import { useTranslation } from "react-i18next";
+//import { useTranslation } from "react-i18next";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(Observer);
 }
 
 const About = () => {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -34,7 +34,7 @@ const About = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 
@@ -274,7 +274,7 @@ const About = () => {
             >
               <div className="max-w-2xl text-center p-10">
                 <h1 className="section-heading text-5xl font-bold mb-4 ">
-                  {t("aboutTitle")}
+                  About YeLijoch Mahiber
                 </h1>
               </div>
 

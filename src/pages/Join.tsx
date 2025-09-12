@@ -4,18 +4,12 @@ import { Observer } from "gsap/Observer";
 import SplitType from "split-type"; // Alternative to SplitText
 
 import bg18 from "../assets/bg-18.jpg";
-import bg19 from "../assets/bg-19.jpg";
+
 import bg20 from "../assets/bg-20.jpg";
-import bg21 from "../assets/bg-21.jpg";
+
 import bg22 from "../assets/bg-22.jpg";
-import bg23 from "../assets/bg-23.jpg";
 
-import { useTranslation } from "react-i18next";
-
-import { useState } from "react";
-import { createParentOrganization } from "../services/parentOrgService";
-import { createFarmer } from "../services/farmerService";
-import { createYouth } from "../services/youthService";
+//import { useTranslation } from "react-i18next";
 
 import { useNavigate } from "react-router-dom";
 // Register GSAP plugin
@@ -36,7 +30,7 @@ const Join = () => {
     nav("/joinParentOrg");
   };
 
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -55,7 +49,7 @@ const Join = () => {
     let currentIndex = -1;
     let animating = false;
     let isScrollingInside = false;
-    let observer: gsap.plugins.Observer | null = null;
+    let observer: ReturnType<typeof Observer.create> | null = null;
 
     const wrap = gsap.utils.wrap(0, sections.length);
 
