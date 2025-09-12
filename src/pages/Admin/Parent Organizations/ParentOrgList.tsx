@@ -1,0 +1,72 @@
+import React from "react";
+
+const ParentOrgList = ({
+  parentOrgList,
+  refreshList,
+  setEditingId,
+  handleDelete,
+}) => {
+  const confirmDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this organization?")) {
+      const res = await handleDelete(id);
+      if (res.ok) refreshList();
+      else alert("Failed to delete parent organization");
+    }
+  };
+
+  return (
+    <div className="mt-8 overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4 text-white">
+        Parent Organizations
+      </h2>
+      <table className="min-w-full border text-sm bg-white rounded-lg shadow">
+        <thead className="bg-black text-white">
+          <tr>
+            <th className="border p-2">Organization</th>
+            <th className="border p-2">Type</th>
+            <th className="border p-2">Contact</th>
+            <th className="border p-2">Email</th>
+            <th className="border p-2">Phone</th>
+            <th className="border p-2">Interest</th>
+            <th className="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {parentOrgList.map((org) => (
+            <tr key={org.organization_id} className="text-center text-black">
+              <td className="border p-2">{org.organization_name}</td>
+              <td className="border p-2">{org.organization_type}</td>
+              <td className="border p-2">{org.contact_person}</td>
+              <td className="border p-2">{org.contact_email}</td>
+              <td className="border p-2">{org.contact_phone}</td>
+              <td className="border p-2">{org.partnership_interest}</td>
+              <td className="border p-2 space-x-2">
+                <button
+                  onClick={() => setEditingId(org.organization_id)}
+                  className="text-blue-500 hover:underline"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => confirmDelete(org.organization_id)}
+                  className="text-red-500 hover:underline"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+          {parentOrgList.length === 0 && (
+            <tr>
+              <td colSpan={7} className="p-4 text-gray-500">
+                No parent organizations found.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ParentOrgList;

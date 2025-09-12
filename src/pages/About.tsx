@@ -6,7 +6,6 @@ import SplitType from "split-type"; // Alternative to SplitText
 import bg22 from "../assets/bg-24.jpg";
 import bg7 from "../assets/bg-7.jpg";
 
-import bg9 from "../assets/bg-9.jpg";
 import bg10 from "../assets/bg-10.jpg";
 
 import { useTranslation } from "react-i18next";
@@ -19,28 +18,72 @@ const About = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
-
     const sections = document.querySelectorAll("section");
     const images = document.querySelectorAll(".bg-img");
     const outerWrappers = document.querySelectorAll(".outer");
     const innerWrappers = document.querySelectorAll(".inner");
     const headings = document.querySelectorAll(".section-heading");
 
-    const splitHeadings = Array.from(headings).map(
-      (heading) =>
-        new SplitType(heading as HTMLElement, {
-          types: ["lines", "words", "chars"],
-        })
-    );
+    const splitHeadings = Array.from(headings).map((heading) => {
+      console.log("🔠 Splitting heading:", heading.textContent);
+      return new SplitType(heading as HTMLElement, {
+        types: ["lines", "words", "chars"],
+      });
+    });
 
     let currentIndex = -1;
     let animating = false;
+    let isScrollingInside = false;
+    let observer: gsap.plugins.Observer | null = null;
+
     const wrap = gsap.utils.wrap(0, sections.length);
 
-    gsap.set(outerWrappers, { yPercent: 100 });
-    gsap.set(innerWrappers, { yPercent: -100 });
+    function enableScroll(section: HTMLElement) {
+      const scrollable = section.querySelector(".bg-img") as HTMLElement;
+      if (scrollable) {
+        scrollable.style.overflowY = "auto";
+        scrollable.style.position = "relative";
+        scrollable.style.height = "100vh";
+      }
+    }
+
+    function disableScroll(section: HTMLElement) {
+      const scrollable = section.querySelector(".bg-img") as HTMLElement;
+      if (scrollable) {
+        scrollable.style.overflow = "hidden";
+        scrollable.style.position = "absolute";
+        scrollable.scrollTop = 0;
+      }
+    }
+
+    function createObserver() {
+      if (observer) {
+        observer.kill();
+      }
+
+      observer = Observer.create({
+        type: "wheel,touch,pointer",
+        wheelSpeed: -1,
+        tolerance: 10,
+        preventDefault: true,
+        onWheel: (e) => {
+          if (isScrollingInside) {
+            e.event.preventDefault();
+          }
+        },
+        onDown: () => {
+          if (!animating && !isScrollingInside) {
+            gotoSection(currentIndex - 1, -1);
+          }
+        },
+        onUp: () => {
+          console.log("⬆️ Observer onUp");
+          if (!animating && !isScrollingInside) {
+            gotoSection(currentIndex + 1, 1);
+          }
+        },
+      });
+    }
 
     function gotoSection(index: number, direction: number): void {
       index = wrap(index);
@@ -48,27 +91,138 @@ const About = () => {
       const fromTop = direction === -1;
       const dFactor = fromTop ? -1 : 1;
 
+      const prevSection =
+        currentIndex >= 0 ? (sections[currentIndex] as HTMLElement) : null;
+      const nextSection = sections[index] as HTMLElement;
+
+      if (prevSection) {
+        gsap.set(prevSection, { zIndex: 0 });
+      }
+
+      gsap.set(nextSection, { autoAlpha: 1, zIndex: 1 });
+
       const tl = gsap.timeline({
         defaults: { duration: 1.25, ease: "power1.inOut" },
         onComplete: () => {
-          animating = false;
+          setTimeout(() => {
+            animating = false;
+          }, 500);
+
+          if (nextSection.classList.contains("scrollable-section")) {
+            isScrollingInside = true;
+            observer?.kill();
+            enableScroll(nextSection);
+
+            const scrollable = nextSection.querySelector(
+              ".bg-img"
+            ) as HTMLElement;
+
+            let lastScrollTop = scrollable.scrollTop;
+            let edgeScrollCount = 0;
+            let lastEdgeReached: "top" | "bottom" | null = null;
+            let touchStartY = 0;
+
+            const getScrollInfo = () => {
+              const scrollTop = scrollable.scrollTop;
+              const scrollHeight = scrollable.scrollHeight;
+              const clientHeight = scrollable.clientHeight;
+
+              const scrollPercent = (scrollTop + clientHeight) / scrollHeight;
+              const atBottom = scrollPercent >= 0.98;
+              const atTop = scrollTop <= scrollHeight * 0.02;
+
+              return { scrollTop, atTop, atBottom };
+            };
+
+            const handleEdgeScrollAttempt = (dir: "up" | "down") => {
+              const { atTop, atBottom } = getScrollInfo();
+
+              if (dir === "down" && atBottom) {
+                if (lastEdgeReached === "bottom") edgeScrollCount++;
+                else {
+                  lastEdgeReached = "bottom";
+                  edgeScrollCount = 1;
+                }
+
+                if (edgeScrollCount >= 3) {
+                  cleanup();
+                  gotoSection(index + 1, 1);
+                }
+              } else if (dir === "up" && atTop) {
+                if (lastEdgeReached === "top") edgeScrollCount++;
+                else {
+                  lastEdgeReached = "top";
+                  edgeScrollCount = 1;
+                }
+
+                if (edgeScrollCount >= 3) {
+                  console.log(
+                    "🚀 Scrolled to top 3 times → moving to previous section"
+                  );
+                  cleanup();
+                  gotoSection(index - 1, -1);
+                }
+              } else {
+                lastEdgeReached = null;
+                edgeScrollCount = 0;
+              }
+            };
+
+            const onScroll = () => {
+              const scrollTop = scrollable.scrollTop;
+              const dir = scrollTop > lastScrollTop ? "down" : "up";
+              lastScrollTop = scrollTop;
+
+              handleEdgeScrollAttempt(dir);
+            };
+
+            const onTouchStart = (e: TouchEvent) => {
+              touchStartY = e.touches[0].clientY;
+            };
+
+            const onTouchMove = (e: TouchEvent) => {
+              const deltaY = e.touches[0].clientY - touchStartY;
+              const dir = deltaY < 0 ? "down" : "up";
+
+              handleEdgeScrollAttempt(dir);
+            };
+
+            const cleanup = () => {
+              scrollable.removeEventListener("scroll", onScroll);
+              scrollable.removeEventListener("touchstart", onTouchStart);
+              scrollable.removeEventListener("touchmove", onTouchMove);
+              disableScroll(nextSection);
+              isScrollingInside = false;
+              edgeScrollCount = 0;
+              lastEdgeReached = null;
+              createObserver();
+            };
+
+            scrollable.addEventListener("scroll", onScroll);
+            scrollable.addEventListener("touchstart", onTouchStart, {
+              passive: true,
+            });
+            scrollable.addEventListener("touchmove", onTouchMove, {
+              passive: true,
+            });
+          } else {
+            if (!observer) createObserver();
+          }
         },
       });
 
-      if (currentIndex >= 0) {
-        gsap.set(sections[currentIndex], { zIndex: 0 });
+      if (prevSection) {
         tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
-          sections[currentIndex],
-          { autoAlpha: 0 }
+          prevSection,
+          {
+            autoAlpha: 0,
+          }
         );
       }
 
-      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
       tl.fromTo(
         [outerWrappers[index], innerWrappers[index]],
-        {
-          yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
-        },
+        { yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
         { yPercent: 0 },
         0
       )
@@ -81,10 +235,7 @@ const About = () => {
             yPercent: 0,
             duration: 1,
             ease: "power2",
-            stagger: {
-              each: 0.02,
-              from: "random",
-            },
+            stagger: { each: 0.02, from: "random" },
           },
           0.2
         );
@@ -92,17 +243,16 @@ const About = () => {
       currentIndex = index;
     }
 
-    Observer.create({
-      type: "wheel,touch,pointer",
-      wheelSpeed: -1,
-      onDown: () => !animating && gotoSection(currentIndex + 1, 1),
-      onUp: () => !animating && gotoSection(currentIndex - 1, -1),
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
 
-      tolerance: 10,
-      preventDefault: true,
-    });
+    createObserver();
 
     gotoSection(0, 1);
+
+    return () => {
+      observer?.kill();
+    };
   }, []);
 
   return (
@@ -117,20 +267,23 @@ const About = () => {
         <div className="outer w-full h-full overflow-hidden">
           <div className="inner w-full h-full overflow-hidden">
             <div
-              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
+              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex flex-col items-center justify-center"
               style={{
                 backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg22})`,
               }}
             >
               <div className="max-w-2xl text-center p-10">
-                <h1 className="section-heading text-5xl font-bold mb-4">
-                  {t("About Yeljoch Mahber")}
+                <h1 className="section-heading text-5xl font-bold mb-4 ">
+                  {t("aboutTitle")}
                 </h1>
               </div>
 
               {/* Scroll Down Arrow */}
               <div className="scroll-down mt-10 flex flex-col items-center animate-bounce">
-                <span className="text-white text-sm"></span>
+                <span className="text-white text-2xl">
+                  {" "}
+                  smoothly scroll UP ↑ or ↓ Down{" "}
+                </span>
               </div>
             </div>
           </div>
@@ -148,10 +301,10 @@ const About = () => {
               }}
             >
               <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className="section-heading text-lg text-orange-400 font-semibold mb-2">
+                <h2 className="section-heading text-lg md:text-2xl text-white font-semibold mb-2">
                   Our Vision
                 </h2>
-                <p className="text-base text-white p-2.5">
+                <p className="text-base md:text-lg text-[#cfcac4] p-2.5">
                   To create a thriving ecosystem where urban youth and farmers
                   collaborate toward sustainable communities, reduce poverty,
                   and drive agricultural innovation across Ethiopia. We envision
@@ -175,10 +328,10 @@ const About = () => {
               }}
             >
               <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className="section-heading text-lg text-red-400 font-semibold mb-2">
+                <h2 className="section-heading text-lg text-white font-semibold mb-2">
                   Our Mission
                 </h2>
-                <p className="text-base text-white p-2.5">
+                <p className="text-base md:text-lg text-[#cfcac4] p-2.5">
                   YeLijoch Mahiber connects urban youth with rural farmers
                   through structured field placements, providing practical
                   agricultural experience and economic empowerment. We build
@@ -193,47 +346,49 @@ const About = () => {
       </section>
 
       {/* Section 4 */}
-      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth">
+      <section className="fixed top-0 left-0 w-full h-full opacity-0 fourth scrollable-section">
         <div className="outer w-full h-full overflow-hidden">
           <div className="inner w-full h-full overflow-hidden">
-            <div
-              className="bg-img absolute top-0 w-full h-full bg-cover bg-center flex items-center justify-center"
-              style={{
-                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg9})`,
-              }}
-            >
-              <div className="flex flex-col items-center justify-center flex-grow text-center">
-                <h2 className=" section-heading text-base text-cyan-400 font-semibold mb-2 mt-[280px]">
-                  Executive Summary
-                </h2>
-                <p className="text-sm text-white p-2.5">
-                  YeLijoch Mahiber addresses two critical challenges in
-                  Ethiopia: youth unemployment in urban areas and the lack of
-                  agricultural support in rural communities. Our innovative
-                  model creates a bridge between these two worlds, empowering
-                  mutual benefit and sustainable impact.
-                  <br />
-                  <br />
-                  Through our structured 3-6 month field placement program,
-                  urban youth gain practical experience in agriculture while
-                  supporting smallholder farmers. This includes irrigation
-                  automation, modern planting techniques, weeding/harvesting,
-                  and market linkage facilitation.
-                  <br />
-                  <br />
-                  Our approach is financially sustainable through multiple
-                  revenue streams including food distribution hubs, crop sales
-                  aggregation, farm productivity services, and job-placement
-                  services. We aim to place 5,000 youth annually while
-                  increasing income for farmers by 30% within our target
-                  regions.
-                  <br />
-                  <br />
-                  Starting with pilot programs in Oromia, Amhara, and SNNPR
-                  regions, our plan is to scale across Ethiopia, creating a
-                  replicable model for rural-urban collaboration that can be
-                  adapted to other African contexts.
-                </p>
+            <div className="w-full h-full flex items-center justify-center">
+              <div
+                className="bg-img  w-full h-[90vh] bg-cover flex items-center justify-center bg-center overflow-y-auto"
+                style={{
+                  backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${bg7})`,
+                }}
+              >
+                <div className="flex flex-col items-center justify-center flex-grow text-center  mt-[450px] mb-60 md:mt-96 md:mb-[380px]">
+                  <h2 className=" section-heading text-base text-white font-semibold mb-2 ">
+                    Executive Summary
+                  </h2>
+                  <p className="text-sm md:text-base text-[#cfcac4] p-2.5">
+                    YeLijoch Mahiber addresses two critical challenges in
+                    Ethiopia: youth unemployment in urban areas and the lack of
+                    agricultural support in rural communities. Our innovative
+                    model creates a bridge between these two worlds, empowering
+                    mutual benefit and sustainable impact.
+                    <br />
+                    <br />
+                    Through our structured 3-6 month field placement program,
+                    urban youth gain practical experience in agriculture while
+                    supporting smallholder farmers. This includes irrigation
+                    automation, modern planting techniques, weeding/harvesting,
+                    and market linkage facilitation.
+                    <br />
+                    <br />
+                    Our approach is financially sustainable through multiple
+                    revenue streams including food distribution hubs, crop sales
+                    aggregation, farm productivity services, and job-placement
+                    services. We aim to place 5,000 youth annually while
+                    increasing income for farmers by 30% within our target
+                    regions.
+                    <br />
+                    <br />
+                    Starting with pilot programs in Oromia, Amhara, and SNNPR
+                    regions, our plan is to scale across Ethiopia, creating a
+                    replicable model for rural-urban collaboration that can be
+                    adapted to other African contexts.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
