@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ContactMessageForm from "./ContactMessageForm";
 import ContactMessageList from "./ContactMessagesList";
 import { getAllMessages } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactMessageService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
-import { useNavigate } from "react-router-dom";
+import bg from "../assets/bgLight3.jpeg";
+
+export interface Message {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  subject: string;
+  message: string;
+}
+
 const ContactMessageApp = () => {
-  const [messageList, setMessageList] = useState([]);
-  const [editingId, setEditingId] = useState(null);
+  const [messageList, setMessageList] = useState<Message[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const nav = useNavigate();

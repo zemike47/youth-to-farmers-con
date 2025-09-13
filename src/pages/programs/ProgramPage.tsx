@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getAllPrograms } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
 import ProgramCard from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/programs/ProgramCard";
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/whitebg.jpeg";
+//import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/whitebg.jpeg";
 
 export default function ProgramPage() {
   const [programs, setPrograms] = useState<any[]>([]);

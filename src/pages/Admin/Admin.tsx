@@ -60,7 +60,6 @@ const entities = [
 
 export default function Admin() {
   const navigate = useNavigate();
-  const nav = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("isAdmin");

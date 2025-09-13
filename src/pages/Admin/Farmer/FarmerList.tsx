@@ -1,12 +1,49 @@
 import React from "react";
 import { deleteFarmer } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
 
-const FarmerList = ({ farmerList, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
+// Define Farmer type
+export interface Farmer {
+  farmer_id: number;
+  first_name: string;
+  last_name: string;
+  location: string;
+  support_needed: string;
+  phone_number: string;
+  farm_size: string;
+  main_crops: string;
+  accommodation_available: boolean;
+  farming_experience: string;
+}
+
+interface FarmerListProps {
+  farmerList: Farmer[];
+  refreshList: () => void;
+  setEditingId: (id: number | null) => void; // allow null
+}
+interface FarmerListProps {
+  farmerList: Farmer[];
+  refreshList: () => void;
+  setEditingId: (id: number | null) => void; // allow null
+}
+
+const FarmerList: React.FC<FarmerListProps> = ({
+  farmerList,
+  refreshList,
+  setEditingId,
+}) => {
+  const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this farmer?")) {
-      const res = await deleteFarmer(id);
-      if (res.ok) refreshList();
-      else alert("Failed to delete farmer");
+      try {
+        const res = await deleteFarmer(id);
+        if (res.ok) {
+          refreshList();
+        } else {
+          alert("Failed to delete farmer");
+        }
+      } catch (error) {
+        console.error("Error deleting farmer:", error);
+        alert("An error occurred while deleting the farmer.");
+      }
     }
   };
 

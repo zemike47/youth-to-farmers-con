@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FarmerForm from "./FarmerForm";
 import FarmerList from "./FarmerList";
 import { getAllFarmers } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const FarmerApp = () => {
   const [farmerList, setFarmerList] = useState([]);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const nav = useNavigate();

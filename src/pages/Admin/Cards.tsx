@@ -3,7 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 //import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight2.jpg";
 
-export default function Cards({ entities, index }) {
+interface Entity {
+  name: string;
+  detail: string;
+  image: string;
+}
+
+interface CardsProps {
+  entities: Entity;
+  index: number;
+}
+
+export default function Cards({ entities }: CardsProps) {
   const nav = useNavigate();
 
   const handleClick = () => {

@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import {
   createMessage,
   getMessageById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactMessageService";
 
-const initialState = {
+interface ContactForm {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  subject: string;
+  message: string;
+}
+
+interface ContactMessageFormProps {
+  refreshList: () => void;
+  editingId: string | null;
+  setEditingId: (id: string | null) => void;
+}
+
+const initialState: ContactForm = {
   first_name: "",
   last_name: "",
   email: "",
@@ -13,8 +29,12 @@ const initialState = {
   message: "",
 };
 
-const ContactMessageForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
+const ContactMessageForm: React.FC<ContactMessageFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<ContactForm>(initialState);
 
   useEffect(() => {
     if (editingId) {
@@ -26,7 +46,9 @@ const ContactMessageForm = ({ refreshList, editingId, setEditingId }) => {
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
@@ -34,10 +56,9 @@ const ContactMessageForm = ({ refreshList, editingId, setEditingId }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Only create — no update endpoint exists in service
     const res = await createMessage(form);
 
     if (res.ok) {
@@ -58,24 +79,35 @@ const ContactMessageForm = ({ refreshList, editingId, setEditingId }) => {
         {editingId ? "Edit Message" : "Add New Message"}
       </h2>
 
-      {Object.keys(initialState).map((field) => (
-        <input
-          key={field}
-          type={field === "email" ? "email" : "text"}
-          name={field}
-          value={form[field]}
-          onChange={handleChange}
-          placeholder={field.replace(/_/g, " ")}
-          className="w-full border p-2 rounded"
-          required={[
-            "first_name",
-            "last_name",
-            "email",
-            "subject",
-            "message",
-          ].includes(field)}
-        />
-      ))}
+      {Object.keys(initialState).map((field) => {
+        const key = field as keyof ContactForm;
+        const isTextArea = key === "message";
+
+        return isTextArea ? (
+          <textarea
+            key={key}
+            name={key}
+            value={form[key]}
+            onChange={handleChange}
+            placeholder={key.replace(/_/g, " ")}
+            className="w-full border p-2 rounded"
+            required
+          />
+        ) : (
+          <input
+            key={key}
+            type={key === "email" ? "email" : "text"}
+            name={key}
+            value={form[key]}
+            onChange={handleChange}
+            placeholder={key.replace(/_/g, " ")}
+            className="w-full border p-2 rounded"
+            required={["first_name", "last_name", "email", "subject"].includes(
+              key
+            )}
+          />
+        );
+      })}
 
       <button
         type="submit"

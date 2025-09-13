@@ -1,64 +1,43 @@
 import React from "react";
-import { deleteMessage } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactMessageService";
+import type { Message } from "./ContactMessagesApp";
 
-const ContactMessageList = ({ messageList, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this message?")) {
-      const res = await deleteMessage(id);
-      if (res.ok) refreshList();
-      else alert("Failed to delete message");
-    }
-  };
+interface ContactMessageListProps {
+  messageList: Message[];
+  refreshList: () => void;
+  setEditingId: (id: string | null) => void;
+}
+
+const ContactMessageList: React.FC<ContactMessageListProps> = ({
+  messageList,
+  setEditingId,
+}) => {
+  if (messageList.length === 0) {
+    return <p className="text-white mt-6">No messages found.</p>;
+  }
 
   return (
-    <div className="mt-8 overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-4 text-white">Messages</h2>
-      <table className="min-w-full text-sm text-black bg-white border border-gray-300 rounded-2xl shadow-lg">
-        <thead className="bg-black text-white">
-          <tr>
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Phone</th>
-            <th className="border p-2">Subject</th>
-            <th className="border p-2">Message</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {messageList.map((msg) => (
-            <tr key={msg.message_id} className="text-center hover:bg-gray-50">
-              <td className="border p-2">
-                {msg.first_name} {msg.last_name}
-              </td>
-              <td className="border p-2">{msg.email}</td>
-              <td className="border p-2">{msg.phone_number || "-"}</td>
-              <td className="border p-2">{msg.subject}</td>
-              <td className="border p-2">{msg.message}</td>
-              <td className="border p-2 space-x-2">
-                <button
-                  onClick={() => setEditingId(msg.message_id)}
-                  className="text-blue-500 hover:underline"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(msg.message_id)}
-                  className="text-red-500 hover:underline"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-          {messageList.length === 0 && (
-            <tr>
-              <td colSpan={6} className="text-center p-4">
-                No messages found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className="mt-6 grid gap-4">
+      {messageList.map((msg) => (
+        <div
+          key={msg.id}
+          className="p-4 bg-white rounded-xl shadow-md border border-gray-200"
+        >
+          <h3 className="font-semibold text-lg">
+            {msg.first_name} {msg.last_name}
+          </h3>
+          <p className="text-gray-600">{msg.email}</p>
+          <p className="text-gray-600">{msg.phone_number}</p>
+          <p className="mt-2 font-semibold">{msg.subject}</p>
+          <p className="mt-2 text-sm text-gray-700">{msg.message}</p>
+
+          <button
+            onClick={() => setEditingId(msg.id)}
+            className="mt-3 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+          >
+            Edit
+          </button>
+        </div>
+      ))}
     </div>
   );
 };

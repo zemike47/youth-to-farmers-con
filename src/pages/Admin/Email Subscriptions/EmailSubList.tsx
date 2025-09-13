@@ -1,13 +1,33 @@
 import React from "react";
 import { deleteSubscription } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactEmailService";
 
-const EmailList = ({ subscriptions, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
-    console.log(id);
+// Define subscription type
+interface Subscription {
+  id: number | string; // primary identifier
+  email: string;
+}
+
+// Define props type
+interface EmailListProps {
+  subscriptions: Subscription[];
+  refreshList: () => void;
+  setEditingId: (id: number | string | null) => void;
+}
+
+const EmailList: React.FC<EmailListProps> = ({
+  subscriptions,
+  refreshList,
+  //setEditingId,
+}) => {
+  const handleDelete = async (id: number | string) => {
+    console.log("Deleting subscription:", id);
     if (window.confirm("Are you sure you want to unsubscribe this email?")) {
       const res = await deleteSubscription(id);
-      if (res.ok) refreshList();
-      else alert("Failed to delete subscription");
+      if (res.ok) {
+        refreshList();
+      } else {
+        alert("Failed to delete subscription");
+      }
     }
   };
 
@@ -27,7 +47,7 @@ const EmailList = ({ subscriptions, refreshList, setEditingId }) => {
               <td className="border p-2">{sub.email}</td>
               <td className="border p-2 space-x-2">
                 <button
-                  onClick={() => handleDelete(sub.email_id)}
+                  onClick={() => handleDelete(sub.id)}
                   className="text-red-500 hover:underline"
                 >
                   Delete
@@ -35,6 +55,7 @@ const EmailList = ({ subscriptions, refreshList, setEditingId }) => {
               </td>
             </tr>
           ))}
+
           {subscriptions.length === 0 && (
             <tr>
               <td colSpan={2} className="text-center p-4">

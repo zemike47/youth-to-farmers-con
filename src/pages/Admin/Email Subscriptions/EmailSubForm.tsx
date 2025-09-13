@@ -1,41 +1,57 @@
 import React, { useState, useEffect } from "react";
 import {
   createSubscription,
-  // updateSubscription, // optional if backend supports PUT
   getSubscriptionById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactEmailService";
 
-const initialState = { email: "" };
+interface EmailFormProps {
+  refreshList: () => void;
+  editingId: number | string | null;
+  setEditingId: (id: number | string | null) => void;
+}
 
-const EmailForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
+interface FormState {
+  email: string;
+}
 
+const initialState: FormState = { email: "" };
+
+const EmailForm: React.FC<EmailFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<FormState>(initialState);
+
+  // Fetch subscription details when editing (read-only, since no update)
   useEffect(() => {
     if (editingId) {
       getSubscriptionById(editingId).then((res) => {
-        if (res.ok) setForm(res.data.data);
+        if (res.ok && res.data?.data) {
+          setForm({ email: res.data.data.email });
+        }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setForm({ email: value });
   };
 
-  const handleSubmit = async (e) => {
+  // Handle form submit (only create, no update)
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = editingId
-      ? await updateSubscription(editingId, form.email) // optional, only if backend supports update
-      : await createSubscription(form.email);
+    const res = await createSubscription(form.email);
 
     if (res.ok) {
       setForm(initialState);
       setEditingId(null);
       refreshList();
     } else {
-      alert(res.data.error || "Failed to save subscription");
+      alert(res.data?.error || "Failed to save subscription");
     }
   };
 
@@ -44,9 +60,7 @@ const EmailForm = ({ refreshList, editingId, setEditingId }) => {
       onSubmit={handleSubmit}
       className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
     >
-      <h2 className="text-xl font-semibold">
-        {editingId ? "Edit Subscription" : "Add New Subscription"}
-      </h2>
+      <h2 className="text-xl font-semibold">Add New Subscription</h2>
 
       <input
         type="email"
@@ -63,7 +77,7 @@ const EmailForm = ({ refreshList, editingId, setEditingId }) => {
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          {editingId ? "Update" : "Submit"}
+          Submit
         </button>
 
         {editingId && (
