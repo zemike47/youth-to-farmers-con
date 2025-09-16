@@ -1,8 +1,31 @@
 import React from "react";
 import { deleteYouth } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
 
-const YouthList = ({ youthList, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
+type Youth = {
+  youth_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  age: number;
+  education_level: string;
+  agriculture_experience: string;
+  motivation: string;
+  cv_file_path?: string;
+};
+
+type YouthListProps = {
+  youthList: Youth[];
+  refreshList: () => Promise<void>;
+  setEditingId: (id: number) => void;
+};
+
+const YouthList: React.FC<YouthListProps> = ({
+  youthList,
+  refreshList,
+  setEditingId,
+}) => {
+  const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this record?")) {
       const res = await deleteYouth(id);
       if (res.ok) refreshList();
@@ -13,10 +36,7 @@ const YouthList = ({ youthList, refreshList, setEditingId }) => {
   return (
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">Youth List</h2>
-      <table
-        //className="w-full border text-sm "
-        className="space-y-6 p-6 text-sm w-full text-black bg-white border border-gray-300 rounded-2xl  shadow-lg  mt-8"
-      >
+      <table className="space-y-6 p-6 text-sm w-full text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8">
         <thead className="bg-black text-white">
           <tr>
             <th className="border p-2">Name</th>
@@ -27,7 +47,6 @@ const YouthList = ({ youthList, refreshList, setEditingId }) => {
             <th className="border p-2">Agriculture Experience</th>
             <th className="border p-2">Motivation</th>
             <th className="border p-2">CV</th>
-
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -57,7 +76,6 @@ const YouthList = ({ youthList, refreshList, setEditingId }) => {
                   "No CV"
                 )}
               </td>
-
               <td className="border p-2 space-x-2">
                 <button
                   onClick={() => setEditingId(youth.youth_id)}
@@ -74,6 +92,13 @@ const YouthList = ({ youthList, refreshList, setEditingId }) => {
               </td>
             </tr>
           ))}
+          {youthList.length === 0 && (
+            <tr>
+              <td colSpan={9} className="p-4 text-gray-500 text-center">
+                No youth records found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

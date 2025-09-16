@@ -1,12 +1,36 @@
 import React from "react";
 import { deleteVideo } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
 
-const VideosList = ({ videos, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
+// Define the shape of a Video
+interface Video {
+  video_id: string;
+  title: string;
+  description: string;
+  video_url?: string | null;
+  thumbnail_url?: string | null;
+  category_id?: string | null;
+}
+
+// Define props for VideosList
+interface VideosListProps {
+  videos: Video[];
+  refreshList: () => Promise<void>;
+  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const VideosList: React.FC<VideosListProps> = ({
+  videos,
+  refreshList,
+  setEditingId,
+}) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this video?")) {
       const res = await deleteVideo(id);
-      if (res.ok) refreshList();
-      else alert("Failed to delete video");
+      if (res.ok) {
+        refreshList();
+      } else {
+        alert("Failed to delete video");
+      }
     }
   };
 
@@ -19,7 +43,7 @@ const VideosList = ({ videos, refreshList, setEditingId }) => {
             <th className="border p-2">Title</th>
             <th className="border p-2">Description</th>
             <th className="border p-2">Video</th>
-            <th className="border p-2">thumbnail</th>
+            <th className="border p-2">Thumbnail</th>
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -53,10 +77,9 @@ const VideosList = ({ videos, refreshList, setEditingId }) => {
                     View Image
                   </a>
                 ) : (
-                  "No Video"
+                  "No Thumbnail"
                 )}
               </td>
-
               <td className="border p-2 space-x-2">
                 <button
                   onClick={() => setEditingId(video.video_id)}

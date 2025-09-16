@@ -1,12 +1,37 @@
 import React from "react";
 import { deleteProgram } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
 
-const ProgramsList = ({ programsList, refreshList, setEditingId }) => {
-  const handleDelete = async (id) => {
+// ---------- Types ----------
+export interface Program {
+  program_id: string;
+  program_name: string;
+  description: string;
+  details: string;
+  benefits: string;
+  duration_value: string | number;
+  duration_unit: "days" | "weeks" | "months";
+  program_pic?: string | null;
+}
+
+interface ProgramsListProps {
+  programsList: Program[];
+  refreshList: () => Promise<void>;
+  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const ProgramsList: React.FC<ProgramsListProps> = ({
+  programsList,
+  refreshList,
+  setEditingId,
+}) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this program?")) {
       const res = await deleteProgram(id);
-      if (res.ok) refreshList();
-      else alert("Failed to delete program");
+      if (res.ok) {
+        await refreshList();
+      } else {
+        alert("Failed to delete program");
+      }
     }
   };
 

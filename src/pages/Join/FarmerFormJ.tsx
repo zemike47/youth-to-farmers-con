@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createFarmer,
   updateFarmer,
   getFarmerById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
 
-import { useNavigate } from "react-router-dom";
-const initialState = {
+export interface Farmer {
+  first_name: string;
+  last_name: string;
+  location: string;
+  support_needed: string;
+  phone_number: string;
+  farm_size: string;
+  main_crops: string;
+  accommodation_available: boolean;
+  farming_experience: string;
+}
+
+interface FarmerFormProps {
+  refreshList: () => void;
+  editingId: number | null;
+  setEditingId: (id: number | null) => void;
+}
+
+const initialState: Farmer = {
   first_name: "",
   last_name: "",
   location: "",
@@ -14,25 +32,28 @@ const initialState = {
   phone_number: "",
   farm_size: "",
   main_crops: "",
-  accommodation_available: false, // boolean
+  accommodation_available: false,
   farming_experience: "",
 };
 
-const FarmerForm = ({ refreshList, editingId, setEditingId }) => {
-  const nav = useNavigate();
-  const [form, setForm] = useState(initialState);
+const FarmerForm: React.FC<FarmerFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<Farmer>(initialState);
 
   useEffect(() => {
     if (editingId) {
       getFarmerById(editingId).then((res) => {
-        if (res.ok) {
-          setForm(res.data.data);
+        if (res.ok && res.data?.data) {
+          setForm(res.data.data as Farmer);
         }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
     setForm((prev) => ({
@@ -41,7 +62,7 @@ const FarmerForm = ({ refreshList, editingId, setEditingId }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = editingId
       ? await updateFarmer(editingId, form)
@@ -52,9 +73,11 @@ const FarmerForm = ({ refreshList, editingId, setEditingId }) => {
       setEditingId(null);
       refreshList();
     } else {
-      alert(res.data.error || "Failed to save farmer");
+      alert(res.data?.error || "Failed to save farmer");
     }
   };
+
+  const nav = useNavigate();
 
   return (
     <div>
@@ -69,40 +92,32 @@ const FarmerForm = ({ refreshList, editingId, setEditingId }) => {
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
       >
         <h2 className="text-xl font-semibold">
-          {editingId ? "Edit Farmer" : "Join New Farmer"}
+          {editingId ? "Edit Farmer" : "Add New Farmer"}
         </h2>
 
-        {Object.keys(initialState).map((field) =>
+        {(Object.keys(initialState) as (keyof Farmer)[]).map((field) =>
           field === "accommodation_available" ? (
             <label key={field} className="flex items-center gap-2">
               <input
                 type="checkbox"
                 name={field}
-                checked={form[field]}
+                checked={form.accommodation_available}
                 onChange={handleChange}
                 className="h-4 w-4"
               />
               Accommodation Available
             </label>
           ) : (
-            <div key={field} className="flex flex-col gap-1">
-              <label
-                htmlFor={field}
-                className="text-sm font-medium text-gray-700 capitalize"
-              >
-                {field.replace(/_/g, " ")}
-              </label>
-              <input
-                id={field}
-                type="text"
-                name={field}
-                value={form[field]}
-                onChange={handleChange}
-                placeholder={field.replace(/_/g, " ")}
-                className="w-full border p-2 rounded"
-                required={field === "first_name" || field === "last_name"}
-              />
-            </div>
+            <input
+              key={field}
+              type="text"
+              name={field}
+              value={form[field]}
+              onChange={handleChange}
+              placeholder={field.replace(/_/g, " ")}
+              className="w-full border p-2 rounded"
+              required={field === "first_name" || field === "last_name"}
+            />
           )
         )}
 

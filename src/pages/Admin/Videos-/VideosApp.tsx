@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import VideosForm from "./VideosForm";
 import VideosList from "./VideosList";
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const VideosApp = () => {
   const [videos, setVideos] = useState([]);
-  const [editingId, setEditingId] = useState(null);
+  //const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const nav = useNavigate();
 

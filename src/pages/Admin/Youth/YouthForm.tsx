@@ -5,7 +5,26 @@ import {
   getYouthById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
 
-const initialState = {
+export interface Youth {
+  first_name: string;
+  last_name: string;
+  email: string;
+  age: string;
+  phone_number: string;
+  education_level: string;
+  agriculture_experience: string;
+  motivation: string;
+  cv_file: File | null;
+}
+
+// Props for YouthForm
+interface YouthFormProps {
+  refreshList: () => Promise<void>;
+  editingId: number | null;
+  setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
+const initialState: Youth = {
   first_name: "",
   last_name: "",
   email: "",
@@ -17,33 +36,42 @@ const initialState = {
   cv_file: null,
 };
 
-const YouthForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
+const YouthForm: React.FC<YouthFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<Youth>(initialState);
 
   useEffect(() => {
     if (editingId) {
       getYouthById(editingId).then((res) => {
         if (res.ok) {
-          setForm({ ...res.data.data, cv_file: null }); // can't prefill file
+          // don’t prefill file input
+          setForm({ ...res.data.data, cv_file: null });
         }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
     setForm((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) formData.append(key, value);
+      if (value !== null) {
+        formData.append(key, value as Blob | string);
+      }
     });
 
     const res = editingId
@@ -62,12 +90,12 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      //className="space-y-4 p-4 bg-emerald-900 rounded shadow mt-8"
-      className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl  shadow-lg  mt-8"
+      className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
     >
       <h2 className="text-xl font-semibold">
         {editingId ? "Edit Youth" : "Add New Youth"}
       </h2>
+
       {[
         "first_name",
         "last_name",
@@ -79,9 +107,9 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
       ].map((field) => (
         <input
           key={field}
-          type={field === "email" ? "email" : "text"} // optional: make email input proper type
+          type={field === "email" ? "email" : "text"}
           name={field}
-          value={form[field]}
+          value={form[field as keyof Youth] as string}
           onChange={handleChange}
           placeholder={field.replace(/_/g, " ")}
           className="w-full border p-2 rounded"
@@ -94,7 +122,7 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
         className="w-full border p-2 rounded"
         id="education_level"
         name="education_level"
-        value={form.education_level} // keep it consistent with your form state
+        value={form.education_level}
         onChange={handleChange}
         required
       >

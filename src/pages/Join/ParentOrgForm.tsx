@@ -1,63 +1,92 @@
 import React, { useState, useEffect } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import {
-  createParentOrganization,
-  updateParentOrganization,
-  getParentOrganizationById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
-
+  createProgram,
+  updateProgram,
+  getProgramById,
+} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
 import { useNavigate } from "react-router-dom";
-const initialState = {
-  organization_name: "",
-  organization_type: "",
-  contact_person: "",
-  contact_email: "",
-  contact_phone: "",
-  partnership_interest: "",
-  organization_description: "",
-  partnership_goals: "",
-  available_resources: "",
+
+type DurationUnit = "days" | "weeks" | "months";
+
+interface ProgramFormState {
+  program_name: string;
+  description: string;
+  details: string;
+  benefits: string;
+  duration_value: string;
+  duration_unit: DurationUnit;
+  program_pic: File | null;
+}
+
+interface ProgramsFormProps {
+  refreshList: () => Promise<void>;
+  editingId: string | null;
+  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const initialState: ProgramFormState = {
+  program_name: "",
+  description: "",
+  details: "",
+  benefits: "",
+  duration_value: "",
+  duration_unit: "days",
+  program_pic: null,
 };
 
-const ORG_TYPES = [
-  "NGO",
-  "Government",
-  "Private Company",
-  "International Organization",
-  "Foundation",
-];
-
-const ParentOrgForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
-  const nav = useNavigate();
+const ProgramsForm: React.FC<ProgramsFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<ProgramFormState>(initialState);
 
   useEffect(() => {
     if (editingId) {
-      getParentOrganizationById(editingId).then((res) => {
-        if (res.ok) setForm(res.data.data);
+      getProgramById(editingId).then((res) => {
+        if (res.ok) {
+          setForm({
+            ...res.data.data,
+            program_pic: null,
+          });
+        }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
+    setForm((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      if (value !== null) formData.append(key, value as string | Blob);
+    });
+
     const res = editingId
-      ? await updateParentOrganization(editingId, form)
-      : await createParentOrganization(form);
+      ? await updateProgram(editingId, formData, true)
+      : await createProgram(formData);
 
     if (res.ok) {
       setForm(initialState);
       setEditingId(null);
       refreshList();
     } else {
-      alert(res.data.error || "Failed to save parent organization");
+      alert(res.data.error);
     }
   };
 
+  const nav = useNavigate();
   return (
     <div>
       <button
@@ -66,93 +95,65 @@ const ParentOrgForm = ({ refreshList, editingId, setEditingId }) => {
       >
         ← Back
       </button>
-
       <form
         onSubmit={handleSubmit}
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
       >
         <h2 className="text-xl font-semibold">
-          {editingId
-            ? "Edit Parent Organization"
-            : "Join New Parent Organization"}
+          {editingId ? "Edit Program" : "Add New Program"}
         </h2>
 
-        {Object.keys(initialState).map((field) =>
-          field === "organization_type" ? (
-            <div key={field} className="flex flex-col gap-1">
-              <label
-                htmlFor={field}
-                className="text-sm font-medium text-gray-700 capitalize"
-              >
-                Organization Type
-              </label>
-              <select
-                id={field}
-                name={field}
-                value={form[field]}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              >
-                <option value="">Select Organization Type</option>
-                {ORG_TYPES.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <div key={field} className="flex flex-col gap-1">
-              <label
-                htmlFor={field}
-                className="text-sm font-medium text-gray-700 capitalize"
-              >
-                {field.replace(/_/g, " ")}
-              </label>
-              <input
-                id={field}
-                type="text"
-                name={field}
-                value={form[field]}
-                onChange={handleChange}
-                placeholder={field.replace(/_/g, " ")}
-                className="w-full border p-2 rounded"
-                required={[
-                  "organization_name",
-                  "organization_type",
-                  "contact_person",
-                  "contact_email",
-                ].includes(field)}
-              />
-            </div>
-          )
-        )}
+        {/* Text fields */}
+        {[
+          "program_name",
+          "description",
+          "details",
+          "benefits",
+          "duration_value",
+        ].map((field) => (
+          <input
+            key={field}
+            type={field === "duration_value" ? "number" : "text"}
+            name={field}
+            value={form[field as keyof ProgramFormState] as string}
+            onChange={handleChange}
+            placeholder={field.replace(/_/g, " ")}
+            className="w-full border p-2 rounded"
+            required
+          />
+        ))}
 
-        <div className="flex gap-3">
-          {editingId && (
-            <button
-              type="button"
-              onClick={() => {
-                setForm(initialState);
-                setEditingId(null);
-              }}
-              className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-            >
-              Cancel
-            </button>
-          )}
+        {/* Duration unit */}
+        <select
+          name="duration_unit"
+          value={form.duration_unit}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+          required
+        >
+          <option value="days">Days</option>
+          <option value="weeks">Weeks</option>
+          <option value="months">Months</option>
+        </select>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            {editingId ? "Update" : "Submit"}
-          </button>
-        </div>
+        {/* Program image upload */}
+        <input
+          type="file"
+          name="program_pic"
+          accept="image/*"
+          onChange={handleChange}
+          className="w-full text-amber-700"
+        />
+
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          {editingId ? "Update" : "Submit"}
+        </button>
       </form>
     </div>
   );
 };
 
-export default ParentOrgForm;
+export default ProgramsForm;

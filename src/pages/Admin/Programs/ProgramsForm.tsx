@@ -1,47 +1,75 @@
 import React, { useState, useEffect } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import {
   createProgram,
   updateProgram,
   getProgramById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
 
-const initialState = {
+type DurationUnit = "days" | "weeks" | "months";
+
+interface ProgramFormState {
+  program_name: string;
+  description: string;
+  details: string;
+  benefits: string;
+  duration_value: string;
+  duration_unit: DurationUnit;
+  program_pic: File | null;
+}
+
+interface ProgramsFormProps {
+  refreshList: () => Promise<void>;
+  editingId: string | null;
+  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const initialState: ProgramFormState = {
   program_name: "",
   description: "",
   details: "",
   benefits: "",
   duration_value: "",
-  duration_unit: "days", // default
+  duration_unit: "days",
   program_pic: null,
 };
 
-const ProgramsForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
+const ProgramsForm: React.FC<ProgramsFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<ProgramFormState>(initialState);
 
   useEffect(() => {
     if (editingId) {
       getProgramById(editingId).then((res) => {
         if (res.ok) {
-          setForm({ ...res.data.data, program_pic: null }); // can't prefill file
+          setForm({
+            ...res.data.data,
+            program_pic: null,
+          });
         }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
     setForm((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) formData.append(key, value);
+      if (value !== null) formData.append(key, value as string | Blob);
     });
 
     const res = editingId
@@ -66,6 +94,7 @@ const ProgramsForm = ({ refreshList, editingId, setEditingId }) => {
         {editingId ? "Edit Program" : "Add New Program"}
       </h2>
 
+      {/* Text fields */}
       {[
         "program_name",
         "description",
@@ -77,7 +106,7 @@ const ProgramsForm = ({ refreshList, editingId, setEditingId }) => {
           key={field}
           type={field === "duration_value" ? "number" : "text"}
           name={field}
-          value={form[field]}
+          value={form[field as keyof ProgramFormState] as string}
           onChange={handleChange}
           placeholder={field.replace(/_/g, " ")}
           className="w-full border p-2 rounded"

@@ -4,8 +4,28 @@ import {
   updateYouth,
   getYouthById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
+
 import { useNavigate } from "react-router-dom";
-const initialState = {
+export interface Youth {
+  first_name: string;
+  last_name: string;
+  email: string;
+  age: string;
+  phone_number: string;
+  education_level: string;
+  agriculture_experience: string;
+  motivation: string;
+  cv_file: File | null;
+}
+
+// Props for YouthForm
+interface YouthFormProps {
+  refreshList: () => Promise<void>;
+  editingId: number | null;
+  setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
+const initialState: Youth = {
   first_name: "",
   last_name: "",
   email: "",
@@ -17,33 +37,42 @@ const initialState = {
   cv_file: null,
 };
 
-const YouthForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
-  const nav = useNavigate();
+const YouthForm: React.FC<YouthFormProps> = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}) => {
+  const [form, setForm] = useState<Youth>(initialState);
+
   useEffect(() => {
     if (editingId) {
       getYouthById(editingId).then((res) => {
         if (res.ok) {
-          setForm({ ...res.data.data, cv_file: null }); // can't prefill file
+          // don’t prefill file input
+          setForm({ ...res.data.data, cv_file: null });
         }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
     setForm((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) formData.append(key, value);
+      if (value !== null) {
+        formData.append(key, value as Blob | string);
+      }
     });
 
     const res = editingId
@@ -58,7 +87,7 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
       alert(res.data.error);
     }
   };
-
+  const nav = useNavigate();
   return (
     <div>
       <button
@@ -72,10 +101,9 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
       >
         <h2 className="text-xl font-semibold">
-          {editingId ? "Edit Youth" : "Join New Youth"}
+          {editingId ? "Edit Youth" : "Add New Youth"}
         </h2>
 
-        {/* Text fields */}
         {[
           "first_name",
           "last_name",
@@ -85,91 +113,50 @@ const YouthForm = ({ refreshList, editingId, setEditingId }) => {
           "agriculture_experience",
           "motivation",
         ].map((field) => (
-          <div key={field} className="flex flex-col gap-1">
-            <label
-              htmlFor={field}
-              className="text-sm font-medium text-gray-700 capitalize"
-            >
-              {field.replace(/_/g, " ")}
-            </label>
-            <input
-              id={field}
-              type={field === "email" ? "email" : "text"}
-              name={field}
-              value={form[field]}
-              onChange={handleChange}
-              placeholder={field.replace(/_/g, " ")}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
+          <input
+            key={field}
+            type={field === "email" ? "email" : "text"}
+            name={field}
+            value={form[field as keyof Youth] as string}
+            onChange={handleChange}
+            placeholder={field.replace(/_/g, " ")}
+            className="w-full border p-2 rounded"
+            required
+          />
         ))}
 
         {/* Education level dropdown */}
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="education_level"
-            className="text-sm font-medium text-gray-700"
-          >
-            Education Level
-          </label>
-          <select
-            id="education_level"
-            name="education_level"
-            value={form.education_level}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-            required
-          >
-            <option value="" disabled>
-              Select your education level
-            </option>
-            <option value="High school">High School</option>
-            <option value="Diploma">Diploma</option>
-            <option value="Bachelor">Bachelor Degree</option>
-            <option value="Masters">Masters Degree</option>
-          </select>
-        </div>
+        <select
+          className="w-full border p-2 rounded"
+          id="education_level"
+          name="education_level"
+          value={form.education_level}
+          onChange={handleChange}
+          required
+        >
+          <option value="" disabled>
+            Select your education level
+          </option>
+          <option value="High school">High School</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Bachelor">Bachelor Degree</option>
+          <option value="Masters">Masters Degree</option>
+        </select>
 
         {/* File upload */}
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="cv_file"
-            className="text-sm font-medium text-gray-700"
-          >
-            Upload CV
-          </label>
-          <input
-            id="cv_file"
-            type="file"
-            name="cv_file"
-            onChange={handleChange}
-            className="w-full text-amber-700"
-          />
-        </div>
+        <input
+          type="file"
+          name="cv_file"
+          onChange={handleChange}
+          className="w-full text-amber-700"
+        />
 
-        {/* Buttons */}
-        <div className="flex gap-3">
-          {editingId && (
-            <button
-              type="button"
-              onClick={() => {
-                setForm(initialState);
-                setEditingId(null);
-              }}
-              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-            >
-              Cancel
-            </button>
-          )}
-
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            {editingId ? "Update" : "Submit"}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          {editingId ? "Update" : "Submit"}
+        </button>
       </form>
     </div>
   );

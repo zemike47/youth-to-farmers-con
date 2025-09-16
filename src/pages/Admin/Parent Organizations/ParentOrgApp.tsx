@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ParentOrgForm from "./ParentOrgForm";
 import ParentOrgList from "./ParentOrgList";
 import {
@@ -8,8 +8,21 @@ import {
 
 import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
+
+// Define the shape of a Parent Organization
+export interface ParentOrg {
+  parent_org_id: number;
+  name: string;
+  description: string;
+  contact_email?: string | null;
+  contact_phone?: string | null;
+  status: "Active" | "Inactive";
+  created_at?: string;
+  updated_at?: string;
+}
+
 const ParentOrgApp = () => {
-  const [parentOrgList, setParentOrgList] = useState<any[]>([]);
+  const [parentOrgList, setParentOrgList] = useState<ParentOrg[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -19,8 +32,11 @@ const ParentOrgApp = () => {
     setLoading(true);
     setError("");
     const res = await getAllParentOrganizations();
-    if (res.ok) setParentOrgList(res.data.data);
-    else setError("Failed to load parent organizations");
+    if (res.ok) {
+      setParentOrgList(res.data.data as ParentOrg[]);
+    } else {
+      setError("Failed to load parent organizations");
+    }
     setLoading(false);
   };
 

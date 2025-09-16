@@ -1,10 +1,10 @@
-// src/pages/NewsPage.tsx
 import { useEffect, useState } from "react";
 import { getAllNews } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
 import NewsCard from "./NewsCard";
+import { News } from "../types/news";
 
 export default function NewsPage() {
-  const [newsList, setNewsList] = useState<any[]>([]);
+  const [newsList, setNewsList] = useState<News[]>([]);
 
   useEffect(() => {
     getAllNews().then((res) => {

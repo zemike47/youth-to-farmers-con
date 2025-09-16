@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import YouthForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Youth/YouthForm";
 import YouthList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Youth/YouthList";
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const YouthApp = () => {
   const [youthList, setYouthList] = useState([]);
-  const [editingId, setEditingId] = useState(null);
+
+  const [editingId, setEditingId] = useState<number | null>(null);
 
   const nav = useNavigate();
   const fetchYouth = async () => {

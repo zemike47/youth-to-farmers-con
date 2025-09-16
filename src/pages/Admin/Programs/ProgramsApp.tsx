@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import ProgramsForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsForm";
 import ProgramsList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsList";
@@ -6,9 +6,11 @@ import { getAllPrograms } from "/home/zemike/WORK/youth-to-farmers-connect/clien
 
 import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
+import type { Program } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsList";
+
 const ProgramsApp = () => {
-  const [programsList, setProgramsList] = useState([]);
-  const [editingId, setEditingId] = useState(null);
+  const [programsList, setProgramsList] = useState<Program[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const nav = useNavigate();
 
   const fetchPrograms = async () => {

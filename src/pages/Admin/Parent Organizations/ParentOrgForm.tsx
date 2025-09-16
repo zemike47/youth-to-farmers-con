@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+
 import {
   createParentOrganization,
   updateParentOrganization,
   getParentOrganizationById,
 } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
 
-const initialState = {
+// Define the shape of the form state
+export interface ParentOrgFormData {
+  organization_name: string;
+  organization_type: string;
+  contact_person: string;
+  contact_email: string;
+  contact_phone: string;
+  partnership_interest: string;
+  organization_description: string;
+  partnership_goals: string;
+  available_resources: string;
+}
+
+const initialState: ParentOrgFormData = {
   organization_name: "",
   organization_type: "",
   contact_person: "",
@@ -23,26 +38,41 @@ const ORG_TYPES = [
   "Private Company",
   "International Organization",
   "Foundation",
-];
+] as const;
 
-const ParentOrgForm = ({ refreshList, editingId, setEditingId }) => {
-  const [form, setForm] = useState(initialState);
+interface ParentOrgFormProps {
+  refreshList: () => void;
+  editingId: number | null;
+  setEditingId: (id: number | null) => void;
+}
+
+const ParentOrgForm = ({
+  refreshList,
+  editingId,
+  setEditingId,
+}: ParentOrgFormProps) => {
+  const [form, setForm] = useState<ParentOrgFormData>(initialState);
 
   useEffect(() => {
     if (editingId) {
       getParentOrganizationById(editingId).then((res) => {
-        if (res.ok) setForm(res.data.data);
+        if (res.ok) {
+          setForm(res.data.data as ParentOrgFormData);
+        }
       });
     }
   }, [editingId]);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const res = editingId
       ? await updateParentOrganization(editingId, form)
       : await createParentOrganization(form);
@@ -65,7 +95,7 @@ const ParentOrgForm = ({ refreshList, editingId, setEditingId }) => {
         {editingId ? "Edit Parent Organization" : "Add New Parent Organization"}
       </h2>
 
-      {Object.keys(initialState).map((field) =>
+      {(Object.keys(initialState) as (keyof ParentOrgFormData)[]).map((field) =>
         field === "organization_type" ? (
           <select
             key={field}

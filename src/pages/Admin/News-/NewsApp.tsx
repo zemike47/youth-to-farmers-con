@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import NewsForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/News-/NewsForm";
 import NewsList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/News-/NewsList";
