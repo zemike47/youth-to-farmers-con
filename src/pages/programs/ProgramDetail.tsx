@@ -101,7 +101,10 @@ export default function ProgramDetail() {
           ← Back to Programs
         </button>
 
-        <button className="px-5 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">
+        <button
+          onClick={() => nav("/joinYouth")}
+          className="px-5 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition"
+        >
           Join
         </button>
       </div>

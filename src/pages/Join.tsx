@@ -369,11 +369,11 @@ const Join = () => {
                       >
                         Join Youth Program
                       </button>
+
                       {/* Scroll Down Arrow */}
                       <div className="scroll-down mt-6 flex flex-col items-center animate-bounce">
                         <span className="text-white text-2xl">
-                          {" "}
-                          scroll UP ↑ or ↓ Down{" "}
+                          scroll UP ↑ or ↓ Down
                         </span>
                       </div>
                     </div>
