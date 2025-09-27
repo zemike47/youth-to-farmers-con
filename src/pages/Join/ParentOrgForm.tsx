@@ -1,55 +1,65 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+
 import {
-  createProgram,
-  updateProgram,
-  getProgramById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
+  createParentOrganization,
+  updateParentOrganization,
+  getParentOrganizationById,
+} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
 import { useNavigate } from "react-router-dom";
 
-type DurationUnit = "days" | "weeks" | "months";
-
-interface ProgramFormState {
-  program_name: string;
-  description: string;
-  details: string;
-  benefits: string;
-  duration_value: string;
-  duration_unit: DurationUnit;
-  program_pic: File | null;
+// Define the shape of the form state
+export interface ParentOrgFormData {
+  organization_name: string;
+  organization_type: string;
+  contact_person: string;
+  contact_email: string;
+  contact_phone: string;
+  partnership_interest: string;
+  organization_description: string;
+  partnership_goals: string;
+  available_resources: string;
 }
 
-interface ProgramsFormProps {
-  refreshList: () => Promise<void>;
-  editingId: string | null;
-  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
-}
-
-const initialState: ProgramFormState = {
-  program_name: "",
-  description: "",
-  details: "",
-  benefits: "",
-  duration_value: "",
-  duration_unit: "days",
-  program_pic: null,
+const initialState: ParentOrgFormData = {
+  organization_name: "",
+  organization_type: "",
+  contact_person: "",
+  contact_email: "",
+  contact_phone: "",
+  partnership_interest: "",
+  organization_description: "",
+  partnership_goals: "",
+  available_resources: "",
 };
 
-const ProgramsForm: React.FC<ProgramsFormProps> = ({
+const ORG_TYPES = [
+  "NGO",
+  "Government",
+  "Private Company",
+  "International Organization",
+  "Foundation",
+] as const;
+
+interface ParentOrgFormProps {
+  refreshList: () => void;
+  editingId: number | null;
+  setEditingId: (id: number | null) => void;
+}
+
+const ParentOrgForm = ({
   refreshList,
   editingId,
   setEditingId,
-}) => {
-  const [form, setForm] = useState<ProgramFormState>(initialState);
+}: ParentOrgFormProps) => {
+  const nav = useNavigate();
+  const [form, setForm] = useState<ParentOrgFormData>(initialState);
 
   useEffect(() => {
     if (editingId) {
-      getProgramById(editingId).then((res) => {
+      getParentOrganizationById(editingId).then((res) => {
         if (res.ok) {
-          setForm({
-            ...res.data.data,
-            program_pic: null,
-          });
+          setForm(res.data.data as ParentOrgFormData);
         }
       });
     }
@@ -58,40 +68,31 @@ const ProgramsForm: React.FC<ProgramsFormProps> = ({
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, files } = e.target as HTMLInputElement;
-    setForm((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) formData.append(key, value as string | Blob);
-    });
-
     const res = editingId
-      ? await updateProgram(editingId, formData, true)
-      : await createProgram(formData);
+      ? await updateParentOrganization(editingId, form)
+      : await createParentOrganization(form);
 
     if (res.ok) {
       setForm(initialState);
       setEditingId(null);
       refreshList();
     } else {
-      alert(res.data.error);
+      alert(res.data.error || "Failed to save parent organization");
     }
   };
 
-  const nav = useNavigate();
   return (
     <div>
       <button
         onClick={() => nav("/join")}
-        className="px-5 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition"
+        className="pl-2.5 px-5 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition"
       >
         ← Back
       </button>
@@ -100,50 +101,60 @@ const ProgramsForm: React.FC<ProgramsFormProps> = ({
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
       >
         <h2 className="text-xl font-semibold">
-          {editingId ? "Edit Program" : "Add New Program"}
+          {editingId
+            ? "Edit Parent Organization"
+            : "Add New Parent Organization"}
         </h2>
 
-        {/* Text fields */}
-        {[
-          "program_name",
-          "description",
-          "details",
-          "benefits",
-          "duration_value",
-        ].map((field) => (
-          <input
-            key={field}
-            type={field === "duration_value" ? "number" : "text"}
-            name={field}
-            value={form[field as keyof ProgramFormState] as string}
-            onChange={handleChange}
-            placeholder={field.replace(/_/g, " ")}
-            className="w-full border p-2 rounded"
-            required
-          />
-        ))}
+        {(Object.keys(initialState) as (keyof ParentOrgFormData)[]).map(
+          (field) =>
+            field === "organization_type" ? (
+              <select
+                key={field}
+                name={field}
+                value={form[field]}
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              >
+                <option value="">Select Organization Type</option>
+                {ORG_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                key={field}
+                type="text"
+                name={field}
+                value={form[field]}
+                onChange={handleChange}
+                placeholder={field.replace(/_/g, " ")}
+                className="w-full border p-2 rounded"
+                required={[
+                  "organization_name",
+                  "organization_type",
+                  "contact_person",
+                  "contact_email",
+                ].includes(field)}
+              />
+            )
+        )}
 
-        {/* Duration unit */}
-        <select
-          name="duration_unit"
-          value={form.duration_unit}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        >
-          <option value="days">Days</option>
-          <option value="weeks">Weeks</option>
-          <option value="months">Months</option>
-        </select>
-
-        {/* Program image upload */}
-        <input
-          type="file"
-          name="program_pic"
-          accept="image/*"
-          onChange={handleChange}
-          className="w-full text-amber-700"
-        />
+        {editingId && (
+          <button
+            type="button"
+            onClick={() => {
+              setForm(initialState);
+              setEditingId(null);
+            }}
+            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+          >
+            Cancel
+          </button>
+        )}
 
         <button
           type="submit"
@@ -156,4 +167,4 @@ const ProgramsForm: React.FC<ProgramsFormProps> = ({
   );
 };
 
-export default ProgramsForm;
+export default ParentOrgForm;
