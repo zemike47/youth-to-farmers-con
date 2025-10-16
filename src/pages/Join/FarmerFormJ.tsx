@@ -19,9 +19,9 @@ export interface Farmer {
 }
 
 interface FarmerFormProps {
-  refreshList: () => void;
-  editingId: number | null;
-  setEditingId: (id: number | null) => void;
+  refreshList?: () => void;
+  editingId?: number | null;
+  setEditingId?: (id: number | null) => void;
 }
 
 const initialState: Farmer = {
@@ -37,11 +37,12 @@ const initialState: Farmer = {
 };
 
 const FarmerForm: React.FC<FarmerFormProps> = ({
-  refreshList,
-  editingId,
-  setEditingId,
+  refreshList = () => {},
+  editingId = null,
+  setEditingId = () => {},
 }) => {
   const [form, setForm] = useState<Farmer>(initialState);
+  const nav = useNavigate();
 
   useEffect(() => {
     if (editingId) {
@@ -55,7 +56,6 @@ const FarmerForm: React.FC<FarmerFormProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -77,8 +77,6 @@ const FarmerForm: React.FC<FarmerFormProps> = ({
     }
   };
 
-  const nav = useNavigate();
-
   return (
     <div>
       <button
@@ -87,6 +85,7 @@ const FarmerForm: React.FC<FarmerFormProps> = ({
       >
         ← Back
       </button>
+
       <form
         onSubmit={handleSubmit}
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
