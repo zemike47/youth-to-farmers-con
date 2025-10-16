@@ -1,5 +1,4 @@
-import React from "react";
-import { deleteUser } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/systemUserService";
+import { deleteUser } from "../../../services/systemUserService";
 
 const SystemUserList = ({ users, refreshList, setEditingId }) => {
   const handleDelete = async (id: number) => {
@@ -26,7 +25,7 @@ const SystemUserList = ({ users, refreshList, setEditingId }) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user: any) => (
+          {users.map((user) => (
             <tr key={user.user_id} className="text-center">
               <td className="border p-2">{user.username}</td>
               <td className="border p-2">{user.email}</td>

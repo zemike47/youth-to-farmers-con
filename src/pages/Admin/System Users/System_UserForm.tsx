@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   createUser,
   updateUser,
   getUserById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/systemUserService";
+} from "../../../services/systemUserService";
 
 const initialState = {
   username: "",

@@ -3,7 +3,7 @@ import {
   createYouth,
   updateYouth,
   getYouthById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
+} from "../../../services/youthService";
 
 export interface Youth {
   first_name: string;
@@ -17,7 +17,6 @@ export interface Youth {
   cv_file: File | null;
 }
 
-// Props for YouthForm
 interface YouthFormProps {
   refreshList: () => Promise<void>;
   editingId: number | null;

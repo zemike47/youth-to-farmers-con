@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import Cards from "./Cards";
 
-import youth from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/Youth.webp";
-import farmers from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/farmers.jpeg";
-import parentOrg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/parentOrg.jpeg";
-import videos from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/videos.jpeg";
-import programs from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/programs.jpeg";
-import News from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/News.jpeg";
-import subscribe from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/subscribe.jpeg";
-import contact from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/contact.jpeg";
+import youth from "../../../src/assets/Youth.webp";
+import farmers from "../../../src/assets/farmers.jpeg";
+import parentOrg from "../../../src/assets/parentOrg.jpeg";
+import videos from "../../../src/assets/videos.jpeg";
+import programs from "../../../src/assets/programs.jpeg";
+import News from "../../../src/assets/News.jpeg";
+import subscribe from "../../../src/assets/subscribe.jpeg";
+import contact from "../../../src/assets/contact.jpeg";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../src/assets/bgLight3.jpeg";
 
 const entities = [
   {

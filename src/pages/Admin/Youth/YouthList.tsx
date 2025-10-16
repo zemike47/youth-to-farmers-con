@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteYouth } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
+import { deleteYouth } from "../../../services/youthService";
 
 type Youth = {
   youth_id: number;

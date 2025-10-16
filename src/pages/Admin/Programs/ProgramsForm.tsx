@@ -4,7 +4,7 @@ import {
   createProgram,
   updateProgram,
   getProgramById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
+} from "../../../services/programService";
 
 type DurationUnit = "days" | "weeks" | "months";
 

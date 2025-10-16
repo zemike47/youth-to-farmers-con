@@ -5,7 +5,7 @@ import {
   createParentOrganization,
   updateParentOrganization,
   getParentOrganizationById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
+} from "../../../services/orgService";
 
 // Define the shape of the form state
 export interface ParentOrgFormData {

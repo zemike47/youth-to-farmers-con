@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteProgram } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
+import { deleteProgram } from "../../../services/programService";
 
 // ---------- Types ----------
 export interface Program {

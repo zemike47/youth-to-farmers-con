@@ -42,27 +42,26 @@ const ParentOrgList: React.FC<ParentOrgListProps> = ({
             <th className="border p-2">Description</th>
             <th className="border p-2">Email</th>
             <th className="border p-2">Phone</th>
-            <th className="border p-2">Status</th>
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {parentOrgList.map((org) => (
-            <tr key={org.parent_org_id} className="text-center text-black">
-              <td className="border p-2">{org.name}</td>
-              <td className="border p-2">{org.description}</td>
+            <tr key={org.organization_id} className="text-center text-black">
+              <td className="border p-2">{org.organization_name}</td>
+              <td className="border p-2">{org.organization_description}</td>
               <td className="border p-2">{org.contact_email ?? "-"}</td>
               <td className="border p-2">{org.contact_phone ?? "-"}</td>
-              <td className="border p-2">{org.status}</td>
+
               <td className="border p-2 space-x-2">
                 <button
-                  onClick={() => setEditingId(org.parent_org_id)}
+                  onClick={() => setEditingId(org.organization_id)}
                   className="text-blue-500 hover:underline"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => confirmDelete(org.parent_org_id)}
+                  onClick={() => confirmDelete(org.organization_id)}
                   className="text-red-500 hover:underline"
                 >
                   Delete

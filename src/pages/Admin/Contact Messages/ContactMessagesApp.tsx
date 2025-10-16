@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import ContactMessageForm from "./ContactMessageForm";
 import ContactMessageList from "./ContactMessagesList";
-import { getAllMessages } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactMessageService";
+import { getAllMessages } from "../../../services/contactMessageService";
 
 //import bg from "../assets/bgLight3.jpeg";
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 
 export interface Message {
   id: string;

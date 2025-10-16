@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 import EmailForm from "./EmailSubForm";
 import EmailList from "./EmailSubList";
-import { getAllSubscriptions } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactEmailService";
+import { getAllSubscriptions } from "../../../services/contactEmailService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 const EmailApp = () => {
   const [subscriptions, setSubscriptions] = useState([]);

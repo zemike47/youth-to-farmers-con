@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   createSubscription,
   getSubscriptionById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactEmailService";
+} from "../../../services/contactEmailService";
 
 interface EmailFormProps {
   refreshList: () => void;

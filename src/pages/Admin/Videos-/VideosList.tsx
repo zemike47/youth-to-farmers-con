@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteVideo } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
+import { deleteVideo } from "../../../services/videoService";
 
 // Define the shape of a Video
 interface Video {

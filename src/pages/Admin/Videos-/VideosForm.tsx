@@ -3,7 +3,7 @@ import {
   createVideo,
   updateVideo,
   getVideoById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
+} from "../../../services/videoService";
 
 // ---------- Types ----------
 export interface VideoFormData {

@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteFarmer } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
+import { deleteFarmer } from "../../../services/farmerService";
 
 // Define Farmer type
 export interface Farmer {

@@ -4,19 +4,18 @@ import ParentOrgList from "./ParentOrgList";
 import {
   getAllParentOrganizations,
   deleteParentOrganization,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
+} from "../../../services/orgService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 
 // Define the shape of a Parent Organization
 export interface ParentOrg {
-  parent_org_id: number;
-  name: string;
-  description: string;
+  organization_id: number;
+  organization_name: string;
+  organization_description: string;
   contact_email?: string | null;
   contact_phone?: string | null;
-  status: "Active" | "Inactive";
   created_at?: string;
   updated_at?: string;
 }

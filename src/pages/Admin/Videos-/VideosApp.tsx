@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 import VideosForm from "./VideosForm";
 import VideosList from "./VideosList";
-import { getAllVideos } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
+import { getAllVideos } from "../../../services/videoService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const VideosApp = () => {

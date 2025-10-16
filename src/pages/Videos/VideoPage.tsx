@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getAllVideos } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
+import { getAllVideos } from "../../services/videoService";
 import VideoCard from "./VideoCard";
-import type { Video } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/types/Video";
+import type { Video } from "../../types/Video";
 
 export default function VideoPage() {
   const [videoList, setVideoList] = useState<Video[]>([]);

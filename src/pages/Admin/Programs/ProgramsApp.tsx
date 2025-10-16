@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-import ProgramsForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsForm";
-import ProgramsList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsList";
-import { getAllPrograms } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
+import ProgramsForm from "../../../pages/Admin/Programs/ProgramsForm";
+import ProgramsList from "../../../pages/Admin/Programs/ProgramsList";
+import { getAllPrograms } from "../../../services/programService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
-import type { Program } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Programs/ProgramsList";
+import type { Program } from "../../../pages/Admin/Programs/ProgramsList";
 
 const ProgramsApp = () => {
   const [programsList, setProgramsList] = useState<Program[]>([]);

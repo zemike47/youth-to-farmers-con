@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteNews } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
+import { deleteNews } from "../../../services/NewsServices";
 
 // Define the structure of a news item
 export interface NewsItem {

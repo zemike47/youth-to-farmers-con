@@ -3,7 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import {
   createMessage,
   getMessageById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactMessageService";
+} from "../../../services/contactMessageService";
 
 interface ContactForm {
   first_name: string;

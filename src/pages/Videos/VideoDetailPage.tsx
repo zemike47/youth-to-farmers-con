@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getVideoById } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/videoService";
+import { getVideoById } from "../../services/videoService";
+import type { Video } from "../../types/Video";
 
 export default function VideoDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const [video, setVideo] = useState<any>(null);
+  const [video, setVideo] = useState<Video | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!id) return;
 
-    getVideoById(id).then((res) => {
-      if (res.ok) setVideo(res.data.data);
-      setLoading(false);
-    });
+    const fetchVideo = async () => {
+      try {
+        const res = await getVideoById(id);
+        if (res.ok) {
+          setVideo(res.data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch video:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideo();
   }, [id]);
 
   if (loading) {
@@ -39,7 +50,7 @@ export default function VideoDetailPage() {
         <video
           controls
           className="w-full h-[24rem] object-contain bg-black"
-          src={`${"http://localhost:7000"}${video.video_url}`}
+          src={`http://localhost:7000${video.video_url ?? ""}`}
         />
       </div>
 

@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-
+import { useNavigate } from "react-router-dom";
 import {
   createParentOrganization,
   updateParentOrganization,
   getParentOrganizationById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/orgService";
-import { useNavigate } from "react-router-dom";
+} from "../../services/orgService";
 
 // Define the shape of the form state
 export interface ParentOrgFormData {
@@ -41,24 +40,25 @@ const ORG_TYPES = [
   "Foundation",
 ] as const;
 
+//  make props optional and provide safe defaults
 interface ParentOrgFormProps {
-  refreshList: () => void;
-  editingId: number | null;
-  setEditingId: (id: number | null) => void;
+  refreshList?: () => void;
+  editingId?: number | null;
+  setEditingId?: (id: number | null) => void;
 }
 
-const ParentOrgForm = ({
-  refreshList,
-  editingId,
-  setEditingId,
-}: ParentOrgFormProps) => {
+const ParentOrgForm: React.FC<ParentOrgFormProps> = ({
+  refreshList = () => {},
+  editingId = null,
+  setEditingId = () => {},
+}) => {
   const nav = useNavigate();
   const [form, setForm] = useState<ParentOrgFormData>(initialState);
 
   useEffect(() => {
     if (editingId) {
       getParentOrganizationById(editingId).then((res) => {
-        if (res.ok) {
+        if (res.ok && res.data?.data) {
           setForm(res.data.data as ParentOrgFormData);
         }
       });
@@ -83,8 +83,9 @@ const ParentOrgForm = ({
       setForm(initialState);
       setEditingId(null);
       refreshList();
+      alert("Organization saved successfully!");
     } else {
-      alert(res.data.error || "Failed to save parent organization");
+      alert(res.data?.error || "Failed to save parent organization");
     }
   };
 
@@ -96,6 +97,7 @@ const ParentOrgForm = ({
       >
         ← Back
       </button>
+
       <form
         onSubmit={handleSubmit}
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
@@ -143,25 +145,27 @@ const ParentOrgForm = ({
             )
         )}
 
-        {editingId && (
-          <button
-            type="button"
-            onClick={() => {
-              setForm(initialState);
-              setEditingId(null);
-            }}
-            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-          >
-            Cancel
-          </button>
-        )}
+        <div className="flex gap-3">
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setForm(initialState);
+                setEditingId(null);
+              }}
+              className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+            >
+              Cancel
+            </button>
+          )}
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {editingId ? "Update" : "Submit"}
-        </button>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {editingId ? "Update" : "Submit"}
+          </button>
+        </div>
       </form>
     </div>
   );

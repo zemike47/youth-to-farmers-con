@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteSubscription } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/contactEmailService";
+import { deleteSubscription } from "../../../services/contactEmailService";
 
 // Define subscription type
 interface Subscription {

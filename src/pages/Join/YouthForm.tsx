@@ -3,9 +3,9 @@ import {
   createYouth,
   updateYouth,
   getYouthById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
-
+} from "../../services/youthService";
 import { useNavigate } from "react-router-dom";
+
 export interface Youth {
   first_name: string;
   last_name: string;
@@ -18,11 +18,11 @@ export interface Youth {
   cv_file: File | null;
 }
 
-// Props for YouthForm
+// Make all props optional by adding `?`
 interface YouthFormProps {
-  refreshList: () => Promise<void>;
-  editingId: number | null;
-  setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
+  refreshList?: () => Promise<void>;
+  editingId?: number | null;
+  setEditingId?: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const initialState: Youth = {
@@ -43,12 +43,12 @@ const YouthForm: React.FC<YouthFormProps> = ({
   setEditingId,
 }) => {
   const [form, setForm] = useState<Youth>(initialState);
+  const nav = useNavigate();
 
   useEffect(() => {
     if (editingId) {
       getYouthById(editingId).then((res) => {
         if (res.ok) {
-          // don’t prefill file input
           setForm({ ...res.data.data, cv_file: null });
         }
       });
@@ -81,13 +81,13 @@ const YouthForm: React.FC<YouthFormProps> = ({
 
     if (res.ok) {
       setForm(initialState);
-      setEditingId(null);
-      refreshList();
+      setEditingId?.(null); // ✅ use optional chaining
+      refreshList?.(); // ✅ call only if provided
     } else {
       alert(res.data.error);
     }
   };
-  const nav = useNavigate();
+
   return (
     <div>
       <button
@@ -96,6 +96,7 @@ const YouthForm: React.FC<YouthFormProps> = ({
       >
         ← Back
       </button>
+
       <form
         onSubmit={handleSubmit}
         className="space-y-6 p-6 text-black bg-white border border-gray-300 rounded-2xl shadow-lg mt-8"
@@ -125,7 +126,7 @@ const YouthForm: React.FC<YouthFormProps> = ({
           />
         ))}
 
-        {/* Education level dropdown */}
+        {/* Education Level */}
         <select
           className="w-full border p-2 rounded"
           id="education_level"
@@ -143,7 +144,7 @@ const YouthForm: React.FC<YouthFormProps> = ({
           <option value="Masters">Masters Degree</option>
         </select>
 
-        {/* File upload */}
+        {/* File Upload */}
         <input
           type="file"
           name="cv_file"

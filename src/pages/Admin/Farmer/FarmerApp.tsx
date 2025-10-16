@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import FarmerForm from "./FarmerForm";
 import FarmerList from "./FarmerList";
-import { getAllFarmers } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import { getAllFarmers } from "../../../services/farmerService";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const FarmerApp = () => {

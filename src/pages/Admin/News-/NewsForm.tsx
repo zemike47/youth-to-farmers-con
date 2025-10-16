@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   createNews,
   updateNews,
   getNewsById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
+} from "../../../services/NewsServices";
 
 // Form data interface
 export interface NewsFormData {

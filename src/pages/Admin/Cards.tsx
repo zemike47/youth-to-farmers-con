@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-//import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight2.jpg";
-
 interface Entity {
   name: string;
   detail: string;

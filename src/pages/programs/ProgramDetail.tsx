@@ -1,7 +1,7 @@
 // src/pages/ProgramDetail.tsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProgramById } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
+import { getProgramById } from "../../services/programService";
 
 interface Program {
   program_id: number | string;

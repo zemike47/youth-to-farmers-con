@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SystemUserForm from "./System_UserForm";
 import SystemUserList from "./System_UserList";
-import { getAllUsers } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/systemUserService";
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import { getAllUsers } from "../../../services/systemUserService";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 const SystemUserApp = () => {
   const [users, setUsers] = useState([]);

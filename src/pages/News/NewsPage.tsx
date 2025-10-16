@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getAllNews } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
+import { getAllNews } from "../../services/NewsServices";
 import NewsCard from "./NewsCard";
-import type { News } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/types/news";
+import type { News } from "../../types/news";
 
 export default function NewsPage() {
   const [newsList, setNewsList] = useState<News[]>([]);

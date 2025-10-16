@@ -1,7 +1,7 @@
 // src/pages/NewsDetail.tsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getNewsById } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
+import { getNewsById } from "../../services/NewsServices";
 
 interface News {
   news_id: number | string;

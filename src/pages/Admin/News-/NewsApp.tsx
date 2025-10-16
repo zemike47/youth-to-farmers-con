@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-import NewsForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/News-/NewsForm";
-import NewsList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/News-/NewsList";
-import { getAllNews } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/NewsServices";
+import NewsForm from "../../../pages/Admin/News-/NewsForm";
+import NewsList from "../../../pages/Admin/News-/NewsList";
+import { getAllNews } from "../../..//services/NewsServices";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
+
 import { useNavigate } from "react-router-dom";
 const NewsApp = () => {
   const [newsList, setNewsList] = useState([]);

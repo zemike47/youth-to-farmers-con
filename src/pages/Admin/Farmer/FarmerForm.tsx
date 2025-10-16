@@ -3,7 +3,7 @@ import {
   createFarmer,
   updateFarmer,
   getFarmerById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
+} from "../../../services/farmerService";
 
 // 🔹 Farmer interface
 export interface Farmer {

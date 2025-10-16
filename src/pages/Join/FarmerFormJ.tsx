@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   createFarmer,
   updateFarmer,
   getFarmerById,
-} from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/farmerService";
+} from "../../services/farmerService";
 
 export interface Farmer {
   first_name: string;

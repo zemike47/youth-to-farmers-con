@@ -1,11 +1,8 @@
-// src/pages/ProgramPage.tsx
 import { useEffect, useState } from "react";
-import { getAllPrograms } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/programService";
-import ProgramCard from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/programs/ProgramCard";
-//import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/whitebg.jpeg";
-// src/pages/ProgramPage.tsx
+import { getAllPrograms } from "../../services/programService";
+import ProgramCard from "../../pages/programs/ProgramCard";
 
-import type { Program } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/types/program";
+import type { Program } from "../../types/program";
 
 export default function ProgramPage() {
   const [programs, setPrograms] = useState<Program[]>([]);

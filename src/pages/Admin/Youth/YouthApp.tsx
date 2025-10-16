@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-import YouthForm from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Youth/YouthForm";
-import YouthList from "/home/zemike/WORK/youth-to-farmers-connect/client/src/pages/Admin/Youth/YouthList";
-import { getAllYouth } from "/home/zemike/WORK/youth-to-farmers-connect/client/src/services/youthService";
+import YouthForm from "../../../pages/Admin/Youth/YouthForm";
+import YouthList from "../../../pages/Admin/Youth/YouthList";
+import { getAllYouth } from "../../../services/youthService";
 
-import bg from "/home/zemike/WORK/youth-to-farmers-connect/client/src/assets/bgLight3.jpeg";
+import bg from "../../../assets/bgLight3.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const YouthApp = () => {
